@@ -29,55 +29,52 @@
                 </svg>
             </section>
         </transition>
-        <loading v-show="showLoading"></loading>
     </div>
 </template>
 <script>
 import {
     mapState
 } from 'vuex';
-import loading from '../components/loading';
 import Programmer from '../models/testModel';
 export default {
     data() {
-            return {
-                message: new Programmer().hello,
-                showLoading: true, //显示加载动画
-                showActivities: false,
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: '',
-                value6: ''
-            }
-        },
-        components: {
-            loading
-        },
-        methods: {
-            showTransition() {
-                this.showActivities = !this.showActivities;
-                this.message = this.userInfo.userId + ',' + this.login;
-            }
-        },
-        computed: {
-            ...mapState([
-                'login','userInfo'
-            ]),
+        return {
+            message: new Programmer().hello,
+            showActivities: false,
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            }, {
+                value: '选项2',
+                label: '双皮奶'
+            }, {
+                value: '选项3',
+                label: '蚵仔煎'
+            }, {
+                value: '选项4',
+                label: '龙须面'
+            }, {
+                value: '选项5',
+                label: '北京烤鸭'
+            }],
+            value: '',
+            value6: ''
         }
+    },
+    created(){
+        console.log('created');
+    },
+    methods: {
+        showTransition() {
+            this.showActivities = !this.showActivities;
+            this.message = this.userInfo.userId + ',' + this.login;
+        }
+    },
+    computed: {
+        ...mapState([
+            'login', 'userInfo'
+        ]),
+    }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
