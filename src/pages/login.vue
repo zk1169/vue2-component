@@ -19,9 +19,8 @@
                 </div>
             </div>
             <div>
-                <div class="checkbox checkbox-primary text-left pull-left">
-                    <input type="checkbox" id="autoLogin" name="autoLogin">
-                    <label for="autoLogin">保持登录</label>
+                <div class="pull-left">
+                    <checkbox-component v-model="rememberMe" :label="'保持登录'"></checkbox-component>
                 </div>
                 <div class="mw-busy-wrap pull-right">
                     <button type="button" class="btn btn-primary" @click="login">
@@ -46,14 +45,19 @@
     import {
         login
     } from '../services/api.login';
+    import CheckboxComponent from '../components/common/checkbox.component';
     
     export default {
         data() {
             return {
                 userInfo: null,
                 userName: null,
-                password: null
+                password: null,
+                rememberMe:true
             }
+        },
+        components:{
+            CheckboxComponent
         },
         created() {
             console.log('created');
@@ -65,7 +69,7 @@
             // console.log('login success');
         },
         updated(){
-            console.log('updated');
+            //console.log('updated');
         },
         methods: {
             ...mapMutations([
@@ -86,7 +90,7 @@
                 this.userInfo = {
                     userId: loginResponse.data
                 };
-                //this.$router.push('/dashboard/home');
+                this.$router.push('/dashboard/home');
                 console.log(this.userInfo);
                 this.RECORD_USERINFO(this.userInfo);
             },

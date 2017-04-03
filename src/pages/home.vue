@@ -29,6 +29,10 @@
                 </svg>
             </section>
         </transition>
+        <tree-component :node="treeModel"></tree-component>
+        <radio-component v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></radio-component>
+        <checkbox-list-component :options="checkboxOptions" style="margin-left:50px;"></checkbox-list-component>
+        <br><br><br><br><br><br>
     </div>
 </template>
 <script>
@@ -36,6 +40,11 @@ import {
     mapState
 } from 'vuex';
 import Programmer from '../models/testModel';
+import TreeComponent from '../components/common/tree/tree.component';
+import TreeModel from '../components/common/tree/tree.model';
+import RadioComponent from '../components/common/radio.component';
+import CheckboxListComponent from '../components/common/checkbox-list.component';
+
 export default {
     data() {
         return {
@@ -58,11 +67,21 @@ export default {
                 label: '北京烤鸭'
             }],
             value: '',
-            value6: ''
+            value6: '',
+            treeModel:TreeModel.testData,
+            radioModel:null,
+            radioOptions:[{name:'男',code:'1'},{name:'女',code:'2'}],
+            checkboxOptions:[{name:'苹果',code:'1',checked:true},{name:'香蕉',code:'2',checked:true},{name:'芒果',code:'3',checked:true}]
         }
+    },
+    components:{
+        TreeComponent,
+        RadioComponent,
+        CheckboxListComponent
     },
     created(){
         console.log('created');
+        this.radioModel = this.radioOptions[1];
     },
     methods: {
         showTransition() {
