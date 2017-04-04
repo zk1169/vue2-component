@@ -71,7 +71,7 @@ export default {
             treeModel:TreeModel.testData,
             radioModel:null,
             radioOptions:[{name:'男',code:'1'},{name:'女',code:'2'}],
-            checkboxOptions:[{name:'苹果',code:'1',checked:true},{name:'香蕉',code:'2',checked:true},{name:'芒果',code:'3',checked:true}]
+            checkboxOptions:[{name:'苹果',code:'1',checked:true},{name:'香蕉',code:'2',checked:false},{name:'芒果',code:'3',checked:true}]
         }
     },
     components:{
@@ -86,7 +86,8 @@ export default {
     methods: {
         showTransition() {
             this.showActivities = !this.showActivities;
-            this.message = this.userInfo.userId + ',' + this.login;
+            //this.message = this.userInfo.userId + ',' + this.login;
+            this.checkboxOptions[2].checked = false;
         }
     },
     computed: {
