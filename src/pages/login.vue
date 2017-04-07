@@ -75,24 +75,58 @@
             ...mapMutations([
                 'RECORD_USERINFO',
             ]),
-            async login() {
+            // async login() {
+            //     let data = {
+            //         username: this.userName,
+            //         password: this.base64encode(this.password),
+            //         rememberMe: true
+            //     };
+            //     //手机号登录
+            //     this.$root.$emit('show-loading',true);
+            //     this.$root.$emit('start-loading-bar');
+            //     try{
+            //         var loginResponse = await login(data);
+            //     }catch(e){
+            //         debugger;
+            //     }
+            //     this.$root.$emit('show-loading',false);
+            //     this.$root.$emit('complete-loading-bar');
+            //     debugger;
+            //     this.userInfo = {
+            //         userId: loginResponse.data
+            //     };
+            //     this.$router.push('/dashboard/home');
+            //     console.log(this.userInfo);
+            //     this.RECORD_USERINFO(this.userInfo);
+            // },
+            login() {
                 let data = {
                     username: this.userName,
                     password: this.base64encode(this.password),
                     rememberMe: true
                 };
                 //手机号登录
-                this.$root.$emit('show-loading',true);
+                //this.$root.$emit('show-loading',true);
                 this.$root.$emit('start-loading-bar');
-                let loginResponse = await login(data);
-                this.$root.$emit('show-loading',false);
-                this.$root.$emit('complete-loading-bar');
-                this.userInfo = {
-                    userId: loginResponse.data
-                };
-                this.$router.push('/dashboard/home');
-                console.log(this.userInfo);
-                this.RECORD_USERINFO(this.userInfo);
+                login(data).subscribe(
+                    (res)=>{
+                        debugger;
+                        this.$root.$emit('complete-loading-bar');
+                    },
+                    (error)=>{
+                        debugger;
+                        this.$root.$emit('complete-loading-bar');
+                    }
+                );
+                // this.$root.$emit('show-loading',false);
+                // this.$root.$emit('complete-loading-bar');
+                // debugger;
+                // this.userInfo = {
+                //     userId: loginResponse.data
+                // };
+                // this.$router.push('/dashboard/home');
+                // console.log(this.userInfo);
+                // this.RECORD_USERINFO(this.userInfo);
             },
             base64encode(str) {
                 let base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

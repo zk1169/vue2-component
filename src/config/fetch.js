@@ -39,8 +39,9 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 		try {
 			var response = await fetch(url, requestConfig);
 			var responseJson = await response.json();
+			return responseJson;
 		} catch (error) {
-			throw new Error(error)
+			throw new Error(error);
 		}
 		return responseJson
 	} else {

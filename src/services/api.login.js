@@ -1,4 +1,6 @@
-import fetch from '../config/fetch';
+//import fetch from '../config/fetch';
+
+import fetch from '../config/fetch-rx';
 
 /**
  * 获取首页默认地址

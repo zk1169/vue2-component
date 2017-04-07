@@ -13,7 +13,27 @@ import './styles/style.scss';
 import Element from 'element-ui';
 Vue.use(Element);
 
+// import Rx from 'rxjs/Rx';
+// import VueRx from 'vue-rx';
+// Vue.use(VueRx,Rx);
+
+//import VueRx from 'vue-rx';
+// import { Observable } from 'rxjs/Observable'
+// import { Subscription } from 'rxjs/Subscription' // Disposable if using RxJS4
+// import { Subject } from 'rxjs/Subject' // required for domStreams option
+// Vue.use(VueRx, {
+//   Observable,
+//   Subscription,
+//   Subject
+// });
+
 Vue.config.productionTip = false;
+
+Vue.config.errorHandler = function (err, vm) {
+  // handle error
+  debugger;
+  console.log(err);
+}
 
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
