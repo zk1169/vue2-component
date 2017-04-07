@@ -110,11 +110,11 @@
                 this.$root.$emit('start-loading-bar');
                 login(data).subscribe(
                     (res)=>{
-                        debugger;
+                        //debugger;
                         this.$root.$emit('complete-loading-bar');
                     },
                     (error)=>{
-                        debugger;
+                        //debugger;
                         this.$root.$emit('complete-loading-bar');
                     }
                 );
