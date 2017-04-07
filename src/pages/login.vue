@@ -23,7 +23,7 @@
                     <checkbox-component v-model="rememberMe" :label="'保持登录'"></checkbox-component>
                 </div>
                 <div class="mw-busy-wrap pull-right">
-                    <button type="button" class="btn btn-primary" @click="login">
+                    <button type="button" class="btn btn-primary" @click="login" name="btnLogin">
                             <i class="fa fa-sign-in"></i>
                             <span>登录</span>
                         </button>

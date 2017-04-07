@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="dashboard-component">
         Dashboard
         <router-view></router-view>
     </div>
