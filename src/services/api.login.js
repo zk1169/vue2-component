@@ -3,9 +3,14 @@
 import fetch from '../config/fetch-rx';
 
 /**
- * 获取首页默认地址
+ * 登录
  */
-
-var login = (data) => fetch('POST', '/api/auth/form', data);
+var login = (data) => {
+    return fetch('POST', '/api/auth/form', data).map(
+        (res) => {
+            return res;
+        }
+    );
+};
 
 export { login };

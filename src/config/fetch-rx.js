@@ -10,7 +10,7 @@ import fetch from './fetch';
 function extractData(response) {
     if (response) {
         if (response.code === '000000') {
-            return response;
+            return response.data;
         } else {
             throw new Error(response.message);
         }

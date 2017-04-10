@@ -5,16 +5,16 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-user" style="width:14px;"></i>
-                    </span>
+                                    <i class="fa fa-user" style="width:14px;"></i>
+                                </span>
                     <input id="userName" type="text" class="form-control mw-fs-16" name="userName" v-model="userName" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-key"></i>
-                    </span>
+                                    <i class="fa fa-key"></i>
+                                </span>
                     <input id="password" type="password" class="form-control mw-fs-16" name="password" v-model="password" />
                 </div>
             </div>
@@ -24,9 +24,9 @@
                 </div>
                 <div class="mw-busy-wrap pull-right">
                     <button type="button" class="btn btn-primary" @click="login" name="btnLogin">
-                            <i class="fa fa-sign-in"></i>
-                            <span>登录</span>
-                        </button>
+                                        <i class="fa fa-sign-in"></i>
+                                        <span>登录</span>
+                                    </button>
                 </div>
             </div>
         </form>
@@ -53,22 +53,16 @@
                 userInfo: null,
                 userName: null,
                 password: null,
-                rememberMe:true
+                rememberMe: true
             }
         },
-        components:{
+        components: {
             CheckboxComponent
         },
         created() {
             console.log('created');
         },
-        async mounted(){
-            // this.userName = '2057';
-            // this.password = '111111';
-            // await this.login();
-            // console.log('login success');
-        },
-        updated(){
+        updated() {
             //console.log('updated');
         },
         methods: {
@@ -106,27 +100,29 @@
                     rememberMe: true
                 };
                 //手机号登录
-                //this.$root.$emit('show-loading',true);
+                this.$root.$emit('show-loading', true);
                 this.$root.$emit('start-loading-bar');
                 login(data).subscribe(
-                    (res)=>{
-                        //debugger;
+                    (res) => {
+                        this.$root.$emit('show-loading', false);
                         this.$root.$emit('complete-loading-bar');
+    
+                        this.userInfo = {
+                            userId: res
+                        };
+                        this.RECORD_USERINFO(this.userInfo);
+                        this.$router.push('/dashboard/home');
                     },
-                    (error)=>{
-                        //debugger;
+                    (error) => {
+                        this.$root.$emit('show-loading', false);
                         this.$root.$emit('complete-loading-bar');
+                        this.$toast({
+                            title: 'error',
+                            message: error.message,
+                            type: 'error'
+                        });
                     }
                 );
-                // this.$root.$emit('show-loading',false);
-                // this.$root.$emit('complete-loading-bar');
-                // debugger;
-                // this.userInfo = {
-                //     userId: loginResponse.data
-                // };
-                // this.$router.push('/dashboard/home');
-                // console.log(this.userInfo);
-                // this.RECORD_USERINFO(this.userInfo);
             },
             base64encode(str) {
                 let base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
