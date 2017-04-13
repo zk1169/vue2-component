@@ -23,8 +23,5 @@ export default function(method = 'GET', url = '', data = {}) {
     return Observable.from(fetch(method, url, data))
         .timeout(30000) //超时时间(单位:毫秒)
         .map(extractData)
-        // .catch((error) => {
-        //     return Observable.throw(error);
-        // });
         .catch(extractData);
 };

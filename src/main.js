@@ -5,7 +5,7 @@ import FastClick from 'fastclick';
 import App from './app';
 import router from './router';
 import store from './store';
-import elementUI from './config/element-ui';
+import './directives/ps-loading/ps-loading.directive';
 
 //全局样式
 import './styles/style.scss';
@@ -14,6 +14,8 @@ import './styles/style.scss';
 // import Element from 'element-ui';
 // Vue.use(Element);
 
+// //自定义element-ui控件库
+import elementUI from './config/element-ui';
 Vue.use(elementUI);
 
 Vue.config.productionTip = false;

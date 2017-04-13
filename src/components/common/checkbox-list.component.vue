@@ -5,7 +5,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import CheckboxComponent from './checkbox.component';
     export default {
         name: 'checkbox-list-component',

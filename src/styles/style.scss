@@ -1,7 +1,6 @@
-
-@import '../../node_modules/element-ui/lib/theme-default/index.css';
 @import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
+@import './element-ui';
 @import './flex';
 @import './bootstrap-customer';
 @import './utilities';
@@ -23,4 +22,8 @@ body{
   	//-moz-osx-font-smoothing: grayscale;
 	margin:0px;
 	padding:0px;
+}
+
+.center{
+    @include center;
 }
