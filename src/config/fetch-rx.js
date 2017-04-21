@@ -9,7 +9,7 @@ import fetch from './fetch';
 
 function extractData(response) {
     if (response) {
-        if (response.code === '000000') {
+        if (response.code === '000000' || response.code === 200) {
             return response.data;
         } else {
             throw new Error(response.message);

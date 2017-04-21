@@ -12,7 +12,7 @@ export default {
 	// 记录用户信息
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
-		state.login = true;
+		state.isLogin = true;
 		let validity = 30;
 		let now = new Date();
 		now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
@@ -24,7 +24,7 @@ export default {
 		if (state.userInfo && (state.userInfo.username !== info.username)) {
 			return;
 		};
-		if (!state.login) {
+		if (!state.isLogin) {
 			return
 		}
 		if (!info.message) {

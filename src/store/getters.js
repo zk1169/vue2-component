@@ -1,3 +1,3 @@
 export default {
-	login: state => Boolean(state.login)
+	isLogin: state => Boolean(state.isLogin)
 }

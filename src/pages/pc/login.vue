@@ -44,8 +44,8 @@
     } from 'vuex';
     import {
         login
-    } from '../services/api.login';
-    import CheckboxComponent from '../components/common/checkbox.component';
+    } from '../../services/api.login';
+    import CheckboxComponent from '../../components/common/checkbox.component';
     
     export default {
         data() {

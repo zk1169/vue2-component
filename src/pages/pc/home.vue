@@ -49,15 +49,15 @@
     
     import {
         login
-    } from '../services/api.login';
-    import Programmer from '../models/testModel';
-    import TreeComponent from '../components/common/tree/tree.component';
-    import TreeModel from '../components/common/tree/tree.model';
-    import RadioComponent from '../components/common/radio.component';
-    import CheckboxListComponent from '../components/common/checkbox-list.component';
-    import PsSelectComponent from '../components/common/ps-select.component';
-    import PsButtonComponent from '../components/common/ps-button.component';
-    import PsImageComponent from '../components/common/ps-image.component';
+    } from '../../services/api.login';
+    import Programmer from '../../models/testModel';
+    import TreeComponent from '../../components/common/tree/tree.component';
+    import TreeModel from '../../components/common/tree/tree.model';
+    import RadioComponent from '../../components/common/radio.component';
+    import CheckboxListComponent from '../../components/common/checkbox-list.component';
+    import PsSelectComponent from '../../components/common/ps-select.component';
+    import PsButtonComponent from '../../components/common/ps-button.component';
+    import PsImageComponent from '../../components/common/ps-image.component';
     
     export default {
         data() {
@@ -146,7 +146,7 @@
         },
         computed: {
             ...mapState([
-                'login', 'userInfo'
+                'isLogin', 'userInfo'
             ]),
         }
     }
