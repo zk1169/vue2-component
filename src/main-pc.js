@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import FastClick from 'fastclick';
-import App from './app';
+import App from './pc-app';
 import router from './router/pc';
 import store from './store';
 import './directives/ps-loading/ps-loading.directive';

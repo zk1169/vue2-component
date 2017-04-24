@@ -29,7 +29,16 @@ let register = (data) => {
     );
 };
 
+let search = (data) => {
+    return fetch('POST', '/api/steel/search', data).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 export { 
     login,
-    register
+    register,
+    search
  };

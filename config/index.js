@@ -34,7 +34,7 @@ module.exports = {
         //     "changeOrigin": true
         // },
         "/api/**": {
-            "target": "http://local.api.justhere.com",
+            "target": "http://local.api.com",
             "secure": false,
             "changeOrigin": true
         }

@@ -1,6 +1,6 @@
 <template>
-    <div class="m-login-component">
-        <header-top title="登录" :goBack="true"></header-top>
+    <div v-title="'登录'" class="m-login-component">
+        <!--<header-top title="登录" :goBack="true"></header-top>-->
         <div>
             <mt-field placeholder="手机号" type="tel" v-model="phone"></mt-field>
             <mt-field placeholder="密码" type="text" v-model="pwd"></mt-field>
@@ -11,7 +11,7 @@
         </div>
         <div layout="row" layout-align="space-between center" class="padding">
             <router-link class="block" to="/register">注册</router-link>
-            <router-link class="block" to="/register">忘记密码</router-link>
+            <!--<router-link class="block" to="/register">忘记密码</router-link>-->
         </div>
     </div>
 </template>
@@ -36,7 +36,9 @@
         components: {
             headerTop
         },
-        created() {},
+        created() {
+            this.$parent.tabIndex = 3;
+        },
         methods: {
             ...mapMutations([
                 'RECORD_USERINFO',

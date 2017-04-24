@@ -1,6 +1,5 @@
 <template>
-    <div class="m-login-component">
-        <header-top title="注册" :goBack="true"></header-top>
+    <div v-title="'注册'" class="m-register-component">
         <div>
             <mt-field placeholder="手机号" type="tel" v-model="phone"></mt-field>
             <mt-field placeholder="密码" type="text" v-model="pwd"></mt-field>
@@ -34,7 +33,9 @@
         components: {
             headerTop
         },
-        created() {},
+        created() {
+            this.$parent.tabIndex = 3;
+        },
         methods: {
             registerClick() {
                 this.$indicator.open();
@@ -73,5 +74,5 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     @import '../../styles/variables';
-    .m-login-component {}
+    .m-register-component {}
 </style>

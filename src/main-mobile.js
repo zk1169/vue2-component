@@ -2,10 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import FastClick from 'fastclick';
-import App from './app';
+import App from './mobile-app';
 import router from './router/mobile';
 import store from './store';
-import './directives/ps-loading/ps-loading.directive';
+import './directives/title.directive';
 
 //全局样式
 import './styles/m-style.scss';

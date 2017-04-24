@@ -28,7 +28,7 @@
                 @include padding(0, $g, 0, $g);
             }
             .padding-v {
-                @include padding(0, $g, 0, $g);
+                @include padding( $g, 0, $g, 0);
             }
             .padding-left {
                 @include padding(0, 0, 0, $g);
@@ -49,7 +49,7 @@
                 @include margin(0, $g, 0, $g);
             }
             .margin-v {
-                @include margin(0, $g, 0, $g);
+                @include margin($g, 0, $g, 0);
             }
             .margin-left {
                 @include margin(0, 0, 0, $g);
@@ -72,7 +72,7 @@
                 @include padding(0, $g*$value, 0, $g*$value);
             }
             .padding-v-#{$value} {
-                @include padding(0, $g*$value, 0, $g*$value);
+                @include padding($g*$value, 0, $g*$value, 0);
             }
             .padding-left-#{$value} {
                 @include padding(0, 0, 0, $g*$value);
@@ -93,7 +93,7 @@
                 @include margin(0, $g*$value, 0, $g*$value);
             }
             .margin-v-#{$value} {
-                @include margin(0, $g*$value, 0, $g*$value);
+                @include margin( $g*$value, 0, $g*$value, 0);
             }
             .margin-left-#{$value} {
                 @include margin(0, 0, 0, $g*$value);
@@ -118,9 +118,11 @@
 @media (max-width: $layout-breakpoint-md - 1) {
     @include gutter_for_breakpoint($gutter);
 }
+
 @media (min-width: $layout-breakpoint-md - 1) {
     @include gutter_for_breakpoint($gutter*2);
 }
+
 // @media (max-width: $layout-breakpoint-lg - 1) {
 //     @include gutter_for_breakpoint($gutter*4);
 // }

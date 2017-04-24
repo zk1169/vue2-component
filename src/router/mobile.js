@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import store from '../store';
 
 
-const Dashboard = resolve => require(['../pages/mobile/dashboard'], resolve);
+//const Dashboard = resolve => require(['../pages/mobile/dashboard'], resolve);
 const Index = resolve => require(['../pages/mobile/index'], resolve);
 const Login = resolve => require(['../pages/mobile/login'], resolve);
 const Register = resolve => require(['../pages/mobile/register'], resolve);
