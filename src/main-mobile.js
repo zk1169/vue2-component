@@ -27,6 +27,8 @@ if ('addEventListener' in document) {
     }, false);
 }
 
+store.commit('AUTO_LOGIN');
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

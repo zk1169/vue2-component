@@ -1,10 +1,15 @@
 <template>
     <div v-title="'注册'" class="m-register-component">
+        <img src="../../assets/images/sign-bg.jpg" style="width:100%;display:block;" alt="">
         <div>
             <mt-field placeholder="手机号" type="tel" v-model="phone"></mt-field>
-            <mt-field placeholder="密码" type="text" v-model="pwd"></mt-field>
+            <mt-field placeholder="密码" type="password" v-model="pwd"></mt-field>
             <mt-field placeholder="短信验证码" type="text">
-                <mt-button flex type="default">获取短信验证码</mt-button>
+                <mt-button flex type="default" class="fs-14" style="height:30px;" @click="sendMessageCode" 
+                v-bind:disabled="messageCode && messageCode.length>0 && seconds<60">
+                    <span v-if="messageCode && seconds<60">{{seconds}}</span>
+                    <span v-else>获取短信验证码</span>
+                </mt-button>
             </mt-field>
         </div>
         <br><br><br>
@@ -18,25 +23,62 @@
     import {
         mapState
     } from 'vuex';
-    import headerTop from '../../components/m-header';
     import {
-        register
+        register,
+        sendMessageCode
     } from '../../services/api.login';
     
     export default {
         data() {
             return {
                 phone: null,
-                pwd: null
+                pwd: null,
+                messageCode:null,
+                seconds:60
             }
         },
         components: {
-            headerTop
+    
         },
         created() {
             this.$parent.tabIndex = 3;
         },
         methods: {
+            sendMessageCode() {
+                this.$indicator.open();
+                sendMessageCode({
+                        phone: this.phone
+                    })
+                    .subscribe(
+                        (res) => {
+                            this.messageCode = res;
+                            this.timeInterval();
+                            this.$indicator.close();
+                            this.$toast({
+                                message: '验证码发送成功',
+                                position: 'bottom',
+                                duration: 5000
+                            });
+                        },
+                        (error) => {
+                            this.$indicator.close();
+                            this.$toast({
+                                message: error.message,
+                                position: 'bottom',
+                                duration: 5000
+                            });
+                        }
+                    );
+            },
+            timeInterval(){
+                let loop = setInterval(()=>{
+                    this.seconds--;
+                    if(this.seconds == 0){
+                        clearInterval(loop);
+                        this.seconds = 60;
+                    }
+                },1000);
+            },
             registerClick() {
                 this.$indicator.open();
                 register({

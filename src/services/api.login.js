@@ -13,6 +13,14 @@ import fetch from '../config/fetch-rx';
 //     );
 // };
 
+let sendMessageCode = (data) => {
+    return fetch('POST', '/api/steel/getMessageCode', data).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 let login = (data) => {
     return fetch('POST', '/api/steel/login', data).map(
         (res) => {
@@ -29,16 +37,31 @@ let register = (data) => {
     );
 };
 
-let search = (data) => {
-    return fetch('POST', '/api/steel/search', data).map(
+let followUser = (userId) => {
+    let data={
+        followUserId:userId
+    };
+    return fetch('POST', '/api/steel/followUser', data).map(
         (res) => {
             return res;
         }
     );
 };
 
+let getFollowUser = () => {
+    return fetch('GET', '/api/steel/getFollowUser').map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
+
+
 export { 
     login,
     register,
-    search
+    followUser,
+    getFollowUser,
+    sendMessageCode
  };

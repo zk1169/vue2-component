@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 const state = {
 	isLogin: false,//是否登录
+	redirectUrl:null,//登录后跳转url
 	userInfo: null //用户信息
 }
 

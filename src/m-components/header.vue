@@ -1,10 +1,17 @@
 <template>
     <header id='head_top' layout="row" layout-align="start center">
-        <div class="head_goback" v-if="goBack" @click="$router.go(-1)">
-            <i class="fa fa-angle-left"></i>
+        <div flex="20" class="text-left">
+            <div class="head_goback" v-if="goBack" @click="$router.go(-1)">
+                <slot name="left">
+                    <i class="fa fa-angle-left"></i>
+                </slot>
+            </div>
         </div>
-        <div flex class="text-overflow text-center" v-if="title">
-            <span v-bind:class="[{'offset-16':goBack},'title']">{{title}}</span>
+        <div flex class="text-overflow text-center">
+            <span v-if="title">{{title}}</span>
+        </div>
+        <div flex="20" class="right-wrap text-center">
+            <slot name="right"></slot>
         </div>
     </header>
 </template>
@@ -43,19 +50,25 @@
 
 <style lang="scss" scoped>
     @import '../styles/variables';
+    $headerHeight:50px;
     #head_top{
-        height:50px;
+        height:$headerHeight;
         background-color:$m-primary-color;
         color: #fff;
         .head_goback{
-            font-size: 26px;
-            padding:10px;
+            margin-left:20px;
+            //font-size: 26px;
+            //padding:10px;
         }
         .title{
             font-size:16px;
         }
         .offset-16{
             margin-left:-16px;
+        }
+        .right-wrap{
+            float:right;
+            color:#fff;
         }
     }
 </style>

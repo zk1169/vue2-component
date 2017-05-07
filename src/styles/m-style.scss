@@ -1,5 +1,4 @@
 @import '../../node_modules/font-awesome/css/font-awesome.min.css';
-
 //@import '../../node_modules/mint-ui/lib/style.css';
 @import './mint-ui';
 @import './flex';
@@ -9,7 +8,6 @@
 @import './variables';
 @import './padding-margin';
 @import './font';
-
 @font-face {
     src: url("../../static/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot");
     src: url("../../static/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../../static/fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff") format("woff"), url("../../static/fonts/roboto_regular_macroman/Roboto-Regular-webfont.ttf") format("truetype"), url("../../static/fonts/roboto_regular_macroman/Roboto-Regular-webfont.svg#robotoregular") format("svg");
@@ -18,16 +16,20 @@
     font-style: normal;
 }
 
-body{
-	font-family: "Roboto", "MicrosoftYaHeiLight", "Microsoft Yahei","微软雅黑", "Helvetica Neue", "Helvetica", "Arial", "PingFangSC-Light", "Hiragino Sans GB";
+body {
+    font-family: "Roboto", "MicrosoftYaHeiLight", "Microsoft Yahei", "微软雅黑", "Helvetica Neue", "Helvetica", "Arial", "PingFangSC-Light", "Hiragino Sans GB";
     font-size: 14px;
-	margin:0px;
-	padding:0px;
-    min-height:100vh;
-    background-color:$bg-color;
+    margin: 0px;
+    padding: 0px;
+    min-height: 100vh;
+    background-color: $bg-color;
 }
 
-input[type="button"], input[type="submit"], input[type="search"], input[type="reset"],textarea {
+input[type="button"],
+input[type="submit"],
+input[type="search"],
+input[type="reset"],
+textarea {
     -webkit-appearance: none;
 }
 
@@ -38,11 +40,38 @@ textarea {
     outline: none;
     border: none;
 }
+
 input {
     background: transparent;
 }
 
+ul,
+ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
+.list-item-wrap {
+    
+}
 
+.list-item-no-more {
+    color: $label-color;
+}
 
+.price {
+    color: #F40;
+}
 
+.center {
+    @include center;
+}
+
+.grey {
+    color: $grey-color;
+}
+
+.green {
+    color: $second-color;
+}
