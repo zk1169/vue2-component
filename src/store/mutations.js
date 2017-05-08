@@ -3,12 +3,7 @@ import {
     RECORD_USERINFO,
     RECORD_REDIRECT_URL,
 	AUTO_LOGIN,
-} from './mutation-types.js'
-
-import {
-    setStore,
-    getStore,
-} from '../config/mUtils'
+} from './mutation-types.js';
 
 export default {
     // 记录用户信息
