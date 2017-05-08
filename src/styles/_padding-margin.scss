@@ -17,9 +17,6 @@
 
 @mixin gutter_for_breakpoint($g:$gutter) {
     @for $value from 1 through 3 {
-        .padding-#{$value} {
-            font-size: $value+px!important;
-        }
         @if $value==1 {
             .padding {
                 @include padding($g, $g, $g, $g);

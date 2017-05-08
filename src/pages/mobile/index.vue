@@ -2,8 +2,8 @@
     <div v-title="'发现'" v-bind:class="{'noScroll':showSearchHistory}">
         <div class="card">
             <div layout="row" class="search-wrap">
-                <input flex type="text" placeholder="请输入您想搜索的钢材" v-model="searchText" class="input-search fs-18" v-on:focus="inputFocus(true)">
-                <button class="button-search fs-18" @click="searchClick(null)">搜索</button>
+                <input flex type="text" placeholder="请输入您想搜索的钢材" v-model="searchText" class="input-search fs-16" v-on:focus="inputFocus(true)">
+                <button class="button-search fs-16" @click="searchClick(null)">搜索</button>
             </div>
         </div>
         <div class="card margin-top">
@@ -152,7 +152,7 @@
                     }
                 }
             } else if (this.searchHistoryList && this.searchHistoryList.length > 0) {
-                //this.searchText = this.searchHistoryList[0];
+                this.searchText = this.searchHistoryList[0];
                 this.searchClick(this.searchHistoryList[0]);
             }
         },
@@ -162,13 +162,13 @@
         methods: {
             searchClick(text) {
                 this.sortList[1].desc = null;
-                let data = { };
-                if(this.category){
+                let data = {};
+                if (this.category) {
                     data.type = [this.category];
                 }
-                if(text){
+                if (text) {
                     data.keyWord = text;
-                }else if (this.searchText) {
+                } else if (this.searchText) {
                     data.keyWord = this.searchText;
                     let localSearch = window.localStorage.getItem('searchHistory');
                     if (localSearch && localSearch.length > 0) {
@@ -189,16 +189,24 @@
                     }
                     this.searchHistoryList = localSearch;
                     window.localStorage.setItem('searchHistory', localSearch.toString());
-                }else{
+                } else {
                     data.keyWord = '';
                 }
                 this.showSearchHistory = false;
+                this.searchList = [];
                 this.$indicator.open();
                 search(data)
                     .subscribe(
                         (res) => {
                             this.$indicator.close();
                             this.searchList = res.rows;
+                            if (!this.searchList || this.searchList.length == 0) {
+                                this.$toast({
+                                    message: '没有搜索到钢材噢～',
+                                    position: 'bottom',
+                                    duration: 5000
+                                });
+                            }
                             //this.orderClick(this.sortList[0]);
                         },
                         (error) => {
