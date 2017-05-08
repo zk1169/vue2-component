@@ -21,19 +21,14 @@
             <section class="activities_details" v-if="showActivities">
                 <h2 class="activities_shoptitle">transition-fade</h2>
                 <svg width="60" height="60" class="close_activities" v-on:click="showTransition">
-                                <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none" />
-                                <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2" />
-                                <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2" />
-                            </svg>
+                    <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none" />
+                    <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2" />
+                    <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2" />
+                </svg>
             </section>
         </transition>
 
         <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></ps-image-component>
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg.jpg"></ps-image-component>
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg.jpg"></ps-image-component>
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg.jpg"></ps-image-component>
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg.jpg"></ps-image-component>
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg.jpg"></ps-image-component>
 
         <tree-component :node="treeModel"></tree-component>
         <radio-component v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></radio-component>
@@ -49,15 +44,15 @@
     
     import {
         login
-    } from '../../services/api.login';
-    import Programmer from '../../models/testModel';
-    import TreeComponent from '../../components/common/tree/tree.component';
-    import TreeModel from '../../components/common/tree/tree.model';
-    import RadioComponent from '../../components/common/radio.component';
-    import CheckboxListComponent from '../../components/common/checkbox-list.component';
-    import PsSelectComponent from '../../components/common/ps-select.component';
-    import PsButtonComponent from '../../components/common/ps-button.component';
-    import PsImageComponent from '../../components/common/ps-image.component';
+    } from '../services/api.login';
+    import Programmer from '../models/testModel';
+    import TreeComponent from '../components/common/tree/tree.component';
+    import TreeModel from '../components/common/tree/tree.model';
+    import RadioComponent from '../components/common/radio.component';
+    import CheckboxListComponent from '../components/common/checkbox-list.component';
+    import PsSelectComponent from '../components/common/ps-select.component';
+    import PsButtonComponent from '../components/common/ps-button.component';
+    import PsImageComponent from '../components/common/ps-image.component';
     
     export default {
         data() {

@@ -7,10 +7,10 @@ import store from '../store';
 // import Login from '../pages/login';
 // import Home from '../pages/home';
 
-const Sign = resolve => require(['../pages/pc/sign'], resolve);
-const Login = resolve => require(['../pages/pc/login'], resolve);
-const Dashboard = resolve => require(['../pages/pc/dashboard'], resolve);
-const Home = resolve => require(['../pages/pc/home'], resolve);
+const Sign = resolve => require(['../pages/sign'], resolve);
+const Login = resolve => require(['../pages/login'], resolve);
+const Dashboard = resolve => require(['../pages/dashboard'], resolve);
+const Home = resolve => require(['../pages/home'], resolve);
 
 Vue.use(Router);
 
@@ -52,7 +52,7 @@ let router = new Router({
 router.beforeEach(({ meta, path }, from, next) => {
     //var { auth = true } = meta;
     console.log('route change');
-    if (!store.getters.login && path !== '/sign/login') {
+    if (!store.getters.isLogin && path !== '/sign/login') {
         return next({ path: '/sign/login' });
     }
     next();

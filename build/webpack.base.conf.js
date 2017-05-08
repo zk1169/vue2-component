@@ -9,8 +9,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: './src/main-mobile.js'
-    //app: './src/main-pc.js'
+    app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,

@@ -5,16 +5,16 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                                    <i class="fa fa-user" style="width:14px;"></i>
-                                </span>
+                        <i class="fa fa-user" style="width:14px;"></i>
+                    </span>
                     <input id="userName" type="text" class="form-control mw-fs-16" name="userName" v-model="userName" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                                    <i class="fa fa-key"></i>
-                                </span>
+                        <i class="fa fa-key"></i>
+                    </span>
                     <input id="password" type="password" class="form-control mw-fs-16" name="password" v-model="password" />
                 </div>
             </div>
@@ -24,9 +24,9 @@
                 </div>
                 <div class="mw-busy-wrap pull-right">
                     <button type="button" class="btn btn-primary" @click="login" name="btnLogin">
-                                        <i class="fa fa-sign-in"></i>
-                                        <span>登录</span>
-                                    </button>
+                        <i class="fa fa-sign-in"></i>
+                        <span>登录</span>
+                    </button>
                 </div>
             </div>
         </form>
@@ -44,8 +44,8 @@
     } from 'vuex';
     import {
         login
-    } from '../../services/api.login';
-    import CheckboxComponent from '../../components/common/checkbox.component';
+    } from '../services/api.login';
+    import CheckboxComponent from '../components/common/checkbox.component';
     
     export default {
         data() {
