@@ -5,8 +5,16 @@ import fetch from '../config/fetch-rx';
 /**
  * 登录
  */
+// var login = (data) => {
+//     return fetch('POST', '/api/steel/test', data).map(
+//         (res) => {
+//             return res;
+//         }
+//     );
+// };
+
 var login = (data) => {
-    return fetch('POST', '/api/steel/test', data).map(
+    return fetch('GET', '/patent/query/result?_type=query&q=phone&efq=&viewtype=tablelist&page=1&sort=sdesc&uk=null&_=1494310662467').map(
         (res) => {
             return res;
         }
