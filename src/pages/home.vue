@@ -38,13 +38,8 @@
 </template>
 
 <script>    
-    import {
-        mapState
-    } from 'vuex';
-    
-    import {
-        login
-    } from '../services/api.login';
+    import { mapState } from 'vuex';
+    import { login } from '../services/api';
     import Programmer from '../models/testModel';
     import TreeComponent from '../components/common/tree/tree.component';
     import TreeModel from '../components/common/tree/tree.model';

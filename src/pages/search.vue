@@ -1,0 +1,338 @@
+<template>
+    <div>
+        <div class="header" layout="row" layout-align="start center">
+            <img src="../assets/images/logo_zhihuiya_35.png" />
+            <div flex class="input-wrap" layout="row">
+                <div class="database-selector-tip" layout="row" layout-align="center center">
+                    <div class="database-selector-all"></div>
+                </div>
+                <div class="search-field" flex>
+                    <input id="q" autocomplete="off" type="text" class="search-input">
+                </div>
+                <div class="btn-wrap" layout="row">
+                    <a class="btn-search"></a>
+                    <popup-component>
+                        <div slot="content">
+                            <a class="btn-search-menu"></a>
+                        </div>
+                        <div slot="popup">
+                            <div class="search-menu">
+                                <ul>
+                                    <li>
+                                        <a href="/simple" class="simpleSearch" target="">简单搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/patents" class="fieldSearch" target="">字段搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/patents/cmd" class="cmdSearch" target="">命令搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/bulk" class="bulkSearch" target="">批量处理</a>
+                                    </li>
+                                    <li>
+                                        <a href="/patents/semantic" class="semanticSearch" target="">语义搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/expand" class="divergent" target="">扩展搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/classification" class="classification" target="">分类号搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/patents/legal/litigation" class="legalSearch" target="">法律搜索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/search/image" class="imageSearch" target="">图像探索</a>
+                                    </li>
+                                    <li>
+                                        <a href="/patents/chemical" class="chemicalSearch" target="">化学搜索</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </popup-component>
+                    <input id="efq" name="efq" type="hidden" value="">
+                </div>
+            </div>
+            <div class="right-side" layout="row">
+                <div class="queue-monitor">
+                    <a id="btn-monitor" class="btn-monitor" title="">
+                        <span class="i16 ico-hourglass i16-gray"></span>
+                    </a>
+                </div>
+                <div class="user-pannel" layout="row" laout-align="start end">
+                    <popup-component>
+                        <div slot="content">
+                            <a class="user-name tools">
+                                <span class="user-email text-overflow">zhukun-analytics@patsnap.com</span>
+                                <span class="i12 ico-corner-down"></span>
+                            </a>
+                        </div>
+                        <div slot="popup">
+                            <div class="user-menu tools-submenu">
+                                <div class="feature-list">
+                                    <ul>
+                                        <li>
+                                            <a href="/my/history" target="_blank">
+                                                <span class="i16 ico-clock"></span>历史记录</a>
+                                        </li>
+                                        <li>
+                                            <a href="/workspace" target="_blank">
+                                                <span class="i16 ico-list"></span>工作空间</a>
+                                        </li>
+                                        <li>
+                                            <a href="/alert/email" target="_blank">
+                                                <span class="i16 ico-calendar"></span>邮件提醒</a>
+                                        </li>
+                                        <li>
+                                            <a href="/saved_query/list" target="_blank">
+                                                <span class="i16 ico-save"></span>已保存语句</a>
+                                        </li>
+                                        <li>
+                                            <a href="/analysis/list" target="_blank">
+                                                <span class="i16 ico-chart-line"></span>我的分析</a>
+                                        </li>
+                                        <li>
+                                            <a href="/landscape" target="_blank">
+                                                <span class="i16 ico-landscape"></span>我的专利地图</a>
+                                        </li>
+                                        <li>
+                                            <a href="/assignee" target="_blank">
+                                                <span class="i16 ico-assignee-group"></span>申请人分组</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="profile">
+                                    <a href="/my/setting" class="btn-profile">
+                                        <span class="i16 ico-id-card"></span>用户设置</a>
+                                </div>
+                                <div class="support-btns">
+                                    <a href="http://x.patsnap.cn" class="btn-demo" target="_blank">
+                                        <span class="i16 ico-demo"></span>智慧芽学院</a>
+                                    <a href="https://patsnap.kf5.com/forum/" class="btn-question" target="_blank">
+                                        <span class="i16 ico-question"></span>帮助中心</a>
+                                    <a href="/log/release" class="btn-release-log" target="">
+                                        <span class="i16 ico-release-log"></span>更新日志</a>
+                                    <a href="/texttour" class="btn-features" target="">
+                                        <span class="i16 ico-star-light"></span>特色功能</a>
+                                    <a href="/logout" class="btn-logout" target="">
+                                        <span class="i16 ico-onoff"></span>登出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </popup-component>
+                </div>
+            </div>
+            <a href="javascript://;" id="uservoice" class="uservoice ico-uservoice">Uservoice</a>
+            <!--<ps-button-component type="primary" :async="asyncClick">异步按钮</ps-button-component>-->
+        </div>
+        <div flex></div>
+    </div>
+</template>
+
+<script>    
+import { mapState } from 'vuex';
+import { moreAnalysis } from '../services/api';
+import PsButtonComponent from '../components/common/ps-button.component';
+import PopupComponent from '../components/popup.component';
+
+export default {
+    data() {
+        return {
+
+        }
+    },
+    components: {
+        PsButtonComponent, PopupComponent
+    },
+    created() {
+    },
+    methods: {
+        asyncClick() {
+            return moreAnalysis().map(
+                (res) => {
+                    debugger;
+                    //handle 
+                }
+            )
+                .catch((error) => {
+                    debugger;
+                    this.$toast({
+                        title: 'error',
+                        message: error.message,
+                        type: 'error'
+                    });
+                });
+        }
+    },
+    computed: {
+        ...mapState([
+            'userInfo'
+        ]),
+    }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.header {
+    border-bottom: 1px solid #d2d2d2;
+    min-width: 735px;
+    .input-wrap {
+        height: 29px;
+        padding: 0 0 0 28px;
+        background: url(../assets/images/sprite_v2.gif);
+        background-position: 0 -320px;
+        margin-left: 10px;
+    }
+    .database-selector-tip {
+        width: 35px;
+        height: 29px;
+        margin-left: -29px;
+        background-image: url(../assets/images/sprite_v2.gif);
+        background-position: -120px -360px;
+        cursor: pointer;
+    }
+    .database-selector-all {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAj1JREFUOBGVkz1oU1EUx/NeXkwzBPygOFkQ7ZAPxU0k4CBG6FySkIiSpcWKgxQc3AJOSoltEfEjQ5TQfG0KFq2opeDQyaFG5zq4SAdJQgn58Pd/5paHmxcO53/+53/Ovfe8dy3fPyubzcb6/f4cdBKbGqd38RuO4zyvVqtfx5zrLBOkUqlDlmUVR6PRVfwjFYC/hcPh/Xa7fQV8Hv42/DPwYrPZ7KnWbaBi8DqWCAaDJyuVyk8ltdLp9CoFt4ADzBHH+oDNqImtiM4PcZfwTVNMkZXL5abhdGRtZIqBrrYoYGUymfhwOHxl23YhEomsFQqFPnM4PhgMKjRJ0MDCT0jsXdBDv99/1iGpgRXr9fpLI6D4DFinWsA2Ed/Hz6K9iHcX2NawdYVkIBB4PeZ9zOMpyXfYMqc6gj9HA+kuGI3HJ3WCE3TSkO4wsATx/FgwzdW2wXv4o54iL5xyB0PRd7HsGOD4XoGwW8wp3qIroQnjJ7Eb5CZtEj8gt6Ss1WqfiJ8A9xR7FwWXie+FQqFqo9F4AL6L7dokdN9ZIya5wPc9RiP9iSPD4/1YoVwu74tj08O4DbxdosFcPp8XcbBo9J7gywHh823TuK4Y7QRzualf2+bz7bDbm263W/KIDdwxgI2WDO50OivUbOldmCEuklznK6xxmnl2akuM6DPxNWEafNTObLQMdxqbEa97+Vqt1iAWi9Uo0I/yOB6Ph6LR6G8e0mav1/sFd4qCEfgFGn2x63oH+L+PScCs/33OfwBAyBjh4pskxgAAAABJRU5ErkJggg==) no-repeat 50%;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+    .search-input {
+        border: none;
+        background: none;
+        width: 100%;
+        font-size: 14px;
+        padding: 6px;
+        box-sizing: border-box;
+        -moz-sizing: border-box;
+        -webkit-sizing: border-box;
+        -ms-sizing: border-box;
+    }
+    #q:before {
+        content: "";
+        content: none
+    }
+     :focus {
+        outline: 0
+    }
+    .btn-wrap {
+        position: relative;
+        .btn-search {
+            float: left;
+            background: url(../assets/images/sprite_v2.gif);
+            width: 63px;
+            height: 29px;
+            background-position: -180px -360px;
+            cursor: pointer;
+        }
+        .btn-search:hover {
+            background-position: -180px -400px;
+        }
+    }
+    .btn-search-menu {
+        float: left;
+        background: url(../assets/images/sprite_v2.gif);
+        width: 28px;
+        height: 29px;
+        background-position: -260px -360px;
+        cursor: pointer;
+    }
+    .search-menu {
+        width: 142px;
+        padding: 4px 0;
+        background: #fff;
+        border: 1px solid #d2d2d2;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+        a {
+            display: block;
+            padding: 3px 10px;
+            color: #555;
+        }
+    }
+    .right-side {
+        margin-left: 32px;
+        .queue-monitor {
+            border: 1px solid #d2d2d2;
+            border-right: 0;
+            border-bottom: 0;
+            a.btn-monitor {
+                margin: 8px;
+                font-size: 14px;
+                color: #555;
+                height: 16px;
+                cursor: pointer;
+                display: inline-block;
+                vertical-align: middle;
+                .i16-gray,
+                .i16-light-gray {
+                    background-image: url(../assets/images/icons_light_gray.png);
+                    line-height: 16px;
+                    width: 16px;
+                    height: 16px;
+                }
+                .ico-hourglass {
+                    background-position: -180px -80px;
+                    display: inline-block;
+                }
+            }
+        }
+        .user-pannel {
+            position: relative;
+            .user-name {
+                padding: 7px 10px 7px 15px;
+                font-size: 14px;
+                color: #555;
+                height: 18px;
+                border: 1px solid #d2d2d2;
+                height: 100%;
+                display: block;
+                border-bottom: 0;
+                .ico-corner-down {
+                    background-position: -60px -20px;
+                }
+                .i12 {
+                    background-image: url(data:image/png;base64,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);
+                    line-height: 12px;
+                    width: 12px;
+                    height: 12px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-indent: -9000px;
+                }
+                .user-email{
+                    max-width:150px;
+                }
+            }
+            .user-menu {
+                background: #fff;
+                border: 1px solid #d2d2d2;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+                width: 305px;
+                .feature-list li a {
+                    padding-right: 50px;
+                }
+                a {
+                    color: #555;
+                    display: block;
+                    padding: 5px 8px;
+                }
+            }
+        }
+    }
+    .ico-uservoice {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAYAAAARfGZ1AAADGUlEQVRIDaVVTUhUURT+3ptnqZk648ashRW1aBFBCpUQYSoW2YAVUlBU0M/GVJydCRMZLXKwgqAkwk0GFokUjSmCBFrUFNWmRVC40BahkoZOjjOv74w+mxnvG5UOw9xzz/nOd+8999zzNNjIPi+MnUXYr5k4BA1FhK2j7jI1jGnAiGlikPrz9wPo6/diVkVD3GLx9OIEibwk3bLYm2Ax8ZWLeJtL0Z7gYXiMnO3CWlca2jQNlTHmZak8ydOxaZx+4MakFbBAfr4XWZnAKxq2W86VjibweQLY21qKXxKry5/kl8RP/odYeCReeI51wCHzKHnhHlygo0QMKuGOusNhFHM72cEQsiIRFMDEfdr5ixfhyc/GRbFq1S+QmZqCb9Rz4mFzs4iJBl8ZrnO2iMjzEk2ajgZF3OjoFDYaqw0cplNJHA3SkCvEdT0oMDS4udgwF7sntj9h3E1Vk+ewMNwGQUkrg3mrZmnm8bhuYg2dSl03PrSU462hY4o2O6k0WHbb7LyWnXxHLJ1ja8sbBGSu6zgZY49ThddgItczeFnClHiYEp+A63twnKdotgsUXp3XFLEDxNlN9FrEnh40cmcP6Ze0KoUvPCSlOKL0Jhi5E6koyCtmQV/haZMemPghnTv4lMCjnJKpuNaPfGcaqqjzISYXYr4Y4Qg6HTqqkkPpZRNLMfB9Sdw8gL3mkf57Bs+o/FgqiMe8zIeRydfZuCSWfIHX8OutFaxVTfnK4jjGpnBbOt54ELfiHIoJU1LTzx4f7S3sxW2smscK3ILJlY5LcpnOVNQsGFUK03GjbI4rSk6M+XMYp7hAnwovNu6mKScdE3w4V+0wTF1XcBZnLH+0NcrkYxdmV21Ge94GpJNpN8n4W77w3gYCgzjYcQ4hK0pJ4PHzg+GAl2VaQaDtQ7FIoiNPzXSUxNqU5BagthPZRgbKmK4dtOVyMSd3aHIcZysYYk5reT7nPD4YCmPTzfJ/lZeU3FrEbqz3o1BzoJuLuQTDnPdPT+LonUqMyty6UNFXLL4DeDcD7OJpOsk8zn6yNS0D1/gRWSNkfwGSHeGgrunuYQAAAABJRU5ErkJggg==) no-repeat 50% 50%;
+        width: 23px;
+        height: 24px;
+        padding: 5px 0;
+        display: inline-block;
+        vertical-align: middle;
+        text-indent: -9999px;
+        overflow: hidden;
+        margin: 0 25px 0 15px;
+        font-size: 12px;
+    }
+}
+</style>

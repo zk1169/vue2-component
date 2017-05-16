@@ -11,6 +11,7 @@ const Sign = resolve => require(['../pages/sign'], resolve);
 const Login = resolve => require(['../pages/login'], resolve);
 const Dashboard = resolve => require(['../pages/dashboard'], resolve);
 const Home = resolve => require(['../pages/home'], resolve);
+const Search = resolve => require(['../pages/search'], resolve);
 
 Vue.use(Router);
 
@@ -42,6 +43,10 @@ let router = new Router({
                 {
                     path: 'home',
                     component: Home
+                },
+                {
+                    path: 'search',
+                    component: Search
                 }
             ]
         }

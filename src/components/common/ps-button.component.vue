@@ -37,6 +37,7 @@
                             this.loading = false;
                         },
                         (error) => {
+                            this.loading = false;
                             //Observable.of(true).delay(1000).subscribe(()=>this.loading = false);
                         }
                     );

@@ -22,7 +22,7 @@
  #sign-component{
   height: 100vh;
     width: 100%;
-    background-image: url('../assets/images/LookoutTower_GrandCanyon_FF_768_HD_ZH-CN727571233.jpg');
+    //background-image: url('../assets/images/LookoutTower_GrandCanyon_FF_768_HD_ZH-CN727571233.jpg');
     background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;
