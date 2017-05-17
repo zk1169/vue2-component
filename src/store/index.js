@@ -9,7 +9,7 @@ Vue.use(Vuex);
 const state = {
     isLogin: true, //是否登录
     redirectUrl: null, //登录后跳转url
-    userInfo: null //用户信息
+    userInfo: { email: 'zhukun-analytics@patsnap.com' } //用户信息
 }
 
 export default new Vuex.Store({

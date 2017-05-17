@@ -1,6 +1,6 @@
 <template>
     <div class="checkbox-component checkbox" v-bind:class="{checked:checked}">
-        <label><input type="checkbox" v-model="checked">{{label}}</label>
+        <label><input type="checkbox" v-model="checked" :checked="ifChecked">{{label}}</label>
     </div>
 </template>
 
@@ -12,14 +12,18 @@
             label: String
         },
         data() {
-            return {}
+            return {
+                ifChecked: false
+            }
         },
         computed: {
             checked: {
                 get() {
-                    return this.value;
+                    //return this.value || false;
+                    return this.ifChecked;
                 },
                 set(newValue) {
+                    this.ifChecked = newValue;
                     this.$emit("input", newValue);
                 }
             }
@@ -33,26 +37,28 @@
     }
     
     .checkbox {
-        margin:0px;
+        margin: 0px;
         label {
             padding-left: 0px;
         }
         label:before {
             font-family: "FontAwesome";
-            font-size:16px;
+            font-size: 16px;
             content: "\f096";
             margin-right: 2px;
-            width:13px;
-            display:inline-block;
-            color:#2e6da4;
+            width: 13px;
+            display: inline-block;
+            color: #2e6da4;
         }
     }
-    .checkbox.checked{
+    
+    .checkbox.checked {
         label:before {
             content: "\f046";
         }
     }
-    .checkbox.indeterminate{
+    
+    .checkbox.indeterminate {
         label:before {
             content: "\f147";
         }

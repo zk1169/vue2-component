@@ -1,322 +1,523 @@
 export const moreAnalysisData = {
     "status": true,
-    "moreList": [{
-            "title": "申请人",
-            "list": [{
-                    "key": "Top_Assignee",
-                    "title": "申请人排名",
-                    "chartType": "column",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Application_Trend_of_Assignee",
-                    "title": "申请人申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Patent_Distribution_of_Assignee",
-                    "title": "申请人各国专利分布",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "IPC_Distribution_of_Assignee",
-                    "title": "申请人技术分布",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Top_Standardized_Assignee",
-                    "title": "[标]申请人排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Application_Trend_of_Standardized_Assignee",
-                    "title": "[标]申请人申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Patent_Distribution_of_Standardized_Assignee",
-                    "title": "[标]申请人各国专利分布",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "IPC_Distribution_of_Standardized_Assignee",
-                    "title": "[标]申请人技术分布",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "publication_assignee",
-                    "title": "申请人公开趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "publication_standardized_assignee",
-                    "title": "[标]申请人公开趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "patent_type_assignee",
-                    "title": "申请人专利类型",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                }
-            ]
+    "data": {
+        "efq": [],
+        "configs": [{
+                "field": "AN_FACET_CN",
+                "name": "申请(专利权)人",
+                "canSearch": true,
+                "frameColor": "#FF9481",
+                "hoverColor": "#FFF4F2",
+                "isExpand": true,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 1
+            },
+            {
+                "field": "GNAME",
+                "name": "自定义申请人组",
+                "canSearch": false,
+                "frameColor": "#FF9500",
+                "hoverColor": "#FFF4E5",
+                "isExpand": false,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 2
+            },
+            {
+                "field": "AN_ST_FACET",
+                "name": "[标]申请(专利权)人",
+                "canSearch": true,
+                "frameColor": "#FF9500",
+                "hoverColor": "#FFF4E5",
+                "isExpand": false,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 3
+            },
+            {
+                "field": "ANS_TYPE",
+                "name": "[标]申请(专利权)人类型",
+                "canSearch": false,
+                "frameColor": "#FF9500",
+                "hoverColor": "#FFF4E5",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 10,
+                "sort": 4
+            },
+            {
+                "field": "COUNTRY",
+                "name": "受理局",
+                "canSearch": false,
+                "frameColor": "#83AAE7",
+                "hoverColor": "#EDF3FC",
+                "isExpand": false,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 4
+            },
+            {
+                "field": "PATENT_TYPE",
+                "name": "专利类型",
+                "canSearch": false,
+                "frameColor": "#83AAE7",
+                "hoverColor": "#EDF3FC",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 4,
+                "expandNum": 4,
+                "sort": 5
+            },
+            {
+                "field": "APD_Y",
+                "name": "申请年",
+                "canSearch": false,
+                "frameColor": "#A8CE63",
+                "hoverColor": "#EEF5E0",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 6
+            },
+            {
+                "field": "PBD_Y",
+                "name": "公开年",
+                "canSearch": false,
+                "frameColor": "#99c868",
+                "hoverColor": "#ECF8E2",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 7
+            },
+            {
+                "field": "IPC_FACET",
+                "name": "IPC分类",
+                "canSearch": false,
+                "frameColor": "#E5CF4F",
+                "hoverColor": "#FAF5DC",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": true,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 8,
+                "groups": [{
+                        "field": "IPC_SECTION",
+                        "name": "IPC部",
+                        "selected": false
+                    },
+                    {
+                        "field": "IPC_CLASS",
+                        "name": "IPC大类",
+                        "selected": false
+                    },
+                    {
+                        "field": "IPC_SUB_CLASS",
+                        "name": "IPC小类",
+                        "selected": false
+                    },
+                    {
+                        "field": "IPC_MAIN_GROUP",
+                        "name": "IPC大组",
+                        "selected": false
+                    },
+                    {
+                        "field": "IPC_FACET",
+                        "name": "IPC小组",
+                        "selected": true
+                    }
+                ]
+            },
+            {
+                "field": "CPC_FACET",
+                "name": "CPC分类",
+                "canSearch": false,
+                "frameColor": "#A6C5F5",
+                "hoverColor": "#EDF3FD",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": true,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 10,
+                "groups": [{
+                        "field": "CPC_SECTION",
+                        "name": "CPC部",
+                        "selected": false
+                    },
+                    {
+                        "field": "CPC_CLASS",
+                        "name": "CPC大类",
+                        "selected": false
+                    },
+                    {
+                        "field": "CPC_SUB_CLASS",
+                        "name": "CPC小类",
+                        "selected": false
+                    },
+                    {
+                        "field": "CPC_MAIN_GROUP",
+                        "name": "CPC大组",
+                        "selected": false
+                    },
+                    {
+                        "field": "CPC_FACET",
+                        "name": "CPC小组",
+                        "selected": true
+                    }
+                ]
+            },
+            {
+                "field": "SIMPLE_LEGAL_STATUS",
+                "name": "简单法律状态",
+                "canSearch": false,
+                "frameColor": "#85E0B6",
+                "hoverColor": "#E7F9F0",
+                "isExpand": false,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 3,
+                "expandNum": 3,
+                "sort": 11
+            },
+            {
+                "field": "LEGAL_STATUS",
+                "name": "法律状态",
+                "canSearch": false,
+                "frameColor": "#85E0B6",
+                "hoverColor": "#E7F9F0",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 12
+            },
+            {
+                "field": "IN_FACET_CN",
+                "name": "发明人",
+                "canSearch": true,
+                "frameColor": "#6DCEFE",
+                "hoverColor": "#E2F5FF",
+                "isExpand": false,
+                "showAll": true,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 13
+            },
+            {
+                "field": "LOC_FACET",
+                "name": "LOC分类",
+                "canSearch": false,
+                "frameColor": "#B1A8E7",
+                "hoverColor": "#F4F2FC",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": true,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 14,
+                "groups": [{
+                        "field": "LOC_CLASS",
+                        "name": "LOC大类",
+                        "selected": false
+                    },
+                    {
+                        "field": "LOC_FACET",
+                        "name": "LOC小类",
+                        "selected": true
+                    }
+                ]
+            },
+            {
+                "field": "UPC_FACET",
+                "name": "UPC分类",
+                "canSearch": false,
+                "frameColor": "#8CD1DD",
+                "hoverColor": "#E8F6F8",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": true,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 15,
+                "groups": [{
+                        "field": "UPC_CLASS",
+                        "name": "UPC大类",
+                        "selected": false
+                    },
+                    {
+                        "field": "UPC_FACET",
+                        "name": "UPC小类",
+                        "selected": true
+                    }
+                ]
+            },
+            {
+                "field": "PV",
+                "name": "专利价值",
+                "canSearch": false,
+                "frameColor": "",
+                "hoverColor": "",
+                "isExpand": false,
+                "showAll": false,
+                "showExplain": false,
+                "collapseNum": 10,
+                "expandNum": 50,
+                "sort": 16
+            }
+        ],
+        "analysisConfigs": [],
+        "supportTypes": {
+            "defaultTypes": [
+                "AN_FACET_CN",
+                "AN_ST_FACET",
+                "APD_Y",
+                "IN_FACET_CN",
+                "PBD_Y",
+                "LEGAL_STATUS",
+                "PATENT_TYPE",
+                "SIMPLE_LEGAL_STATUS",
+                "COUNTRY",
+                "GNAME",
+                "ANS_TYPE"
+            ],
+            "singleSelectTypes": [
+                "IPC_FACET",
+                "LOC_FACET",
+                "UPC_FACET",
+                "CPC_FACET"
+            ],
+            "rangeTypes": [
+                "PV",
+                "CITED_COUNT",
+                "INPADOC_FAMILY_COUNT",
+                "EXDT_TS",
+                "CITE_COUNT"
+            ],
+            "multiSelectTypes": []
         },
-        {
-            "title": "发明人",
-            "list": [{
-                    "key": "Top_Inventor",
-                    "title": "发明人排名",
-                    "chartType": "column",
-                    "dataType": "top"
+        "data": [{
+            "field": "AN_FACET_CN",
+            "value": [{
+                    "name": "SEMICONDUCTOR ENERGY LABORATORY CO., LTD.",
+                    "value": 2204
                 },
                 {
-                    "key": "Application_Trend_of_Inventor",
-                    "title": "发明人申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
+                    "name": "GOOGLE INC.",
+                    "value": 1988
                 },
                 {
-                    "key": "IPC_Distribution_of_Inventor",
-                    "title": "发明人技术分布",
-                    "chartType": "line",
-                    "dataType": "dimension"
+                    "name": "SONY CORPORATION",
+                    "value": 1905
                 },
                 {
-                    "key": "CPC_inventor",
-                    "title": "发明人CPC技术分布",
-                    "chartType": "bar",
-                    "dataType": "dimension"
+                    "name": "APPLE INC.",
+                    "value": 1720
                 },
                 {
-                    "key": "UPC_inventor",
-                    "title": "发明人UPC技术分布",
-                    "chartType": "bar",
-                    "dataType": "dimension"
+                    "name": "MICROSOFT CORPORATION",
+                    "value": 1489
                 },
                 {
-                    "key": "LOC_inventor",
-                    "title": "发明人外观分布",
-                    "chartType": "bar",
-                    "dataType": "dimension"
+                    "name": "PANASONIC CORPORATION",
+                    "value": 1345
+                },
+                {
+                    "name": "QUALCOMM INCORPORATED",
+                    "value": 1123
+                },
+                {
+                    "name": "NOKIA CORPORATION",
+                    "value": 994
+                },
+                {
+                    "name": "SAMSUNG ELECTRONICS CO., LTD.",
+                    "value": 992
+                },
+                {
+                    "name": "IGT",
+                    "value": 779
+                },
+                {
+                    "name": "GENERAL MOTORS LLC",
+                    "value": 621
+                },
+                {
+                    "name": "PANASONIC INTELLECTUAL PROPERTY CORPORATION OF AMERICA",
+                    "value": 599
+                },
+                {
+                    "name": "INTERNATIONAL BUSINESS MACHINES CORPORATION",
+                    "value": 583
+                },
+                {
+                    "name": "SILVERBROOK RESEARCH PTY LTD",
+                    "value": 505
+                },
+                {
+                    "name": "LG ELECTRONICS INC.",
+                    "value": 470
+                },
+                {
+                    "name": "FACEBOOK, INC.",
+                    "value": 416
+                },
+                {
+                    "name": "KONINKLIJKE PHILIPS ELECTRONICS N.V.",
+                    "value": 413
+                },
+                {
+                    "name": "YAHOO! INC.",
+                    "value": 398
+                },
+                {
+                    "name": "MATSUSHITA ELECTRIC INDUSTRIAL CO., LTD.",
+                    "value": 387
+                },
+                {
+                    "name": "MICROSOFT TECHNOLOGY LICENSING, LLC",
+                    "value": 367
+                },
+                {
+                    "name": "DIGIMARC CORPORATION",
+                    "value": 365
+                },
+                {
+                    "name": "PIONEER CORPORATION",
+                    "value": 347
+                },
+                {
+                    "name": "INTEL CORPORATION",
+                    "value": 327
+                },
+                {
+                    "name": "RESEARCH IN MOTION LIMITED",
+                    "value": 316
+                },
+                {
+                    "name": "AMAZON TECHNOLOGIES, INC.",
+                    "value": 307
+                },
+                {
+                    "name": "SONOS, INC.",
+                    "value": 296
+                },
+                {
+                    "name": "MATSUSHITA ELECTRIC INDUSTRIAL CO. LTD.",
+                    "value": 285
+                },
+                {
+                    "name": "BROADCOM CORPORATION",
+                    "value": 276
+                },
+                {
+                    "name": "GM GLOBAL TECHNOLOGY OPERATIONS LLC",
+                    "value": 263
+                },
+                {
+                    "name": "SOROCA ADAM",
+                    "value": 263
+                },
+                {
+                    "name": "OTICON A/S",
+                    "value": 260
+                },
+                {
+                    "name": "RAMER JOREY",
+                    "value": 231
+                },
+                {
+                    "name": "AT&T INTELLECTUAL PROPERTY I, L.P.",
+                    "value": 229
+                },
+                {
+                    "name": "DOUGHTY DENNIS",
+                    "value": 229
+                },
+                {
+                    "name": "HARMAN BECKER AUTOMOTIVE SYSTEMS GMBH",
+                    "value": 223
+                },
+                {
+                    "name": "FUJITSU TEN LIMITED",
+                    "value": 221
+                },
+                {
+                    "name": "NANT HOLDINGS IP, LLC",
+                    "value": 219
+                },
+                {
+                    "name": "SONY ERICSSON MOBILE COMMUNICATIONS AB",
+                    "value": 213
+                },
+                {
+                    "name": "FLEXTRONICS AP, LLC",
+                    "value": 212
+                },
+                {
+                    "name": "DENSO CORPORATION",
+                    "value": 205
+                },
+                {
+                    "name": "SEARETE LLC, A LIMITED LIABILITY CORPORATION OF THE STATE OF DELAWARE",
+                    "value": 205
+                },
+                {
+                    "name": "SUN PATENT TRUST",
+                    "value": 202
+                },
+                {
+                    "name": "KADONO SHINYA",
+                    "value": 198
+                },
+                {
+                    "name": "ELWHA LLC",
+                    "value": 196
+                },
+                {
+                    "name": "FUJITSU LIMITED",
+                    "value": 195
+                },
+                {
+                    "name": "FORD GLOBAL TECHNOLOGIES, LLC",
+                    "value": 193
+                },
+                {
+                    "name": "HERE GLOBAL B.V.",
+                    "value": 183
+                },
+                {
+                    "name": "NOKIA TECHNOLOGIES OY",
+                    "value": 183
+                },
+                {
+                    "name": "KABUSHIKI KAISHA TOSHIBA",
+                    "value": 180
+                },
+                {
+                    "name": "MOTOROLA, INC.",
+                    "value": 171
                 }
             ]
-        },
-        {
-            "title": "时间分析",
-            "list": [{
-                    "key": "Application_Trend",
-                    "title": "申请趋势",
-                    "chartType": "line",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Publication_Trend",
-                    "title": "公开趋势",
-                    "chartType": "line",
-                    "dataType": "top"
-                }
-            ]
-        },
-        {
-            "title": "分类分析",
-            "list": [{
-                    "key": "Top_IPC",
-                    "title": "IPC分类排名",
-                    "chartType": "treemap",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Application_Trend_of_IPC",
-                    "title": "IPC分类申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Top_UPC",
-                    "title": "UPC分类排名",
-                    "chartType": "treemap",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Application_Trend_of_UPC",
-                    "title": "UPC分类申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Top_LOC",
-                    "title": "LOC分类排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Application_Trend_of_LOC",
-                    "title": "LOC分类申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Top_CPC",
-                    "title": "CPC分类排名",
-                    "chartType": "treemap",
-                    "dataType": "top"
-                },
-                {
-                    "key": "assignee_IPC",
-                    "title": "申请人IPC技术对比",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-
-                    "key": "standardized_assignee_IPC",
-                    "title": "[标]申请人IPC技术对比",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "inventor_IPC",
-                    "title": "发明人IPC技术对比",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "assignee_CPC",
-                    "title": "申请人CPC技术对比",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "standardized_assignee_CPC",
-                    "title": "[标]申请人CPC技术对比 ",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                }
-            ]
-        },
-        {
-            "title": "国家/地区",
-            "list": [{
-                    "key": "Top_Province",
-                    "title": "省排名(中国)",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "application_assignee_country",
-                    "title": "申请人国家申请趋势",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "publication_assignee_country",
-                    "title": "申请人国家公开趋势",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "application_province",
-                    "title": "各省申请趋势(中国)",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "patent_type_province",
-                    "title": "各省专利类型(中国)",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "Top_Assignee_Countries",
-                    "title": "申请人国家排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Top_Authorities",
-                    "title": "受理局排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                }
-            ]
-        },
-        {
-            "title": "代理机构",
-            "list": [{
-                    "key": "top_agency",
-                    "title": "代理机构排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "top_agent",
-                    "title": "代理人排名",
-                    "chartType": "bar",
-                    "dataType": "top"
-                },
-                {
-                    "key": "application_agency",
-                    "title": "代理机构申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "applcation_agent",
-                    "title": "代理人申请趋势",
-                    "chartType": "line",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "patent_type_agency",
-                    "title": "代理机构专利类型",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "patent_type_agent",
-                    "title": "代理人专利类型",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "IPC_agency",
-                    "title": "代理机构IPC技术分布",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                },
-                {
-                    "key": "IPC_agent",
-                    "title": "代理人IPC技术分布",
-                    "chartType": "bar",
-                    "dataType": "dimension"
-                }
-            ]
-        },
-        {
-            "title": "法律状态",
-            "list": [{
-                    "key": "Simple_Legal_Status",
-                    "title": "简单法律状态",
-                    "chartType": "pie",
-                    "dataType": "top"
-                },
-                {
-                    "key": "Patent_Type",
-                    "title": "专利类型",
-                    "chartType": "pie",
-                    "dataType": "top"
-                }
-            ]
-        }
-    ],
-    "hasPermission": true
+        }]
+    }
 };

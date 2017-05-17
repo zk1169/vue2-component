@@ -49,8 +49,8 @@
             },
             complete() {
                 this.width = 100;
+                this.opacity = 0;
                 setTimeout(() => {
-                    this.opacity = 0;
                     this.width = 0;
                     //clearInterval(this.timer);
                     //this.timer = null;

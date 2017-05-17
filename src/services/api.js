@@ -49,7 +49,11 @@ var patentQuery = (data) => {
     //         return res;
     //     }
     // );
-    return Observable.of(patentData).delay(2000);
+    let mockData = {
+        moreAnalysisData: moreAnalysisData,
+        patentData: patentData
+    }
+    return Observable.of(mockData).delay(500);
 };
 
 export {
