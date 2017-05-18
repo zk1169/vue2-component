@@ -659,8 +659,8 @@ export default {
                 }
             }
         }
-        .list-body {
-            max-height: calc(100vh - 186px);
+        .list-component {
+            max-height: calc(100vh - 158px);
             overflow-y: auto;
             overflow-x: hidden;
         }
