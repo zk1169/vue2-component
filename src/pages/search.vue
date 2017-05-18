@@ -104,17 +104,17 @@
                                     </ul>
                                 </div>
                                 <div class="profile">
-                                    <a href="/my/setting" class="btn-profile">
+                                    <a class="btn-profile">
                                         <span class="i16 ico-id-card"></span>用户设置</a>
                                 </div>
                                 <div class="support-btns">
-                                    <a href="http://x.patsnap.cn" class="btn-demo" target="_blank">
+                                    <a class="btn-demo" target="_blank">
                                         <span class="i16 ico-demo"></span>智慧芽学院</a>
-                                    <a href="https://patsnap.kf5.com/forum/" class="btn-question" target="_blank">
+                                    <a class="btn-question" target="_blank">
                                         <span class="i16 ico-question"></span>帮助中心</a>
-                                    <a href="/log/release" class="btn-release-log" target="">
+                                    <a class="btn-release-log" target="">
                                         <span class="i16 ico-release-log"></span>更新日志</a>
-                                    <a href="/texttour" class="btn-features" target="">
+                                    <a class="btn-features" target="">
                                         <span class="i16 ico-star-light"></span>特色功能</a>
                                     <a href="/logout" class="btn-logout" target="">
                                         <span class="i16 ico-onoff"></span>登出</a>
@@ -139,8 +139,9 @@
                                 <filter-component :source="filterSource"></filter-component>
                             </div>
                         </tab-component>
-                        <tab-component title="最近搜索">tab2 content</tab-component>
-                        <!--<tab-component title="tab3" v-ps-loading="loading"><div style="height:200px;">tab3 content</div></tab-component>-->
+                        <tab-component title="最近搜索" v-ps-loading="loading">
+                            <div style="height:200px;">tab2 content</div>
+                        </tab-component>
                     </tabs-component>
                 </div>
             </div>
@@ -213,31 +214,29 @@
                                 </li>
                             </ul>
                         </list-header>
-                        <div class="list-body">
-                            <list-item v-for="(item,index) in listData.list" :key="item.PATENT_ID">
-                                <div layout="row">
-                                    <div class="item-column">
-                                        <checkbox-component v-model="item.checked"></checkbox-component>
-                                    </div>
-                                    <div class="item-column list-index">
-                                        <i class="dot-status"></i>
-                                        {{index+1}}
-                                    </div>
-                                    <div class="item-column" v-for="header in listData.headers" :flex="header.flex">
-                                        <span v-if="header.prop=='PN'">
-                                            <a>{{item.PN}}</a>
-                                        </span>
-                                        <span v-else-if="header.prop=='IN'">
-                                            <span v-for="(inventor,inventorIndex) in item.IN" v-if="!item.hasMore && inventorIndex<3 || item.hasMore">
-                                                <a>{{inventor}}</a>&nbsp;&nbsp;
-                                            </span>
-                                            <a class="more" v-if="!item.hasMore && item.IN.length>3" @click="item.hasMore=!item.hasMore">+{{item.IN.length-3}}</a>
-                                        </span>
-                                        <span v-else>{{item[header.prop]}}</span>
-                                    </div>
+                        <list-item v-for="(item,index) in listData.list" :key="item.PATENT_ID">
+                            <div layout="row">
+                                <div class="item-column">
+                                    <checkbox-component v-model="item.checked"></checkbox-component>
                                 </div>
-                            </list-item>
-                        </div>
+                                <div class="item-column list-index">
+                                    <i class="dot-status"></i>
+                                    {{index+1}}
+                                </div>
+                                <div class="item-column" v-for="header in listData.headers" :flex="header.flex">
+                                    <span v-if="header.prop=='PN'">
+                                        <a>{{item.PN}}</a>
+                                    </span>
+                                    <span v-else-if="header.prop=='IN'">
+                                        <span v-for="(inventor,inventorIndex) in item.IN" v-if="(!item.hasMore && inventorIndex<3) || item.hasMore">
+                                            <a>{{inventor}}</a>&nbsp;&nbsp;
+                                        </span>
+                                        <a class="more" v-if="!item.hasMore && item.IN.length>3" @click="inventorMore(item,index)">+{{item.IN.length-3}}</a>
+                                    </span>
+                                    <span v-else>{{item[header.prop]}}</span>
+                                </div>
+                            </div>
+                        </list-item>
                     </list-component>
                 </div>
             </div>
@@ -246,9 +245,8 @@
 </template>
 
 <script>
-import {
-    mapState
-} from 'vuex';
+import Vue from 'vue';
+import { mapState } from 'vuex';
 import { patentQuery } from '../services/api';
 import PopupComponent from '../components/popup.component';
 import TabsComponent from '../components/tab-component/tabs.component';
@@ -258,6 +256,7 @@ import ListComponent from '../components/list-component/list.component';
 import ListHeader from '../components/list-component/list-header.component';
 import ListItem from '../components/list-component/list-item.component';
 import CheckboxComponent from '../components/common/checkbox.component';
+let cloneDeep = require('lodash.clonedeep');
 
 export default {
     data() {
@@ -266,9 +265,7 @@ export default {
             activeTabIndex: 0,
             loading: true,
             filterSource: [],
-            listData: {
-                allChecked: false
-            }
+            listData: {}
         }
     },
     components: {
@@ -290,7 +287,7 @@ export default {
     },
     methods: {
         queryClick() {
-            this.loading = false;
+            //this.loading = false;
             this.$root.$emit('start-loading-bar');
             return patentQuery().subscribe(
                 (res) => {
@@ -301,6 +298,8 @@ export default {
                         headers: res.patentHeadersData
                     };
                     this.$root.$emit('complete-loading-bar');
+                    this.listAllChecked = true;
+                    this.listAllChecked = false;
                 },
                 (error) => {
                     this.$root.$emit('complete-loading-bar');
@@ -311,6 +310,11 @@ export default {
                     });
                 }
             );
+        },
+        inventorMore(item,index){
+            item.hasMore = !item.hasMore;
+            this.listData.list.splice(index,1);
+            this.listData.list.splice(index,0,item);
         }
     },
     computed: {
@@ -340,6 +344,14 @@ export default {
                     this.listData.list.forEach((item, index) => {
                         item.checked = value;
                     });
+                    
+                    //let tempList = cloneDeep(this.listData.list);
+                    //this.listData.list.splice(0,this.listData.list.length);
+                    //this.listData.list.splice(0,0,...tempList);
+
+                    // let tempListData = cloneDeep(this.listData);
+                    // this.listData = undefined;
+                    // this.listData = tempListData;
                 }
             }
         }
@@ -483,7 +495,7 @@ export default {
                 background: #fff;
                 border: 1px solid #d2d2d2;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
-                width: 305px;
+                width: 100%;
                 .feature-list li a {
                     padding-right: 50px;
                 }
@@ -677,6 +689,7 @@ export default {
         .item-column a {
             text-decoration: underline;
             cursor: pointer;
+            color: #06c;
         }
         .item-column a.more {
             background: #f5f5f5;
