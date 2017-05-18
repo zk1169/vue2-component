@@ -1,3 +1,24 @@
+export const patentHeadersData = [{
+        "title": "公开(公告)号",
+        "prop": "PN",
+        "flex": "15"
+    },
+    {
+        "title": "发明人",
+        "prop": "IN",
+        "flex": "auto"
+    },
+    {
+        "title": "申请日",
+        "prop": "APD",
+        "flex": "10"
+    },
+    {
+        "title": "公开(公告)日",
+        "prop": "PBD",
+        "flex": "10"
+    }
+];
 export const patentData = {
     "data": {
         "PATENT_DATA": [{

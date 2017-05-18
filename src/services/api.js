@@ -5,7 +5,8 @@ import 'rxjs/add/operator/delay';
 
 import { loginResultData } from './temp-data/login';
 import { moreAnalysisData } from './temp-data/more-analysis';
-import { patentData } from './temp-data/patent';
+import { patentData, patentHeadersData } from './temp-data/patent';
+import { rankingData } from './temp-data/ranking';
 
 /**
  * 创建临时数据
@@ -51,13 +52,19 @@ var patentQuery = (data) => {
     // );
     let mockData = {
         moreAnalysisData: moreAnalysisData,
-        patentData: patentData
+        patentData: patentData,
+        patentHeadersData: patentHeadersData
     }
     return Observable.of(mockData).delay(500);
+};
+
+var ranking = (param) => {
+    return Observable.of(rankingData).delay(1000);
 };
 
 export {
     login,
     moreAnalysis,
-    patentQuery
+    patentQuery,
+    ranking
 };

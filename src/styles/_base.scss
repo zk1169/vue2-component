@@ -49,3 +49,25 @@ a:hover {
     height: 29px;
     width: 32px;
 }
+
+.hand {
+    cursor: pointer;
+}
+
+.list-component {
+    .list-header {
+        background: #75bb00;
+        color: #fff;
+        ul li {
+            padding: 3px 5px;
+        }
+    }
+    .list-item {
+        border-bottom: 1px solid #d2d2d2;
+        color: #333;
+        font-size: 12px;
+        .item-column {
+            padding: 3px 5px;
+        }
+    }
+}
