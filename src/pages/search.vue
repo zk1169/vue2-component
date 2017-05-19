@@ -265,7 +265,8 @@ export default {
             activeTabIndex: 0,
             loading: true,
             filterSource: [],
-            listData: {}
+            listData: {},
+            listAllChecked: true
         }
     },
     components: {
@@ -279,10 +280,6 @@ export default {
         CheckboxComponent
     },
     created() {
-        // this.$root.$emit('start-loading-bar');
-        // setTimeout(() => {
-        //     this.$root.$emit('complete-loading-bar');
-        // }, 5000);
         this.queryClick();
     },
     methods: {
@@ -311,50 +308,59 @@ export default {
                 }
             );
         },
-        inventorMore(item,index){
+        inventorMore(item, index) {
             item.hasMore = !item.hasMore;
-            this.listData.list.splice(index,1);
-            this.listData.list.splice(index,0,item);
+            this.listData.list.splice(index, 1);
+            this.listData.list.splice(index, 0, item);
+        }
+    },
+    watch: {
+        listAllChecked: function (val) {
+            if (this.listData && this.listData.list) {
+                this.listData.list.forEach((item, index) => {
+                    item.checked = val;
+                });
+            }
         }
     },
     computed: {
         ...mapState([
             'userInfo'
         ]),
-        listAllChecked: {
-            get() {
-                if (this.listData && this.listData.list) {
-                    // this.listData.list.forEach((item, index) => {
-                    //     if(!item.checked){
-                    //         return false;
-                    //     }
-                    // });
-                    for (let i = 0; i < this.listData.list.length; i++) {
-                        if (!this.listData.list[i].checked) {
-                            return false;
-                        }
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-            set(value) {
-                if (this.listData && this.listData.list) {
-                    this.listData.list.forEach((item, index) => {
-                        item.checked = value;
-                    });
-                    
-                    //let tempList = cloneDeep(this.listData.list);
-                    //this.listData.list.splice(0,this.listData.list.length);
-                    //this.listData.list.splice(0,0,...tempList);
+        // listAllChecked: {
+        //     get() {
+        //         if (this.listData && this.listData.list) {
+        //             // this.listData.list.forEach((item, index) => {
+        //             //     if(!item.checked){
+        //             //         return false;
+        //             //     }
+        //             // });
+        //             for (let i = 0; i < this.listData.list.length; i++) {
+        //                 if (!this.listData.list[i].checked) {
+        //                     return false;
+        //                 }
+        //             }
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        //     },
+        //     set(value) {
+        //         if (this.listData && this.listData.list) {
+        //             this.listData.list.forEach((item, index) => {
+        //                 item.checked = value;
+        //             });
 
-                    // let tempListData = cloneDeep(this.listData);
-                    // this.listData = undefined;
-                    // this.listData = tempListData;
-                }
-            }
-        }
+        //             //let tempList = cloneDeep(this.listData.list);
+        //             //this.listData.list.splice(0,this.listData.list.length);
+        //             //this.listData.list.splice(0,0,...tempList);
+
+        //             let tempListData = cloneDeep(this.listData);
+        //             this.listData = undefined;
+        //             this.listData = tempListData;
+        //         }
+        //     }
+        // }
     }
 }
 </script>

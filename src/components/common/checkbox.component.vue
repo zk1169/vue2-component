@@ -1,7 +1,6 @@
 <template>
-    <div class="checkbox-component checkbox" v-bind:class="{checked:checked}">
-        <!--<label><input type="checkbox" v-model="checked" :checked="isChecked">{{label}}</label>-->
-        <label><input type="checkbox" v-model="checked">{{label}}</label>
+    <div class="checkbox-component checkbox" v-bind:class="{checked:isChecked}">
+        <label><input type="checkbox" v-model="isChecked">{{label}}</label>
     </div>
 </template>
 
@@ -17,17 +16,12 @@
                 isChecked: this.value
             }
         },
-        computed: {
-            checked: {
-                get() {
-                    //return this.value || false;
-                    return this.isChecked;
-                },
-                set(newValue) {
-                    this.isChecked = newValue;
-                    //this.value = newValue;
-                    this.$emit("input", newValue);
-                }
+        watch:{
+            value:function(newVal){
+                this.isChecked = newVal;
+            },
+            isChecked:function(newVal){
+                this.$emit("input", newVal);
             }
         }
     }
