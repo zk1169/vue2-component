@@ -5,6 +5,7 @@ import App from './app';
 import router from './router/route';
 import store from './store';
 import './directives/ps-loading/ps-loading.directive';
+import './filters/filter';
 
 //全局样式
 import './styles/style.scss';
@@ -19,16 +20,16 @@ Vue.use(elementUI);
 
 Vue.config.productionTip = false;
 
-Vue.config.errorHandler = function (err, vm) {
-  // handle error
-  console.log(err);
+Vue.config.errorHandler = function(err, vm) {
+    // handle error
+    console.log(err);
 }
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
 });

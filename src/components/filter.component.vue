@@ -15,8 +15,8 @@
             </li>
         </ul>
         <div class="filter-footer" layout="row" layout-align="start center">
-            <button flex="60" class="box-button">筛选</button>
-            <a flex="40" class="text-center hand">清空</a>
+            <button flex="60" class="box-button" @click="filterClick">筛选</button>
+            <a flex="40" class="text-center hand" @click="cleanFilter">清空</a>
         </div>
     </div>
 </template>
@@ -63,12 +63,42 @@ export default {
             } else {
                 item.isExpand = !item.isExpand;
             }
+        },
+        filterClick(){
+            let selectFilters = [];
+            if(this.source){
+                this.source.forEach((item,index)=>{
+                    if(item.values){
+                        item.values.forEach((subItem)=>{
+                            if(subItem.checked){
+                                subItem.field=item.field;
+                                selectFilters.push(subItem);
+                            }
+                        });
+                    }
+                });
+            }
+            this.$emit('filter',selectFilters);
+        },
+        cleanFilter(){
+            if(this.source){
+                this.source.forEach((item,index)=>{
+                    if(item.values){
+                        item.values.forEach((subItem,subIndex)=>{
+                            subItem.checked = false;
+                            item.values.splice(subIndex,0,subItem);
+                        });
+                    }
+                });
+            }
+            this.$emit('filter',null);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/variables';
 .filter-component {
     .filter-ul {
         max-height: calc(100vh - 220px);
@@ -93,7 +123,7 @@ export default {
         }
     }
     .box-button {
-        background: #75bb00;
+        background-color: $patsnap-color;
         box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
         border: 0px;
         border-radius: 3px;

@@ -65,6 +65,20 @@ export default {
             'RECORD_USERINFO',
         ]),
         login() {
+            if (!this.userName) {
+                this.$toast({
+                    message:'请输入用户名',
+                    type: 'error'
+                });
+                return;
+            }
+            if (!this.password) {
+                this.$toast({
+                    message:'请输入密码',
+                    type: 'error'
+                });
+                return;
+            }
             let data = {
                 username: this.userName,
                 password: this.base64encode(this.password),

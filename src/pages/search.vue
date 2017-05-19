@@ -7,7 +7,7 @@
                     <div class="database-selector-all"></div>
                 </div>
                 <div class="search-field" flex>
-                    <input id="q" autocomplete="off" type="text" class="search-input">
+                    <input id="q" autocomplete="off" type="text" class="search-input" v-model="searchText">
                 </div>
                 <div class="btn-wrap" layout="row">
                     <a class="btn-search" @click="queryClick"></a>
@@ -136,7 +136,7 @@
                     <tabs-component :activeIndex="activeTabIndex">
                         <tab-component title="过滤">
                             <div class="tab-content">
-                                <filter-component :source="filterSource"></filter-component>
+                                <filter-component :source="filterSource" @filter="listFilter"></filter-component>
                             </div>
                         </tab-component>
                         <tab-component title="最近搜索" v-ps-loading="loading">
@@ -190,9 +190,9 @@
                             <span class="i16 ico-insights"></span>
                             <span>英策</span>
                         </a>
-                        <a class="btn-26 btn-field-set green " layout="row" layout-align="start center">
+                        <a class="btn-26 btn-field-set green" layout="row" layout-align="start center" @click="dialogVisible=!dialogVisible">
                             <span class="i16 ico-cog"></span>
-                            <span>用户设置</span>
+                            <!--<span>用户设置</span>-->
                         </a>
                         <span class="toolbar-disabled" style="display: none;"></span>
                     </div>
@@ -214,26 +214,34 @@
                                 </li>
                             </ul>
                         </list-header>
-                        <list-item v-for="(item,index) in listData.list" :key="item.PATENT_ID">
-                            <div layout="row">
+                        <list-item v-for="(item,index) in patents" :key="item.PATENT_ID" :class="{'checked':item.checked}">
+                            <div layout="row" @click="listItemClick(item)">
                                 <div class="item-column">
                                     <checkbox-component v-model="item.checked"></checkbox-component>
                                 </div>
                                 <div class="item-column list-index">
-                                    <i class="dot-status"></i>
+                                    <i class="dot-status" v-if="!item.hasRead"></i>
                                     {{index+1}}
                                 </div>
                                 <div class="item-column" v-for="header in listData.headers" :flex="header.flex">
                                     <span v-if="header.prop=='PN'">
-                                        <a>{{item.PN}}</a>
+                                        <a v-html="$options.filters.highlight(item.PN,searchText)"></a>
+                                    </span>
+                                    <span v-else-if="header.prop=='TITLE'">
+                                        <a v-html="$options.filters.highlight(item.TITLE,searchText)"></a>
                                     </span>
                                     <span v-else-if="header.prop=='IN'">
                                         <span v-for="(inventor,inventorIndex) in item.IN" v-if="(!item.hasMore && inventorIndex<3) || item.hasMore">
-                                            <a>{{inventor}}</a>&nbsp;&nbsp;
+                                            <a v-html="$options.filters.highlight(inventor,searchText)"></a>&nbsp;&nbsp;
                                         </span>
                                         <a class="more" v-if="!item.hasMore && item.IN.length>3" @click="inventorMore(item,index)">+{{item.IN.length-3}}</a>
                                     </span>
-                                    <span v-else>{{item[header.prop]}}</span>
+                                    <span v-else-if="header.prop=='AN'">
+                                        <span v-for="an in item.AN">
+                                            <a v-html="$options.filters.highlight(an,searchText)"></a>&nbsp;&nbsp;
+                                        </span>
+                                    </span>
+                                    <span v-else v-html="$options.filters.highlight(item[header.prop],searchText)"></span>
                                 </div>
                             </div>
                         </list-item>
@@ -241,6 +249,18 @@
                 </div>
             </div>
         </div>
+        <div class="select-patent-component" v-if="this.selectedItems.length>0">
+            <select-patent-component :selected="selectedItems" @cancelSelect="cancelSelect"></select-patent-component>
+        </div>
+    
+        <el-dialog title="搜索结果显示设置" :visible.sync="dialogVisible" size="tiny">
+            <span>搜索结果显示设置</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">重 置</el-button>
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -256,6 +276,7 @@ import ListComponent from '../components/list-component/list.component';
 import ListHeader from '../components/list-component/list-header.component';
 import ListItem from '../components/list-component/list-item.component';
 import CheckboxComponent from '../components/common/checkbox.component';
+import SelectPatentComponent from '../components/select-patent.component';
 let cloneDeep = require('lodash.clonedeep');
 
 export default {
@@ -266,7 +287,11 @@ export default {
             loading: true,
             filterSource: [],
             listData: {},
-            listAllChecked: true
+            listAllChecked: false,
+            dialogVisible: false,
+            searchText: 'CAR',
+            selectedItems: [],
+            patents: []
         }
     },
     components: {
@@ -277,14 +302,14 @@ export default {
         ListComponent,
         ListHeader,
         ListItem,
-        CheckboxComponent
+        CheckboxComponent,
+        SelectPatentComponent
     },
     created() {
         this.queryClick();
     },
     methods: {
         queryClick() {
-            //this.loading = false;
             this.$root.$emit('start-loading-bar');
             return patentQuery().subscribe(
                 (res) => {
@@ -294,9 +319,8 @@ export default {
                         list: res.patentData.data.PATENT_DATA,
                         headers: res.patentHeadersData
                     };
+                    this.patents = cloneDeep(this.listData.list);
                     this.$root.$emit('complete-loading-bar');
-                    this.listAllChecked = true;
-                    this.listAllChecked = false;
                 },
                 (error) => {
                     this.$root.$emit('complete-loading-bar');
@@ -310,15 +334,61 @@ export default {
         },
         inventorMore(item, index) {
             item.hasMore = !item.hasMore;
-            this.listData.list.splice(index, 1);
-            this.listData.list.splice(index, 0, item);
+        },
+        listItemClick(item) {
+            item.hasRead = true;
+            this.selectedItems.splice(0, this.selectedItems.length);
+            if (this.patents) {
+                this.patents.forEach((item, index) => {
+                    if (item.checked) {
+                        this.selectedItems.splice(this.selectedItems.length, 0, item);
+                    }
+                });
+            }
+        },
+        cancelSelect() {
+            if (this.patents) {
+                this.patents.forEach((item, index) => {
+                    item.checked = false;
+                });
+            }
+            this.selectedItems.splice(0, this.selectedItems.length);
+            this.listAllChecked = false;
+        },
+        listFilter(filters) {
+            if (filters && filters.length > 0) {
+                this.patents.splice(0, this.patents.length);
+                if (this.listData && this.listData.list) {
+                    this.listData.list.forEach((item) => {
+                        let filterFlag = false;
+                        for (let i = 0; i < filters.length; i++) {
+                            if (item[filters[i].field].indexOf(filters[i].name) > -1) {
+                                filterFlag = true;
+                                break;
+                            }
+                        }
+                        if (filterFlag) {
+                            this.patents.push(item);
+                        }
+                    });
+                    // this.listData.list.filter((item) => {
+                    //     this.patents.push(item);
+                    // });
+                }
+            } else {
+                this.patents = cloneDeep(this.listData.list);
+            }
         }
     },
     watch: {
         listAllChecked: function (val) {
-            if (this.listData && this.listData.list) {
-                this.listData.list.forEach((item, index) => {
+            this.selectedItems.splice(0, this.selectedItems.length);
+            if (this.patents) {
+                this.patents.forEach((item, index) => {
                     item.checked = val;
+                    if (val) {
+                        this.selectedItems.splice(this.selectedItems.length, 0, item);
+                    }
                 });
             }
         }
@@ -327,38 +397,11 @@ export default {
         ...mapState([
             'userInfo'
         ]),
-        // listAllChecked: {
-        //     get() {
-        //         if (this.listData && this.listData.list) {
-        //             // this.listData.list.forEach((item, index) => {
-        //             //     if(!item.checked){
-        //             //         return false;
-        //             //     }
-        //             // });
-        //             for (let i = 0; i < this.listData.list.length; i++) {
-        //                 if (!this.listData.list[i].checked) {
-        //                     return false;
-        //                 }
-        //             }
-        //             return true;
-        //         } else {
-        //             return false;
-        //         }
-        //     },
-        //     set(value) {
-        //         if (this.listData && this.listData.list) {
-        //             this.listData.list.forEach((item, index) => {
-        //                 item.checked = value;
-        //             });
-
-        //             //let tempList = cloneDeep(this.listData.list);
-        //             //this.listData.list.splice(0,this.listData.list.length);
-        //             //this.listData.list.splice(0,0,...tempList);
-
-        //             let tempListData = cloneDeep(this.listData);
-        //             this.listData = undefined;
-        //             this.listData = tempListData;
-        //         }
+        // patents:function(){
+        //     if(this.listData && this.listData.list){
+        //         this.listData.list.forEach((item)=>{
+        //             return item.
+        //         });
         //     }
         // }
     }
@@ -367,6 +410,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../styles/variables';
 .search-component {
     height: 100vh;
     min-width: 1280px;
@@ -613,7 +657,7 @@ export default {
                 background-position: -60px -80px;
             }
             .btn-26.selected {
-                background-color: #75bb00;
+                background-color: $patsnap-color;
                 background-image: none;
                 color: #fff;
                 border: 1px solid #480;
@@ -670,6 +714,9 @@ export default {
                         background-image: url(../assets/images/icons_green.png);
                     }
                 }
+                .ico-cog {
+                    background-image: url(../assets/images/icons_green.png)!important;
+                }
                 .btn-field-set.green {
                     border: 1px solid #aaa;
                     border-radius: 2px 2px 2px 2px;
@@ -711,5 +758,14 @@ export default {
             line-height: 45px;
         }
     }
+}
+
+.select-patent-component {
+    position: fixed;
+    width: 272px;
+    right: 50px;
+    bottom: 50px;
+    box-shadow: 0 1px 2px 0 hsla(0, 0%, 57%, .5);
+    background-color: #fff;
 }
 </style>

@@ -3,7 +3,7 @@ export const moreAnalysisData = {
     "data": {
         "efq": [],
         "configs": [{
-                "field": "AN_FACET_CN",
+                "field": "AN",
                 "name": "申请(专利权)人",
                 "canSearch": true,
                 "frameColor": "#FF9481",
@@ -318,18 +318,8 @@ export const moreAnalysisData = {
         "data": [{
             "field": "AN_FACET_CN",
             "value": [{
-                    "name": "SEMICONDUCTOR ENERGY LABORATORY CO., LTD.",
-                    "value": 2204,
-                    "checked": false
-                },
-                {
                     "name": "GOOGLE INC.",
                     "value": 1988,
-                    "checked": false
-                },
-                {
-                    "name": "SONY CORPORATION",
-                    "value": 1905,
                     "checked": false
                 },
                 {
@@ -338,235 +328,245 @@ export const moreAnalysisData = {
                     "checked": false
                 },
                 {
-                    "name": "MICROSOFT CORPORATION",
-                    "value": 1489,
+                    "name": "诺华公司",
+                    "value": 7,
                     "checked": false
                 },
                 {
-                    "name": "PANASONIC CORPORATION",
-                    "value": 1345,
+                    "name": "宾夕法尼亚大学董事会",
+                    "value": 7,
                     "checked": false
                 },
                 {
-                    "name": "QUALCOMM INCORPORATED",
-                    "value": 1123,
+                    "name": "诺华股份有限公司",
+                    "value": 2,
                     "checked": false
                 },
                 {
-                    "name": "NOKIA CORPORATION",
-                    "value": 994,
+                    "name": "宾夕法尼亚大学托管会  ",
+                    "value": 2,
                     "checked": false
                 },
                 {
-                    "name": "SAMSUNG ELECTRONICS CO., LTD.",
-                    "value": 992,
+                    "name": "得克萨斯州大学系统董事会",
+                    "value": 2,
                     "checked": false
                 },
                 {
-                    "name": "IGT",
-                    "value": 779,
+                    "name": "ユーシーエル ビジネス ピーエルシー  ",
+                    "value": 2,
                     "checked": false
                 },
                 {
-                    "name": "GENERAL MOTORS LLC",
-                    "value": 621,
+                    "name": "细胞治疗学公司",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "PANASONIC INTELLECTUAL PROPERTY CORPORATION OF AMERICA",
-                    "value": 599,
+                    "name": "加州生物医学研究所",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "INTERNATIONAL BUSINESS MACHINES CORPORATION",
-                    "value": 583,
+                    "name": "斯克利普斯研究所  ",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "SILVERBROOK RESEARCH PTY LTD",
-                    "value": 505,
+                    "name": "ザ カリフォルニア インスティテュート フォー バイオメ",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "LG ELECTRONICS INC.",
-                    "value": 470,
+                    "name": "ディカル リサーチ",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "FACEBOOK, INC.",
-                    "value": 416,
+                    "name": "ザ スクリプス リサーチ インスティテュート",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "KONINKLIJKE PHILIPS ELECTRONICS N.V.",
-                    "value": 413,
+                    "name": "华为技术有限公司  ",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "YAHOO! INC.",
-                    "value": 398,
+                    "name": "ボード·オブ·リージエンツ,ザ·ユニバーシテイ·オブ·テキサス·システム",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "MATSUSHITA ELECTRIC INDUSTRIAL CO., LTD.",
-                    "value": 387,
+                    "name": "ノバルティス アーゲー",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "MICROSOFT TECHNOLOGY LICENSING, LLC",
-                    "value": 367,
+                    "name": "ザ トラスティーズ オブ ザ ユニ",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "DIGIMARC CORPORATION",
-                    "value": 365,
+                    "name": "バーシティ オブ ペンシルバニア",
+                    "value": 1,
                     "checked": false
                 },
                 {
-                    "name": "PIONEER CORPORATION",
-                    "value": 347,
+                    "name": "UCL商务股份有限公司 ",
+                    "value": 1,
                     "checked": false
                 },
-                {
-                    "name": "INTEL CORPORATION",
-                    "value": 327,
-                    "checked": false
-                },
-                {
-                    "name": "RESEARCH IN MOTION LIMITED",
-                    "value": 316,
-                    "checked": false
-                },
-                {
-                    "name": "AMAZON TECHNOLOGIES, INC.",
-                    "value": 307,
-                    "checked": false
-                },
-                {
-                    "name": "SONOS, INC.",
-                    "value": 296,
-                    "checked": false
-                },
-                {
-                    "name": "MATSUSHITA ELECTRIC INDUSTRIAL CO. LTD.",
-                    "value": 285,
-                    "checked": false
-                },
-                {
-                    "name": "BROADCOM CORPORATION",
-                    "value": 276,
-                    "checked": false
-                },
-                {
-                    "name": "GM GLOBAL TECHNOLOGY OPERATIONS LLC",
-                    "value": 263,
-                    "checked": false
-                },
-                {
-                    "name": "SOROCA ADAM",
-                    "value": 263,
-                    "checked": false
-                },
-                {
-                    "name": "OTICON A/S",
-                    "value": 260,
-                    "checked": false
-                },
-                {
-                    "name": "RAMER JOREY",
-                    "value": 231,
-                    "checked": false
-                },
-                {
-                    "name": "AT&T INTELLECTUAL PROPERTY I, L.P.",
-                    "value": 229,
-                    "checked": false
-                },
-                {
-                    "name": "DOUGHTY DENNIS",
-                    "value": 229,
-                    "checked": false
-                },
-                {
-                    "name": "HARMAN BECKER AUTOMOTIVE SYSTEMS GMBH",
-                    "value": 223,
-                    "checked": false
-                },
-                {
-                    "name": "FUJITSU TEN LIMITED",
-                    "value": 221,
-                    "checked": false
-                },
-                {
-                    "name": "NANT HOLDINGS IP, LLC",
-                    "value": 219,
-                    "checked": false
-                },
-                {
-                    "name": "SONY ERICSSON MOBILE COMMUNICATIONS AB",
-                    "value": 213,
-                    "checked": false
-                },
-                {
-                    "name": "FLEXTRONICS AP, LLC",
-                    "value": 212,
-                    "checked": false
-                },
-                {
-                    "name": "DENSO CORPORATION",
-                    "value": 205,
-                    "checked": false
-                },
-                {
-                    "name": "SEARETE LLC, A LIMITED LIABILITY CORPORATION OF THE STATE OF DELAWARE",
-                    "value": 205,
-                    "checked": false
-                },
-                {
-                    "name": "SUN PATENT TRUST",
-                    "value": 202,
-                    "checked": false
-                },
-                {
-                    "name": "KADONO SHINYA",
-                    "value": 198,
-                    "checked": false
-                },
-                {
-                    "name": "ELWHA LLC",
-                    "value": 196,
-                    "checked": false
-                },
-                {
-                    "name": "FUJITSU LIMITED",
-                    "value": 195,
-                    "checked": false
-                },
-                {
-                    "name": "FORD GLOBAL TECHNOLOGIES, LLC",
-                    "value": 193,
-                    "checked": false
-                },
-                {
-                    "name": "HERE GLOBAL B.V.",
-                    "value": 183,
-                    "checked": false
-                },
-                {
-                    "name": "NOKIA TECHNOLOGIES OY",
-                    "value": 183,
-                    "checked": false
-                },
-                {
-                    "name": "KABUSHIKI KAISHA TOSHIBA",
-                    "value": 180,
-                    "checked": false
-                },
-                {
-                    "name": "MOTOROLA, INC.",
-                    "value": 171,
-                    "checked": false
-                }
+                // {
+                //     "name": "DIGIMARC CORPORATION",
+                //     "value": 365,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "PIONEER CORPORATION",
+                //     "value": 347,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "INTEL CORPORATION",
+                //     "value": 327,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "RESEARCH IN MOTION LIMITED",
+                //     "value": 316,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "AMAZON TECHNOLOGIES, INC.",
+                //     "value": 307,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "SONOS, INC.",
+                //     "value": 296,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "MATSUSHITA ELECTRIC INDUSTRIAL CO. LTD.",
+                //     "value": 285,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "BROADCOM CORPORATION",
+                //     "value": 276,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "GM GLOBAL TECHNOLOGY OPERATIONS LLC",
+                //     "value": 263,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "SOROCA ADAM",
+                //     "value": 263,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "OTICON A/S",
+                //     "value": 260,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "RAMER JOREY",
+                //     "value": 231,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "AT&T INTELLECTUAL PROPERTY I, L.P.",
+                //     "value": 229,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "DOUGHTY DENNIS",
+                //     "value": 229,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "HARMAN BECKER AUTOMOTIVE SYSTEMS GMBH",
+                //     "value": 223,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "FUJITSU TEN LIMITED",
+                //     "value": 221,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "NANT HOLDINGS IP, LLC",
+                //     "value": 219,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "SONY ERICSSON MOBILE COMMUNICATIONS AB",
+                //     "value": 213,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "FLEXTRONICS AP, LLC",
+                //     "value": 212,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "DENSO CORPORATION",
+                //     "value": 205,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "SEARETE LLC, A LIMITED LIABILITY CORPORATION OF THE STATE OF DELAWARE",
+                //     "value": 205,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "SUN PATENT TRUST",
+                //     "value": 202,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "KADONO SHINYA",
+                //     "value": 198,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "ELWHA LLC",
+                //     "value": 196,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "FUJITSU LIMITED",
+                //     "value": 195,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "FORD GLOBAL TECHNOLOGIES, LLC",
+                //     "value": 193,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "HERE GLOBAL B.V.",
+                //     "value": 183,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "NOKIA TECHNOLOGIES OY",
+                //     "value": 183,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "KABUSHIKI KAISHA TOSHIBA",
+                //     "value": 180,
+                //     "checked": false
+                // },
+                // {
+                //     "name": "MOTOROLA, INC.",
+                //     "value": 171,
+                //     "checked": false
+                // }
             ]
         }]
     }

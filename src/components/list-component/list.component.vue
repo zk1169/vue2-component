@@ -73,12 +73,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/variables';
 .list-component {
     .list-index {
         width: 40px;
     }
     .list-header {
-        background: #75bb00;
+        background: $patsnap-color;
         color: #fff;
         ul li {
             padding: 3px 5px;

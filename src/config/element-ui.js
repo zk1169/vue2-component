@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Select from 'element-ui/lib/select';
 import Option from 'element-ui/lib/option';
 import Button from 'element-ui/lib/button';
+import Dialog from 'element-ui/lib/dialog';
 import DatePicker from 'element-ui/lib/date-picker';
 import Notification from 'element-ui/lib/notification';
 //import Loading from 'element-ui/lib/loading';
@@ -91,7 +92,7 @@ export default {
         // });
 
         //Vue.use(Pagination);
-        //Vue.use(Dialog);
+        Vue.use(Dialog);
         //Vue.use(Autocomplete);
         //Vue.use(Dropdown);
         //Vue.use(DropdownMenu);

@@ -56,7 +56,7 @@ a:hover {
 
 .list-component {
     .list-header {
-        background: #75bb00;
+        background: $patsnap-color;
         color: #fff;
         ul li {
             padding: 3px 5px;
@@ -70,4 +70,31 @@ a:hover {
             padding: 3px 5px;
         }
     }
+    .list-item.checked {
+        background: #efd;
+    }
+}
+
+.highlight {
+    background-color: #ffb53e;
+}
+
+.el-button--primary {
+    color: #fff;
+    background-color: $patsnap-color;
+    border-color: $patsnap-color;
+}
+
+.el-button--primary:hover {
+    color: #fff!important;
+    border-color: $patsnap-color;
+    background-color: $patsnap-color;
+}
+
+// .el-button {
+//     border-color: $patsnap-color;
+// }
+.el-button:hover {
+    color: $patsnap-color;
+    border-color: $patsnap-color;
 }
