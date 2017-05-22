@@ -318,16 +318,6 @@ export const moreAnalysisData = {
         "data": [{
             "field": "AN_FACET_CN",
             "value": [{
-                    "name": "GOOGLE INC.",
-                    "value": 1988,
-                    "checked": false
-                },
-                {
-                    "name": "APPLE INC.",
-                    "value": 1720,
-                    "checked": false
-                },
-                {
                     "name": "诺华公司",
                     "value": 7,
                     "checked": false
@@ -415,6 +405,16 @@ export const moreAnalysisData = {
                 {
                     "name": "UCL商务股份有限公司 ",
                     "value": 1,
+                    "checked": false
+                },
+                {
+                    "name": "GOOGLE INC.",
+                    "value": 0,
+                    "checked": false
+                },
+                {
+                    "name": "APPLE INC.",
+                    "value": 0,
                     "checked": false
                 },
                 // {

@@ -9,7 +9,7 @@
                 </div>
                 <ul class="subList" v-if="item.isExpand">
                     <li v-for="subItem in item.values" class="filter-sub-item">
-                        <filter-item-component :source="subItem"></filter-item-component>
+                        <filter-item-component :source="subItem" @filterAdd="filterAddEvent"></filter-item-component>
                     </li>
                 </ul>
             </li>
@@ -92,6 +92,9 @@ export default {
                 });
             }
             this.$emit('filter',null);
+        },
+        filterAddEvent(filter){
+            this.$emit('filterAdd',filter);
         }
     }
 }

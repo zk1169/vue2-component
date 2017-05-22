@@ -1,5 +1,5 @@
 <template>
-    <div class="search-component">
+    <div class="search-component" >
         <div class="search-header" layout="row" layout-align="start center">
             <img src="../assets/images/logo_zhihuiya_35.png" />
             <div flex class="input-wrap" layout="row">
@@ -7,7 +7,7 @@
                     <div class="database-selector-all"></div>
                 </div>
                 <div class="search-field" flex>
-                    <input id="q" autocomplete="off" type="text" class="search-input" v-model="searchText">
+                    <input id="q" autocomplete="off" type="text" class="search-input" v-model="searchText" @keyup.enter="queryClick()">
                 </div>
                 <div class="btn-wrap" layout="row">
                     <a class="btn-search" @click="queryClick"></a>
@@ -139,13 +139,18 @@
                                 <div class="selected-box" v-if="filters && filters.length>0">
                                     <div>申请(专利权)人</div>
                                     <ul>
-                                        <li class="selected-item" v-for="item in filters">{{item.name}}</li>
+                                        <li class="selected-item" v-for="(item,filterIndex) in filters">
+                                            <div layout="row" layout-align="start center">
+                                                <div flex>{{item.name}}</div>
+                                                <div class="close-item" @click="cleanFilterItem(filterIndex)"><i class="fa fa-times"></i></div>
+                                            </div>
+                                        </li>
                                     </ul>
                                     <div class="box-close" @click="cleanFilter">
                                         <i class="fa fa-times-circle"></i>
                                     </div>
                                 </div>
-                                <filter-component :source="filterSource" @filter="listFilterEvent"></filter-component>
+                                <filter-component :source="filterSource" @filter="listFilterEvent" @filterAdd="listFilterAddEvent"></filter-component>
                             </div>
                         </tab-component>
                         <tab-component title="最近搜索" v-ps-loading="loading">
@@ -503,9 +508,17 @@ export default {
             //this.directUrl({field:"filters",value:querys.toString()});
             this.directUrl();
         },
+        listFilterAddEvent(filter){
+            this.filters.push(filter);
+            this.listFilterEvent(this.filters);
+        },
         cleanFilter(){
             this.routeQuery.filters = null;
             this.directUrl();
+        },
+        cleanFilterItem(index){
+            this.filters.splice(index,1);
+            this.listFilterEvent(this.filters);
         },
         directUrl() {
             let url = "#/dashboard/search?";
@@ -784,9 +797,18 @@ export default {
                         font-size: 16px;
                     }
                 }
+                .close-item{
+                    display: none;
+                }
+                .selected-item{
+                    padding:2px 5px;
+                }
                 .selected-item:hover {
                     background-color: rgb(255, 244, 242);
                     cursor: pointer;
+                    .close-item{
+                        display: inherit;
+                    }
                 }
             }
         }

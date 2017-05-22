@@ -3,7 +3,7 @@
         <div>
             <checkbox-component v-model="filterModel.checked" :key="filterModel.name"></checkbox-component>
         </div>
-        <div flex layout="row" layout-align="start center" :title="filterModel.name" class="filter-item-content">
+        <div flex layout="row" layout-align="start center" :title="filterModel.name" class="filter-item-content" @click="filterItemClick">
             <div flex class="text-overflow filter-item-middle">
                 <slot>{{filterModel.name}}</slot>
             </div>
@@ -31,6 +31,11 @@ export default {
     },
     components: {
         CheckboxComponent
+    },
+    methods:{
+        filterItemClick(){
+            this.$emit('filterAdd',this.filterModel);
+        }
     },
     watch:{
         source:function(newVal){
