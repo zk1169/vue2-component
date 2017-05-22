@@ -136,7 +136,16 @@
                     <tabs-component :activeIndex="activeTabIndex">
                         <tab-component title="过滤">
                             <div class="tab-content">
-                                <filter-component :source="filterSource" @filter="listFilter"></filter-component>
+                                <div class="selected-box" v-if="filters && filters.length>0">
+                                    <div>申请(专利权)人</div>
+                                    <ul>
+                                        <li class="selected-item" v-for="item in filters">{{item.name}}</li>
+                                    </ul>
+                                    <div class="box-close" @click="cleanFilter">
+                                        <i class="fa fa-times-circle"></i>
+                                    </div>
+                                </div>
+                                <filter-component :source="filterSource" @filter="listFilterEvent"></filter-component>
                             </div>
                         </tab-component>
                         <tab-component title="最近搜索" v-ps-loading="loading">
@@ -149,10 +158,10 @@
             <div class="body-right" flex>
                 <div layout="row" class="search-toolbar">
                     <div class="m-btn-group btn-views" layout="row">
-                        <a title="表格视图" class="btn-26 selected">
+                        <a title="表格视图" class="btn-26" :class="{'selected':routeQuery.view=='list'}" @click="viewClick">
                             <span class="i16 ico-grid"></span>
                         </a>
-                        <a title="图文视图" class="btn-26">
+                        <a title="图文视图" class="btn-26" :class="{'selected':routeQuery.view=='card'}" @click="viewClick">
                             <span class="i16 ico-list2"></span>
                         </a>
                         <a title="快速浏览" class="btn-26">
@@ -201,7 +210,7 @@
                     <!--<list-component :headers="listData.headers" :list="listData.list"></list-component>-->
                     <div class="result-total">1-20条专利，共2,567,449条专利</div>
                     <list-component>
-                        <list-header>
+                        <list-header v-if="routeQuery.view=='list'">
                             <ul layout="row">
                                 <li>
                                     <checkbox-component v-model="listAllChecked"></checkbox-component>
@@ -215,7 +224,36 @@
                             </ul>
                         </list-header>
                         <list-item v-for="(item,index) in patents" :key="item.PATENT_ID" :class="{'checked':item.checked}">
-                            <div layout="row" @click="listItemClick(item)">
+                            <div layout="row" @click="listItemClick(item)" v-if="routeQuery.view=='list'">
+                                <div class="item-column">
+                                    <checkbox-component v-model="item.checked"></checkbox-component>
+                                </div>
+                                <div class="item-column list-index">
+                                    <i class="dot-status" v-if="!item.hasRead"></i>
+                                    {{index+1}}
+                                </div>
+                                <div class="item-column" v-for="header in listData.headers" :flex="header.flex">
+                                    <span v-if="header.prop=='PN'">
+                                        <a v-html="$options.filters.highlight(item.PN,searchText)"></a>
+                                    </span>
+                                    <span v-else-if="header.prop=='TITLE'">
+                                        <a v-html="$options.filters.highlight(item.TITLE,searchText)"></a>
+                                    </span>
+                                    <span v-else-if="header.prop=='IN'">
+                                        <span v-for="(inventor,inventorIndex) in item.IN" v-if="(!item.hasMore && inventorIndex<3) || item.hasMore">
+                                            <a v-html="$options.filters.highlight(inventor,searchText)"></a>&nbsp;&nbsp;
+                                        </span>
+                                        <a class="more" v-if="!item.hasMore && item.IN.length>3" @click="inventorMore(item,index)">+{{item.IN.length-3}}</a>
+                                    </span>
+                                    <span v-else-if="header.prop=='AN'">
+                                        <span v-for="an in item.AN">
+                                            <a v-html="$options.filters.highlight(an,searchText)"></a>&nbsp;&nbsp;
+                                        </span>
+                                    </span>
+                                    <span v-else v-html="$options.filters.highlight(item[header.prop],searchText)"></span>
+                                </div>
+                            </div>
+                            <div @click="listItemClick(item)" v-if="routeQuery.view=='card'">
                                 <div class="item-column">
                                     <checkbox-component v-model="item.checked"></checkbox-component>
                                 </div>
@@ -289,9 +327,11 @@ export default {
             listData: {},
             listAllChecked: false,
             dialogVisible: false,
-            searchText: 'CAR',
+            searchText: '',
             selectedItems: [],
-            patents: []
+            patents: [],
+            filters: [],
+            routeQuery:{view:'list'}
         }
     },
     components: {
@@ -306,10 +346,84 @@ export default {
         SelectPatentComponent
     },
     created() {
-        this.queryClick();
+        //this.queryClick();
+        if(this.$route.query){
+            this.routeQueryInit(this.$route.query);
+        }
+    },
+    beforeRouteUpdate(to, from, next) {
+        // 在当前路由改变，但是该组件被复用时调用
+        // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+        // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+        // 可以访问组件实例 `this`
+        if(to && to.query){
+            this.routeQueryInit(to.query);
+        }
     },
     methods: {
-        queryClick() {
+        routeQueryInit(query){
+            if(query.filters){
+                this.routeQuery.filters = query.filters;
+                //this.filterInit(query.filters);
+                this.queryInit();
+            }else{
+                this.routeQuery.filters = null;
+                //this.filterInit(null);
+                this.queryInit();
+            }
+            if(query.key){
+                this.routeQuery.key = query.key;
+                this.searchText = query.key;
+                this.queryInit();
+            }else{
+                this.routeQuery.key = '';
+                this.searchText = '';
+                this.queryInit();
+            }
+            if(query.view){
+                this.routeQuery.view = query.view;
+            }else{
+                this.routeQuery.view = 'list';
+            }
+            
+        },
+        filterInit(filters){
+            //清空筛选条件
+            if(this.filters){
+                this.filters.splice(0,this.filters.length);
+            }
+            
+            if(this.filterSource){
+                this.filterSource.forEach((item)=>{
+                    if(item.values){
+                        item.values.forEach((subItem)=>{
+                            if(filters && filters.indexOf(subItem.name)>-1){
+                                subItem.checked = true;
+                                subItem.field = item.field;
+                                this.filters.push(subItem);
+                            }else{
+                                subItem.checked = false;
+                            }
+                        });
+                    }
+                });
+            }
+            this.listFilter(this.filters);
+        },
+        queryClick(){
+            this.routeQuery.key = this.searchText;
+            //this.directUrl({field:"filters",value:querys.toString()});
+            this.directUrl();
+        },
+        viewClick(){
+            if(this.routeQuery.view == "list"){
+                this.routeQuery.view = "card";
+            }else{
+                this.routeQuery.view = "list";
+            }
+            this.directUrl();
+        },
+        queryInit() {
             this.$root.$emit('start-loading-bar');
             return patentQuery().subscribe(
                 (res) => {
@@ -321,6 +435,7 @@ export default {
                     };
                     this.patents = cloneDeep(this.listData.list);
                     this.$root.$emit('complete-loading-bar');
+                    this.filterInit(this.routeQuery.filters);
                 },
                 (error) => {
                     this.$root.$emit('complete-loading-bar');
@@ -356,6 +471,7 @@ export default {
             this.listAllChecked = false;
         },
         listFilter(filters) {
+            this.filters = filters;
             if (filters && filters.length > 0) {
                 this.patents.splice(0, this.patents.length);
                 if (this.listData && this.listData.list) {
@@ -371,13 +487,51 @@ export default {
                             this.patents.push(item);
                         }
                     });
-                    // this.listData.list.filter((item) => {
-                    //     this.patents.push(item);
-                    // });
                 }
             } else {
                 this.patents = cloneDeep(this.listData.list);
             }
+        },
+        listFilterEvent(filters){
+            let querys = [];
+            if(filters && filters.length>0){
+                filters.forEach((item)=>{
+                    querys.push(item.name);
+                });
+            }
+            this.routeQuery.filters = querys.toString();
+            //this.directUrl({field:"filters",value:querys.toString()});
+            this.directUrl();
+        },
+        cleanFilter(){
+            this.routeQuery.filters = null;
+            this.directUrl();
+        },
+        directUrl() {
+            let url = "#/dashboard/search?";
+            if (this.routeQuery) {
+                // url += '?';
+                // for (var property in query) {
+                //     if (query.hasOwnProperty(property)){
+                //         url += property+"="+query[property]+"&&";
+                //     }
+                // }
+                if(this.routeQuery.key){
+                    url += "key="+this.routeQuery.key+"&";
+                }
+                if(this.routeQuery.filters){
+                    url += "filters="+this.routeQuery.filters+"&";
+                }
+                if(this.routeQuery.view){
+                    url += "view="+this.routeQuery.view+"&";
+                }
+                if(url.lastIndexOf("&")==url.length-1){
+                    url = url.substr(0,url.length-1);
+                }
+            }
+            //this.$router.push({path:'/dashboard/search',query:{key:'bbbbb'}});
+            //this.$route.query.key = "aaaaaaaa";
+            window.location.href = url;
         }
     },
     watch: {
@@ -612,6 +766,28 @@ export default {
                 max-height: calc(100vh - 158px);
                 overflow-y: auto;
                 overflow-x: hidden;
+            }
+            .selected-box {
+                position: relative;
+                font-size: 12px;
+                padding: 10px;
+                margin: 8px 8px 8px 0px;
+                color: rgb(255, 148, 129);
+                border: solid 1px rgb(255, 148, 129);
+                border-radius: 5px;
+                .box-close {
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    cursor: pointer;
+                    i {
+                        font-size: 16px;
+                    }
+                }
+                .selected-item:hover {
+                    background-color: rgb(255, 244, 242);
+                    cursor: pointer;
+                }
             }
         }
     }

@@ -86,7 +86,7 @@ export default {
                     if(item.values){
                         item.values.forEach((subItem,subIndex)=>{
                             subItem.checked = false;
-                            item.values.splice(subIndex,0,subItem);
+                            item.values.splice(subIndex,1,subItem);
                         });
                     }
                 });
@@ -101,9 +101,9 @@ export default {
 @import '../styles/variables';
 .filter-component {
     .filter-ul {
-        max-height: calc(100vh - 220px);
-        overflow-y: auto;
-        overflow-x: hidden;
+        // max-height: calc(100vh - 220px);
+        // overflow-y: auto;
+        // overflow-x: hidden;
     }
     .filter-item {
         padding: 8px 5px;

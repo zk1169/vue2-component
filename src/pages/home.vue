@@ -27,143 +27,148 @@
                 </svg>
             </section>
         </transition>
-
+    
         <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></ps-image-component>
-
+    
         <tree-component :node="treeModel"></tree-component>
         <radio-component v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></radio-component>
         <checkbox-list-component :options="checkboxOptions" style="margin-left:50px;"></checkbox-list-component>
-        <br><br><br><br><br><br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 </template>
 
 <script>    
-    import { mapState } from 'vuex';
-    import { login } from '../services/api';
-    import Programmer from '../models/testModel';
-    import TreeComponent from '../components/common/tree/tree.component';
-    import TreeModel from '../components/common/tree/tree.model';
-    import RadioComponent from '../components/common/radio.component';
-    import CheckboxListComponent from '../components/common/checkbox-list.component';
-    import PsSelectComponent from '../components/common/ps-select.component';
-    import PsButtonComponent from '../components/common/ps-button.component';
-    import PsImageComponent from '../components/common/ps-image.component';
-    
-    export default {
-        data() {
-            return {
-                message: new Programmer().hello,
-                showActivities: false,
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                valueSelect: null,
-                value6: '',
-                treeModel: TreeModel.testData,
-                radioModel: null,
-                radioOptions: [{
-                    name: '男',
-                    code: '1'
-                }, {
-                    name: '女',
-                    code: '2'
-                }],
-                checkboxOptions: [{
-                    name: '苹果',
-                    code: '1',
-                    checked: true
-                }, {
-                    name: '香蕉',
-                    code: '2',
-                    checked: false
-                }, {
-                    name: '芒果',
-                    code: '3',
-                    checked: true
-                }]
-            }
-        },
-        components: {
-            TreeComponent,
-            RadioComponent,
-            CheckboxListComponent,
-            PsSelectComponent,
-            PsButtonComponent,
-            PsImageComponent
-        },
-        created() {
-            console.log('created');
-            this.radioModel = this.radioOptions[1];
-        },
-        methods: {
-            showTransition() {
-                this.showActivities = !this.showActivities;
-                //this.message = this.userInfo.userId + ',' + this.login;
-                this.checkboxOptions[2].checked = false;
-            },
-            asyncClick() {
-                return login({
-                        username: '20571',
-                        password: 'MTExMTEx',
-                        rememberMe: true
-                    })
-                    .map(
-                        (res) => {
-                            //handle 
-                        }
-                    )
-                    .catch((error) => {
-                        this.$toast({
-                            title: 'error',
-                            message: error.message,
-                            type: 'error'
-                        });
-                    });
-            }
-        },
-        computed: {
-            ...mapState([
-                'isLogin', 'userInfo'
-            ]),
+import { mapState } from 'vuex';
+import { login } from '../services/api';
+import Programmer from '../models/testModel';
+import TreeComponent from '../components/common/tree/tree.component';
+import TreeModel from '../components/common/tree/tree.model';
+import RadioComponent from '../components/common/radio.component';
+import CheckboxListComponent from '../components/common/checkbox-list.component';
+import PsSelectComponent from '../components/common/ps-select.component';
+import PsButtonComponent from '../components/common/ps-button.component';
+import PsImageComponent from '../components/common/ps-image.component';
+
+export default {
+    data() {
+        return {
+            message: new Programmer().hello,
+            showActivities: false,
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            }, {
+                value: '选项2',
+                label: '双皮奶'
+            }, {
+                value: '选项3',
+                label: '蚵仔煎'
+            }, {
+                value: '选项4',
+                label: '龙须面'
+            }, {
+                value: '选项5',
+                label: '北京烤鸭'
+            }],
+            valueSelect: null,
+            value6: '',
+            treeModel: TreeModel.testData,
+            radioModel: null,
+            radioOptions: [{
+                name: '男',
+                code: '1'
+            }, {
+                name: '女',
+                code: '2'
+            }],
+            checkboxOptions: [{
+                name: '苹果',
+                code: '1',
+                checked: true
+            }, {
+                name: '香蕉',
+                code: '2',
+                checked: false
+            }, {
+                name: '芒果',
+                code: '3',
+                checked: true
+            }]
         }
+    },
+    components: {
+        TreeComponent,
+        RadioComponent,
+        CheckboxListComponent,
+        PsSelectComponent,
+        PsButtonComponent,
+        PsImageComponent
+    },
+    created() {
+        console.log('created');
+        this.radioModel = this.radioOptions[1];
+    },
+    methods: {
+        showTransition() {
+            this.showActivities = !this.showActivities;
+            //this.message = this.userInfo.userId + ',' + this.login;
+            this.checkboxOptions[2].checked = false;
+        },
+        asyncClick() {
+            return login({
+                username: '20571',
+                password: 'MTExMTEx',
+                rememberMe: true
+            })
+                .map(
+                (res) => {
+                    //handle 
+                }
+                )
+                .catch((error) => {
+                    this.$toast({
+                        title: 'error',
+                        message: error.message,
+                        type: 'error'
+                    });
+                });
+        }
+    },
+    computed: {
+        ...mapState([
+            'isLogin', 'userInfo'
+        ]),
     }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    // .fade-enter-active,
-    // .fade-leave-active {
-    //     transition: margin-left 2s;
-    // }
-    // .fade-enter,
-    // .fade-leave-active {
-    //     //opacity: 0;
-    //     margin-left: 100%;
-    // }
-    // .fade-leave {
-    //     //opacity: 0;
-    //     margin-left: 0px;
-    // }
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: opacity .5s;
-    }
-    
-    .fade-enter,
-    .fade-leave-active {
-        opacity: 0;
-    }
+// .fade-enter-active,
+// .fade-leave-active {
+//     transition: margin-left 2s;
+// }
+// .fade-enter,
+// .fade-leave-active {
+//     //opacity: 0;
+//     margin-left: 100%;
+// }
+// .fade-leave {
+//     //opacity: 0;
+//     margin-left: 0px;
+// }
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
 </style>

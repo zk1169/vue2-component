@@ -1,13 +1,13 @@
 <template>
     <div class="filter-item-component" layout="row" layout-align="start center">
         <div>
-            <checkbox-component v-model="source.checked" :key="source.name"></checkbox-component>
+            <checkbox-component v-model="filterModel.checked" :key="filterModel.name"></checkbox-component>
         </div>
-        <div flex layout="row" layout-align="start center" :title="source.name" class="filter-item-content">
+        <div flex layout="row" layout-align="start center" :title="filterModel.name" class="filter-item-content">
             <div flex class="text-overflow filter-item-middle">
-                <slot>{{source.name}}</slot>
+                <slot>{{filterModel.name}}</slot>
             </div>
-            <div class="text-right">{{source.value}}</div>
+            <div class="text-right">{{filterModel.value}}</div>
         </div>
     </div>
 </template>
@@ -26,14 +26,17 @@ export default {
     },
     data() {
         return {
+            filterModel:this.source
         }
-    },
-    computed: {
     },
     components: {
         CheckboxComponent
     },
-    methods: {}
+    watch:{
+        source:function(newVal){
+            this.filterModel = newVal;
+        }
+    }
 }
 </script>
 
