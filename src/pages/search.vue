@@ -214,7 +214,7 @@
                     </div>
                 </div>
                 <div>
-                    <!--<zk-list :headers="catHeaderList" :list="catList" :hasCheckbox="1" :hasIndex="1"></zk-list>-->
+                    <zk-list :headers="catHeaderList" :list="catList" :hasCheckbox="1" :hasIndex="1"></zk-list>
                     <div class="result-total">1-20条专利，共2,567,449条专利</div>
                     <zk-list>
                         <zk-list-header v-if="routeQuery.view=='list'">
@@ -322,7 +322,7 @@ import ZkListHeader from '../components/list-header';
 import ZkListItem from '../components/list-item';
 import ZkCheckbox from '../components/checkbox';
 import SelectPatentComponent from '../components/select-patent.component';
-import Cat from '../models/testModel';
+import Cat from '../models/animal.model';
 let cloneDeep = require('lodash.clonedeep');
 
 export default {

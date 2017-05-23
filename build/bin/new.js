@@ -44,7 +44,7 @@ export default {
 </script>`
     },
     {
-        filename: path.join('../../../../test/unit/specs', `${componentname}.spec.js`),
+        filename: path.join('../../../test/unit/specs', `${componentname}.spec.js`),
         content: `import { createTest, destroyVM } from '../util';
 import ${ComponentName} from '@/components/${componentname}';
 
@@ -62,7 +62,7 @@ describe('${ComponentName}', () => {
 `
     },
     {
-        filename: path.join('../../../../src/styles/theme/', `${componentname}.scss`),
+        filename: path.join('../../../src/styles/theme/', `${componentname}.scss`),
         content: `@import "../variables";
 
 .zk-${componentname} {

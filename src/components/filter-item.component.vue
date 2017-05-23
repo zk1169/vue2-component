@@ -1,7 +1,7 @@
 <template>
     <div class="filter-item-component" layout="row" layout-align="start center">
         <div>
-            <checkbox-component v-model="filterModel.checked" :key="filterModel.name"></checkbox-component>
+            <zk-checkbox v-model="filterModel.checked" :key="filterModel.name"></zk-checkbox>
         </div>
         <div flex layout="row" layout-align="start center" :title="filterModel.name" class="filter-item-content" @click="filterItemClick">
             <div flex class="text-overflow filter-item-middle">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CheckboxComponent from './common/checkbox.component';
+import ZkCheckbox from './checkbox';
 export default {
     name: 'filter-item-component',
     props: {
@@ -30,7 +30,7 @@ export default {
         }
     },
     components: {
-        CheckboxComponent
+        ZkCheckbox
     },
     methods:{
         filterItemClick(){

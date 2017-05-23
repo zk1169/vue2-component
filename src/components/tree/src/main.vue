@@ -25,8 +25,11 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import ZKCheckbox from '../../checkbox';
+    Vue.use(ZKCheckbox);
     import TreeModel from './tree.model';
+
     export default {
         name: 'zk-tree',
         props: {

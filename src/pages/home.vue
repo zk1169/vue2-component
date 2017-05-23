@@ -34,7 +34,7 @@
         <zk-radio v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></zk-radio>
         <zk-checkbox-list :options="checkboxOptions" style="margin-left:50px;"></zk-checkbox-list>
     
-        <!--<zk-tree :node="treeModel"></zk-tree>-->
+        <zk-tree :node="treeModel"></zk-tree>
     
         <br>
         <br>
@@ -48,26 +48,19 @@
 <script>    
 import { mapState } from 'vuex';
 import { login } from '../services/api';
-import Programmer from '../models/testModel';
-import TreeComponent from '../components/common/tree/tree.component';
-//import TreeModel from '../components/common/tree/tree.model';
-import RadioComponent from '../components/common/radio.component';
-import CheckboxListComponent from '../components/common/checkbox-list.component';
-import PsSelectComponent from '../components/common/ps-select.component';
-import PsButtonComponent from '../components/common/ps-button.component';
-import PsImageComponent from '../components/common/ps-image.component';
+import Cat from '../models/animal.model';
 
 import ZkCheckboxList from '../components/checkbox-list';
 import ZkRadio from '../components/radio';
 import ZkButton from '../components/button';
 import ZkImage from '../components/image';
 import ZkSelect from '../components/select';
-// import { ZkTree, TreeModel } from '../components/tree';
+import { ZkTree, TreeModel } from '../components/tree';
 
 export default {
     data() {
         return {
-            message: new Programmer().hello,
+            message: new Cat().hello,
             showActivities: false,
             options: [{
                 value: '选项1',
@@ -87,7 +80,7 @@ export default {
             }],
             valueSelect: null,
             value6: '',
-            //treeModel: TreeModel.testData,
+            treeModel: TreeModel.testData,
             radioModel: null,
             radioOptions: [{
                 name: '男',
@@ -112,18 +105,12 @@ export default {
         }
     },
     components: {
-        TreeComponent,
-        RadioComponent,
-        CheckboxListComponent,
-        PsSelectComponent,
-        PsButtonComponent,
-        PsImageComponent,
         ZkCheckboxList,
         ZkRadio,
         ZkButton,
         ZkImage,
         ZkSelect,
-        //ZkTree
+        ZkTree
     },
     created() {
         console.log('created');

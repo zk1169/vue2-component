@@ -4,7 +4,7 @@
             <div class="list-header">
                 <ul layout="row">
                     <li v-if="hasCheckbox">
-                        <checkbox-component v-model="allChecked"></checkbox-component>
+                        <zk-checkbox v-model="allChecked"></zk-checkbox>
                     </li>
                     <li v-if="hasIndex" class="list-index">
                         <span style="margin-left:8px;">#</span>
@@ -21,7 +21,7 @@
                     <li v-for="(item, index) in list">
                         <div layout="row">
                             <div v-if="hasCheckbox" class="item-column">
-                                <checkbox-component v-model="item.checked"></checkbox-component>
+                                <zk-checkbox v-model="item.checked"></zk-checkbox>
                             </div>
                             <div v-if="hasIndex" class="item-column list-index">
                                 <i class="dot-status"></i>

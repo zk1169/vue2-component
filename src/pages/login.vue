@@ -20,7 +20,7 @@
             </div>
             <div>
                 <div class="pull-left">
-                    <checkbox-component v-model="rememberMe" :label="'保持登录'"></checkbox-component>
+                    <zk-checkbox v-model="rememberMe" :label="'保持登录'"></zk-checkbox>
                 </div>
                 <div class="mw-busy-wrap pull-right">
                     <button type="button" class="btn btn-primary" @click="login" name="btnLogin">
@@ -40,7 +40,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { login } from '../services/api';
-import CheckboxComponent from '../components/common/checkbox.component';
+import ZkCheckbox from '../components/checkbox';
 
 export default {
     data() {
@@ -52,7 +52,7 @@ export default {
         }
     },
     components: {
-        CheckboxComponent
+        ZkCheckbox
     },
     created() {
         console.log('created');
