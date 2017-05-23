@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <loading v-show="showLoading"></loading>
-    <loading-bar ref="loadingBar"></loading-bar>
+    <zk-loading v-show="showLoading"></zk-loading>
+    <zk-loading-bar ref="loadingBar"></zk-loading-bar>
   </div>
 </template>
 
 <script>
-import loading from './components/loading';
-import loadingBar from './components/loading-bar';
+import ZkLoading from './components/loading';
+import ZkLoadingBar from './components/loading-bar';
 export default {
   name: 'app',
   data(){
@@ -18,8 +18,8 @@ export default {
     };
   },
   components: {
-      loadingBar,
-      loading,
+      ZkLoadingBar,
+      ZkLoading
   },
   mounted(){
     this.$root.$on('show-loading',(loading)=>{

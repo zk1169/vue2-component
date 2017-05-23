@@ -1,8 +1,8 @@
-import Radio from './src/main';
+import ZkRadio from './src/main';
 
 /* istanbul ignore next */
-Radio.install = function (Vue) {
-  Vue.component(Radio.name, Radio);
+ZkRadio.install = function(Vue) {
+    Vue.component(ZkRadio.name, ZkRadio);
 };
 
-export default Radio;
+export default ZkRadio;

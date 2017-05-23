@@ -11,7 +11,7 @@
                 </div>
                 <div class="btn-wrap" layout="row">
                     <a class="btn-search" @click="queryClick"></a>
-                    <popup-component>
+                    <zk-popover>
                         <div slot="content">
                             <a class="btn-search-menu"></a>
                         </div>
@@ -51,7 +51,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </popup-component>
+                    </zk-popover>
                     <input id="efq" name="efq" type="hidden" value="">
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </a>
                 </div>
                 <div class="user-pannel" layout="row" laout-align="start end">
-                    <popup-component>
+                    <zk-popover>
                         <div slot="content">
                             <a class="user-name tools">
                                 <span class="user-email text-overflow">{{userInfo.email}}</span>
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                    </popup-component>
+                    </zk-popover>
                 </div>
             </div>
             <a href="javascript://;" id="uservoice" class="uservoice ico-uservoice">Uservoice</a>
@@ -133,8 +133,8 @@
                     <input id="filter_text" type="text" class="condition-keywords" name="filter" placeholder="二次搜索">
                 </div>
                 <div class="tab-wrap">
-                    <tabs-component :activeIndex="activeTabIndex">
-                        <tab-component title="过滤">
+                    <zk-tab :activeIndex="activeTabIndex">
+                        <zk-tab-item title="过滤">
                             <div class="tab-content">
                                 <div class="selected-box" v-if="filters && filters.length>0">
                                     <div>申请(专利权)人</div>
@@ -154,11 +154,11 @@
                                 </div>
                                 <filter-component :source="filterSource" @filter="listFilterEvent" @filterAdd="listFilterAddEvent"></filter-component>
                             </div>
-                        </tab-component>
-                        <tab-component title="最近搜索" v-ps-loading="loading">
+                        </zk-tab-item>
+                        <zk-tab-item title="最近搜索" v-ps-loading="loading">
                             <div style="height:200px;">tab2 content</div>
-                        </tab-component>
-                    </tabs-component>
+                        </zk-tab-item>
+                    </zk-tab>
                 </div>
             </div>
     
@@ -214,13 +214,13 @@
                     </div>
                 </div>
                 <div>
-                    <list-component :headers="catHeaderList" :list="catList" :hasCheckbox="1" :hasIndex="1"></list-component>
-                    <!--<div class="result-total">1-20条专利，共2,567,449条专利</div>
-                    <list-component>
-                        <list-header v-if="routeQuery.view=='list'">
+                    <!--<zk-list :headers="catHeaderList" :list="catList" :hasCheckbox="1" :hasIndex="1"></zk-list>-->
+                    <div class="result-total">1-20条专利，共2,567,449条专利</div>
+                    <zk-list>
+                        <zk-list-header v-if="routeQuery.view=='list'">
                             <ul layout="row">
                                 <li>
-                                    <checkbox-component v-model="listAllChecked"></checkbox-component>
+                                    <zk-checkbox v-model="listAllChecked"></zk-checkbox>
                                 </li>
                                 <li class="list-index">
                                     <span style="margin-left:8px;">#</span>
@@ -229,11 +229,11 @@
                                     {{header.title}}
                                 </li>
                             </ul>
-                        </list-header>
-                        <list-item v-for="(item,index) in patents" :key="item.PATENT_ID" :class="{'checked':item.checked}">
+                        </zk-list-header>
+                        <zk-list-item v-for="(item,index) in patents" :key="item.PATENT_ID" :class="{'checked':item.checked}">
                             <div layout="row" @click="listItemClick(item)" v-if="routeQuery.view=='list'">
                                 <div class="item-column">
-                                    <checkbox-component v-model="item.checked"></checkbox-component>
+                                    <zk-checkbox v-model="item.checked"></zk-checkbox>
                                 </div>
                                 <div class="item-column list-index">
                                     <i class="dot-status" v-if="!item.hasRead"></i>
@@ -262,7 +262,7 @@
                             </div>
                             <div @click="listItemClick(item)" v-if="routeQuery.view=='card'">
                                 <div class="item-column">
-                                    <checkbox-component v-model="item.checked"></checkbox-component>
+                                    <zk-checkbox v-model="item.checked"></zk-checkbox>
                                 </div>
                                 <div class="item-column list-index">
                                     <i class="dot-status" v-if="!item.hasRead"></i>
@@ -289,8 +289,8 @@
                                     <span v-else v-html="$options.filters.highlight(item[header.prop],searchText)"></span>
                                 </div>
                             </div>
-                        </list-item>
-                    </list-component>-->
+                        </zk-list-item>
+                    </zk-list>
                 </div>
             </div>
         </div>
@@ -313,14 +313,14 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import { patentQuery } from '../services/api';
-import PopupComponent from '../components/popup.component';
-import TabsComponent from '../components/tab-component/tabs.component';
-import TabComponent from '../components/tab-component/tab.component';
+import ZkPopover from '../components/popover';
+import ZkTab from '../components/tab';
+import ZkTabItem from '../components/tab-item';
 import FilterComponent from '../components/filter.component';
-import ListComponent from '../components/list-component/list.component';
-import ListHeader from '../components/list-component/list-header.component';
-import ListItem from '../components/list-component/list-item.component';
-import CheckboxComponent from '../components/common/checkbox.component';
+import ZkList from '../components/list';
+import ZkListHeader from '../components/list-header';
+import ZkListItem from '../components/list-item';
+import ZkCheckbox from '../components/checkbox';
 import SelectPatentComponent from '../components/select-patent.component';
 import Cat from '../models/testModel';
 let cloneDeep = require('lodash.clonedeep');
@@ -347,14 +347,14 @@ export default {
         }
     },
     components: {
-        PopupComponent,
-        TabsComponent,
-        TabComponent,
+        ZkPopover,
+        ZkTab,
+        ZkTabItem,
         FilterComponent,
-        ListComponent,
-        ListHeader,
-        ListItem,
-        CheckboxComponent,
+        ZkList,
+        ZkListHeader,
+        ZkListItem,
+        ZkCheckbox,
         SelectPatentComponent
     },
     created() {
@@ -927,7 +927,7 @@ export default {
                 }
             }
         }
-        .list-component {
+        .zk-list {
             max-height: calc(100vh - 158px);
             overflow-y: auto;
             overflow-x: hidden;

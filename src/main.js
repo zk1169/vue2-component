@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './app';
 import router from './router/route';
 import store from './store';
-import './directives/ps-loading/ps-loading.directive';
+import './directives/loading/loading.directive';
 import './filters/filter';
 
 //全局样式

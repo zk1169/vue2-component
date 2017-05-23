@@ -19,7 +19,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-@import '../../../styles/theme/checkbox-list';
-</style>

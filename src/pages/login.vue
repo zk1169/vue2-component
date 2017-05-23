@@ -94,7 +94,7 @@ export default {
 
                     this.userInfo = res;
                     this.RECORD_USERINFO(this.userInfo);
-                    this.$router.push('/dashboard/search');
+                    this.$router.push('/dashboard/home');
                 },
                 (error) => {
                     this.$root.$emit('show-loading', false);

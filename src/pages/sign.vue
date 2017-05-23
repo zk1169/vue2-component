@@ -1,7 +1,7 @@
  <template>
    <div id="sign-component">
     <video v-if="showVideo" class="bg-video" autoplay loop="loop" autobuffer="autobuffer" preload="auto" oncontextmenu="return false" 
-    src="./static/videos/LookoutTower_GrandCanyon_GettyRM-606345549_1080_HD_ZH-CN.mp4">
+    src="/static/videos/LookoutTower_GrandCanyon_GettyRM-606345549_1080_HD_ZH-CN.mp4">
     您的浏览器不支持视频</video>
     <router-view></router-view>
    </div>
@@ -16,7 +16,7 @@
    }
  }
  </script>
-
+ 
  <!-- Add "scoped" attribute to limit CSS to this component only -->
  <style scoped lang="scss">
  #sign-component{

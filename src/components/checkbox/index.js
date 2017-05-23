@@ -1,8 +1,8 @@
-import Checkbox from './src/main';
+import ZkCheckbox from './src/main';
 
 /* istanbul ignore next */
-Checkbox.install = function(Vue) {
-    Vue.component(Checkbox.name, Checkbox);
+ZkCheckbox.install = function(Vue) {
+    Vue.component(ZkCheckbox.name, ZkCheckbox);
 };
 
-export default Checkbox;
+export default ZkCheckbox;

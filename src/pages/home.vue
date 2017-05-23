@@ -11,9 +11,9 @@
             <i class="fa fa-university"></i>
         </div>
         <div layout="row">
-            <ps-select-component v-model="valueSelect" :options="options" placeholder="请选择"></ps-select-component>
-            <ps-button-component type="primary" @click="showTransition">主要按钮</ps-button-component>
-            <ps-button-component type="primary" :async="asyncClick">异步按钮</ps-button-component>
+            <zk-select v-model="valueSelect" :options="options" placeholder="请选择"></zk-select>
+            <zk-button type="primary" @click="showTransition">主要按钮</zk-button>
+            <zk-button type="primary" :async="asyncClick">异步按钮</zk-button>
             <el-date-picker v-model="value6" type="daterange" placeholder="选择日期范围">
             </el-date-picker>
         </div>
@@ -28,17 +28,14 @@
             </section>
         </transition>
     
-        <!--<ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></ps-image-component>-->
+        <!--<zk-image style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></zk-image>-->
     
         <!--<tree-component :node="treeModel"></tree-component>-->
-        <radio-component v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></radio-component>
-        <checkbox-list-component :options="checkboxOptions" style="margin-left:50px;"></checkbox-list-component>
-
-        <br>
-        <br>
         <zk-radio v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></zk-radio>
         <zk-checkbox-list :options="checkboxOptions" style="margin-left:50px;"></zk-checkbox-list>
-
+    
+        <!--<zk-tree :node="treeModel"></zk-tree>-->
+    
         <br>
         <br>
         <br>
@@ -53,7 +50,7 @@ import { mapState } from 'vuex';
 import { login } from '../services/api';
 import Programmer from '../models/testModel';
 import TreeComponent from '../components/common/tree/tree.component';
-import TreeModel from '../components/common/tree/tree.model';
+//import TreeModel from '../components/common/tree/tree.model';
 import RadioComponent from '../components/common/radio.component';
 import CheckboxListComponent from '../components/common/checkbox-list.component';
 import PsSelectComponent from '../components/common/ps-select.component';
@@ -62,6 +59,10 @@ import PsImageComponent from '../components/common/ps-image.component';
 
 import ZkCheckboxList from '../components/checkbox-list';
 import ZkRadio from '../components/radio';
+import ZkButton from '../components/button';
+import ZkImage from '../components/image';
+import ZkSelect from '../components/select';
+// import { ZkTree, TreeModel } from '../components/tree';
 
 export default {
     data() {
@@ -86,7 +87,7 @@ export default {
             }],
             valueSelect: null,
             value6: '',
-            treeModel: TreeModel.testData,
+            //treeModel: TreeModel.testData,
             radioModel: null,
             radioOptions: [{
                 name: '男',
@@ -118,7 +119,11 @@ export default {
         PsButtonComponent,
         PsImageComponent,
         ZkCheckboxList,
-        ZkRadio
+        ZkRadio,
+        ZkButton,
+        ZkImage,
+        ZkSelect,
+        //ZkTree
     },
     created() {
         console.log('created');
