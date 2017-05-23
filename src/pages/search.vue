@@ -1,5 +1,5 @@
 <template>
-    <div class="search-component" >
+    <div class="search-component">
         <div class="search-header" layout="row" layout-align="start center">
             <img src="../assets/images/logo_zhihuiya_35.png" />
             <div flex class="input-wrap" layout="row">
@@ -142,7 +142,9 @@
                                         <li class="selected-item" v-for="(item,filterIndex) in filters">
                                             <div layout="row" layout-align="start center">
                                                 <div flex>{{item.name}}</div>
-                                                <div class="close-item" @click="cleanFilterItem(filterIndex)"><i class="fa fa-times"></i></div>
+                                                <div class="close-item" @click="cleanFilterItem(filterIndex)">
+                                                    <i class="fa fa-times"></i>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -212,8 +214,8 @@
                     </div>
                 </div>
                 <div>
-                    <!--<list-component :headers="listData.headers" :list="listData.list"></list-component>-->
-                    <div class="result-total">1-20条专利，共2,567,449条专利</div>
+                    <list-component :headers="catHeaderList" :list="catList" :hasCheckbox="1" :hasIndex="1"></list-component>
+                    <!--<div class="result-total">1-20条专利，共2,567,449条专利</div>
                     <list-component>
                         <list-header v-if="routeQuery.view=='list'">
                             <ul layout="row">
@@ -288,7 +290,7 @@
                                 </div>
                             </div>
                         </list-item>
-                    </list-component>
+                    </list-component>-->
                 </div>
             </div>
         </div>
@@ -320,6 +322,7 @@ import ListHeader from '../components/list-component/list-header.component';
 import ListItem from '../components/list-component/list-item.component';
 import CheckboxComponent from '../components/common/checkbox.component';
 import SelectPatentComponent from '../components/select-patent.component';
+import Cat from '../models/testModel';
 let cloneDeep = require('lodash.clonedeep');
 
 export default {
@@ -336,7 +339,11 @@ export default {
             selectedItems: [],
             patents: [],
             filters: [],
-            routeQuery:{view:'list'}
+            routeQuery: {
+                view: 'list'
+            },
+            catList:null,
+            catHeaderList:null
         }
     },
     components: {
@@ -351,8 +358,13 @@ export default {
         SelectPatentComponent
     },
     created() {
+        this.catHeaderList = [{title:'name',prop:'name'},{title:'color',prop:'color'}];
+        this.catList = [];
+        for(let i=0;i<10;i++){
+            this.catList.push(new Cat(i+'-name'));
+        }
         //this.queryClick();
-        if(this.$route.query){
+        if (this.$route.query) {
             this.routeQueryInit(this.$route.query);
         }
     },
@@ -361,52 +373,52 @@ export default {
         // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
         // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
         // 可以访问组件实例 `this`
-        if(to && to.query){
+        if (to && to.query) {
             this.routeQueryInit(to.query);
         }
     },
     methods: {
-        routeQueryInit(query){
-            if(query.filters){
+        routeQueryInit(query) {
+            if (query.filters) {
                 this.routeQuery.filters = query.filters;
                 //this.filterInit(query.filters);
                 this.queryInit();
-            }else{
+            } else {
                 this.routeQuery.filters = null;
                 //this.filterInit(null);
                 this.queryInit();
             }
-            if(query.key){
+            if (query.key) {
                 this.routeQuery.key = query.key;
                 this.searchText = query.key;
                 this.queryInit();
-            }else{
+            } else {
                 this.routeQuery.key = '';
                 this.searchText = '';
                 this.queryInit();
             }
-            if(query.view){
+            if (query.view) {
                 this.routeQuery.view = query.view;
-            }else{
+            } else {
                 this.routeQuery.view = 'list';
             }
-            
+
         },
-        filterInit(filters){
+        filterInit(filters) {
             //清空筛选条件
-            if(this.filters){
-                this.filters.splice(0,this.filters.length);
+            if (this.filters) {
+                this.filters.splice(0, this.filters.length);
             }
-            
-            if(this.filterSource){
-                this.filterSource.forEach((item)=>{
-                    if(item.values){
-                        item.values.forEach((subItem)=>{
-                            if(filters && filters.indexOf(subItem.name)>-1){
+
+            if (this.filterSource) {
+                this.filterSource.forEach((item) => {
+                    if (item.values) {
+                        item.values.forEach((subItem) => {
+                            if (filters && filters.indexOf(subItem.name) > -1) {
                                 subItem.checked = true;
                                 subItem.field = item.field;
                                 this.filters.push(subItem);
-                            }else{
+                            } else {
                                 subItem.checked = false;
                             }
                         });
@@ -415,15 +427,15 @@ export default {
             }
             this.listFilter(this.filters);
         },
-        queryClick(){
+        queryClick() {
             this.routeQuery.key = this.searchText;
             //this.directUrl({field:"filters",value:querys.toString()});
             this.directUrl();
         },
-        viewClick(){
-            if(this.routeQuery.view == "list"){
+        viewClick() {
+            if (this.routeQuery.view == "list") {
                 this.routeQuery.view = "card";
-            }else{
+            } else {
                 this.routeQuery.view = "list";
             }
             this.directUrl();
@@ -497,10 +509,10 @@ export default {
                 this.patents = cloneDeep(this.listData.list);
             }
         },
-        listFilterEvent(filters){
+        listFilterEvent(filters) {
             let querys = [];
-            if(filters && filters.length>0){
-                filters.forEach((item)=>{
+            if (filters && filters.length > 0) {
+                filters.forEach((item) => {
                     querys.push(item.name);
                 });
             }
@@ -508,16 +520,16 @@ export default {
             //this.directUrl({field:"filters",value:querys.toString()});
             this.directUrl();
         },
-        listFilterAddEvent(filter){
+        listFilterAddEvent(filter) {
             this.filters.push(filter);
             this.listFilterEvent(this.filters);
         },
-        cleanFilter(){
+        cleanFilter() {
             this.routeQuery.filters = null;
             this.directUrl();
         },
-        cleanFilterItem(index){
-            this.filters.splice(index,1);
+        cleanFilterItem(index) {
+            this.filters.splice(index, 1);
             this.listFilterEvent(this.filters);
         },
         directUrl() {
@@ -529,17 +541,17 @@ export default {
                 //         url += property+"="+query[property]+"&&";
                 //     }
                 // }
-                if(this.routeQuery.key){
-                    url += "key="+this.routeQuery.key+"&";
+                if (this.routeQuery.key) {
+                    url += "key=" + this.routeQuery.key + "&";
                 }
-                if(this.routeQuery.filters){
-                    url += "filters="+this.routeQuery.filters+"&";
+                if (this.routeQuery.filters) {
+                    url += "filters=" + this.routeQuery.filters + "&";
                 }
-                if(this.routeQuery.view){
-                    url += "view="+this.routeQuery.view+"&";
+                if (this.routeQuery.view) {
+                    url += "view=" + this.routeQuery.view + "&";
                 }
-                if(url.lastIndexOf("&")==url.length-1){
-                    url = url.substr(0,url.length-1);
+                if (url.lastIndexOf("&") == url.length - 1) {
+                    url = url.substr(0, url.length - 1);
                 }
             }
             //this.$router.push({path:'/dashboard/search',query:{key:'bbbbb'}});
@@ -563,14 +575,7 @@ export default {
     computed: {
         ...mapState([
             'userInfo'
-        ]),
-        // patents:function(){
-        //     if(this.listData && this.listData.list){
-        //         this.listData.list.forEach((item)=>{
-        //             return item.
-        //         });
-        //     }
-        // }
+        ])
     }
 }
 </script>
@@ -797,16 +802,16 @@ export default {
                         font-size: 16px;
                     }
                 }
-                .close-item{
+                .close-item {
                     display: none;
                 }
-                .selected-item{
-                    padding:2px 5px;
+                .selected-item {
+                    padding: 2px 5px;
                 }
                 .selected-item:hover {
                     background-color: rgb(255, 244, 242);
                     cursor: pointer;
-                    .close-item{
+                    .close-item {
                         display: inherit;
                     }
                 }

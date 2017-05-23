@@ -1,21 +1,21 @@
 "use strict";
 
-class BaseModel{
-	constructor(id) {
+class BaseModel {
+    constructor(id) {
         this.id = id;
     }
 
-    serialize(id){
+    serialize(id) {
         this.id = id;
     }
-    unserialize(){
+    unserialize() {
         let model = {};
         model.id = this.id;
         return model;
     }
 }
 
-class UserModel extends BaseModel{
+class UserModel extends BaseModel {
     constructor(attrs) {
         super(attrs.id);
         this.name = attrs.name;
@@ -23,7 +23,7 @@ class UserModel extends BaseModel{
     }
 }
 
-class ProductType{
+class ProductType {
     constructor(attrs) {
         super(attrs.id);
         this.name = attrs.name;
@@ -48,7 +48,7 @@ class ProductModel extends BaseModel {
         this.format1 = attrs.format1;
     }
 
-    serialize(model){
+    serialize(model) {
         super.serialize(model.id);
         this.user = model.user;
         this.name = model.name;
@@ -65,7 +65,7 @@ class ProductModel extends BaseModel {
         return this;
     }
 
-    unserialize(){
+    unserialize() {
         let model = super.unserialize();
         model.name = this.name;
         model.material = this.material;
@@ -82,6 +82,6 @@ class ProductModel extends BaseModel {
     }
 }
 
-export { 
+export {
     ProductModel
- };
+};

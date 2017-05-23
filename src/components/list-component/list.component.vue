@@ -28,7 +28,7 @@
                                 {{index+1}}
                             </div>
                             <div class="item-column" v-for="header in headers" :flex="header.flex">
-                                {{item[header.prop].toString()}}
+                                {{item[header.prop]}}
                             </div>
                         </div>
                     </li>
@@ -51,21 +51,44 @@ export default {
             type: Array
         },
         hasCheckbox: {
-            type: [Boolean, String],
+            type: [Boolean, String,Number],
             default: false
         },
         hasIndex: {
-            type: [Boolean, String],
+            type: [Boolean, String,Number],
             default: false
         }
     },
     data() {
         return {
-            allChecked: false
+            //allChecked: false
         }
     },
     components: {
         CheckboxComponent
+    },
+    computed:{
+        allChecked:{
+            get(){
+                let _checked = true;
+                if(this.list){
+                    this.list.forEach((item)=>{
+                        if(!item.checked){
+                            _checked = false;
+                            return;
+                        }
+                    });
+                }
+                return _checked;
+            },
+            set(value){
+                if(this.list){
+                    this.list.forEach((item)=>{
+                        item.checked = value;
+                    });
+                }
+            }
+        }
     },
     methods: {
     }
