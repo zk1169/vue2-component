@@ -1,0 +1,5 @@
+{
+  "checkbox": "./checkbox/index.js",
+  "checkbox-list": "./checkbox-list/index.js",
+  "radio": "./radio/index.js"
+}

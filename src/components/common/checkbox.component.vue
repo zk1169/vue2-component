@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: 'checkbox-component',
+        name: 'zk-checkbox',
         props: {
             value: Boolean,
             label: String

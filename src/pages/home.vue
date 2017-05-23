@@ -28,11 +28,17 @@
             </section>
         </transition>
     
-        <ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></ps-image-component>
+        <!--<ps-image-component style="width:500px;" src="http://saas.dev.mei1.info/images/login-bg222.jpg"></ps-image-component>-->
     
-        <tree-component :node="treeModel"></tree-component>
+        <!--<tree-component :node="treeModel"></tree-component>-->
         <radio-component v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></radio-component>
         <checkbox-list-component :options="checkboxOptions" style="margin-left:50px;"></checkbox-list-component>
+
+        <br>
+        <br>
+        <zk-radio v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></zk-radio>
+        <zk-checkbox-list :options="checkboxOptions" style="margin-left:50px;"></zk-checkbox-list>
+
         <br>
         <br>
         <br>
@@ -53,6 +59,9 @@ import CheckboxListComponent from '../components/common/checkbox-list.component'
 import PsSelectComponent from '../components/common/ps-select.component';
 import PsButtonComponent from '../components/common/ps-button.component';
 import PsImageComponent from '../components/common/ps-image.component';
+
+import ZkCheckboxList from '../components/checkbox-list';
+import ZkRadio from '../components/radio';
 
 export default {
     data() {
@@ -107,7 +116,9 @@ export default {
         CheckboxListComponent,
         PsSelectComponent,
         PsButtonComponent,
-        PsImageComponent
+        PsImageComponent,
+        ZkCheckboxList,
+        ZkRadio
     },
     created() {
         console.log('created');
