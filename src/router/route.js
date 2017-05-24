@@ -16,7 +16,7 @@ const Search = resolve => require(['../pages/search'], resolve);
 Vue.use(Router);
 
 let router = new Router({
-    mode: 'history',
+    mode: 'hash',
     routes: [{
             path: '',
             redirect: '/sign'
