@@ -35,6 +35,10 @@
                 </ul>
             </div>
         </slot>
+        <div class="text-center list-page">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400">
+            </el-pagination>
+        </div>
     </div>
 </template>
 
@@ -51,29 +55,30 @@ export default {
             type: Array
         },
         hasCheckbox: {
-            type: [Boolean, String,Number],
+            type: [Boolean, String, Number],
             default: false
         },
         hasIndex: {
-            type: [Boolean, String,Number],
+            type: [Boolean, String, Number],
             default: false
         }
     },
     data() {
         return {
             //allChecked: false
+            currentPage: 2
         }
     },
     components: {
         ZkCheckbox
     },
-    computed:{
-        allChecked:{
-            get(){
+    computed: {
+        allChecked: {
+            get() {
                 let _checked = true;
-                if(this.list){
-                    this.list.forEach((item)=>{
-                        if(!item.checked){
+                if (this.list) {
+                    this.list.forEach((item) => {
+                        if (!item.checked) {
                             _checked = false;
                             return;
                         }
@@ -81,9 +86,9 @@ export default {
                 }
                 return _checked;
             },
-            set(value){
-                if(this.list){
-                    this.list.forEach((item)=>{
+            set(value) {
+                if (this.list) {
+                    this.list.forEach((item) => {
                         item.checked = value;
                     });
                 }
@@ -91,6 +96,12 @@ export default {
         }
     },
     methods: {
+        handleSizeChange() {
+
+        },
+        handleCurrentChange() {
+
+        }
     }
 }
 </script>

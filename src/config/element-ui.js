@@ -5,6 +5,7 @@ import Button from 'element-ui/lib/button';
 import Dialog from 'element-ui/lib/dialog';
 import DatePicker from 'element-ui/lib/date-picker';
 import Notification from 'element-ui/lib/notification';
+import Pagination from 'element-ui/lib/pagination';
 //import Loading from 'element-ui/lib/loading';
 
 // import {
@@ -91,7 +92,7 @@ export default {
         //     Vue.component(component.name, component);
         // });
 
-        //Vue.use(Pagination);
+        Vue.use(Pagination);
         Vue.use(Dialog);
         //Vue.use(Autocomplete);
         //Vue.use(Dropdown);

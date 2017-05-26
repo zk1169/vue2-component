@@ -12,6 +12,7 @@ const Login = resolve => require(['../pages/login'], resolve);
 const Dashboard = resolve => require(['../pages/dashboard'], resolve);
 const Home = resolve => require(['../pages/home'], resolve);
 const Search = resolve => require(['../pages/search'], resolve);
+const BugList = resolve => require(['../pages/bug-list'], resolve);
 
 Vue.use(Router);
 
@@ -49,6 +50,11 @@ let router = new Router({
                 {
                     path: 'search',
                     component: Search,
+                    meta: { requiresAuth: true }
+                },
+                {
+                    path: 'bug-list',
+                    component: BugList,
                     meta: { requiresAuth: true }
                 }
             ]

@@ -155,7 +155,7 @@
                                 <filter-component :source="filterSource" @filter="listFilterEvent" @filterAdd="listFilterAddEvent"></filter-component>
                             </div>
                         </zk-tab-item>
-                        <zk-tab-item title="最近搜索" v-ps-loading="loading">
+                        <zk-tab-item title="最近搜索" v-zk-loading="loading">
                             <div style="height:200px;">tab2 content</div>
                         </zk-tab-item>
                     </zk-tab>

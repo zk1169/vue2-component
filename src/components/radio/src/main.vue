@@ -30,7 +30,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-@import '../../../styles/theme/radio';
-</style>
