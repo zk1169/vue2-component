@@ -1,24 +1,27 @@
  <template>
     <div class="zk-list">
         <slot>
-            <div class="list-header">
+            <div class="zk-list-header">
                 <ul layout="row">
                     <li v-if="hasCheckbox">
                         <zk-checkbox v-model="allChecked"></zk-checkbox>
                     </li>
                     <li v-if="hasIndex" class="list-index">
-                        <span style="margin-left:8px;">#</span>
+                        #
                     </li>
                     <li v-for="(header, index) in headers" :flex="header.flex">
                         <span class="title">
                             {{header.title}}
                         </span>
                     </li>
+                    <li>
+                        操作
+                    </li>
                 </ul>
             </div>
-            <div class="list-body">
+            <div class="zk-list-body">
                 <ul>
-                    <li v-for="(item, index) in list">
+                    <li v-for="(item, index) in list" class="zk-list-item">
                         <div layout="row">
                             <div v-if="hasCheckbox" class="item-column">
                                 <zk-checkbox v-model="item.checked"></zk-checkbox>
@@ -30,6 +33,7 @@
                             <div class="item-column" v-for="header in headers" :flex="header.flex">
                                 {{item[header.prop]}}
                             </div>
+                            <div class="item-column"><router-link :to="'/bug-detail/'+item.id">详情</router-link></div>
                         </div>
                     </li>
                 </ul>

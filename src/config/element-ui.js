@@ -6,6 +6,7 @@ import Dialog from 'element-ui/lib/dialog';
 import DatePicker from 'element-ui/lib/date-picker';
 import Notification from 'element-ui/lib/notification';
 import Pagination from 'element-ui/lib/pagination';
+import Input from 'element-ui/lib/input';
 //import Loading from 'element-ui/lib/loading';
 
 // import {
@@ -102,7 +103,7 @@ export default {
         //Vue.use(Submenu);
         //Vue.use(MenuItem);
         //Vue.use(MenuItemGroup);
-        //Vue.use(Input);
+        Vue.use(Input);
         //Vue.use(InputNumber);
         //Vue.use(Radio);
         //Vue.use(RadioGroup);

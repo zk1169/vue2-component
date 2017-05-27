@@ -64,7 +64,7 @@ $tool-bar-height:50px;
         width: $left-width;
         background-color: #2b333d;
         color: #c5d0de;
-        z-index: 100;
+        z-index: 101;
         transition-duration: .3s;
         .collapse-nav {
             display: inline-block;

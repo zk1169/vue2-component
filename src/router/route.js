@@ -17,7 +17,7 @@ const BugList = resolve => require(['../pages/bug-list'], resolve);
 Vue.use(Router);
 
 let router = new Router({
-    mode: 'hash',
+    mode: 'history',
     routes: [{
             path: '',
             redirect: '/sign'
