@@ -1,8 +1,8 @@
  <template>
    <div id="sign-component">
-    <video v-if="showVideo" class="bg-video" autoplay loop="loop" autobuffer="autobuffer" preload="auto" oncontextmenu="return false" 
+    <!--<video v-if="showVideo" class="bg-video" autoplay loop="loop" autobuffer="autobuffer" preload="auto" oncontextmenu="return false" 
     src="/static/videos/LookoutTower_GrandCanyon_GettyRM-606345549_1080_HD_ZH-CN.mp4">
-    您的浏览器不支持视频</video>
+    您的浏览器不支持视频</video>-->
     <router-view></router-view>
    </div>
  </template>
@@ -22,7 +22,7 @@
  #sign-component{
   height: 100vh;
     width: 100%;
-    //background-image: url('../assets/images/LookoutTower_GrandCanyon_FF_768_HD_ZH-CN727571233.jpg');
+    background-image: url('../assets/images/BromoJava_ZH-CN13278140077_1920x1080.jpg');
     background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;

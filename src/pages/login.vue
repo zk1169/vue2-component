@@ -30,10 +30,10 @@
                 </div>
             </div>
         </form>
-        <div class="session-links">
+        <!--<div class="session-links">
             <a href="" class="pull-left">注册</a>
             <a href="" class="pull-right">忘记密码</a>
-        </div>
+        </div>-->
     </div>
 </template>
 
