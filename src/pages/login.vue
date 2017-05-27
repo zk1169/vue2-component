@@ -39,7 +39,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import { login } from '../services/api';
+import { login } from '../services/gang-flower';
 import ZkCheckbox from '../components/checkbox';
 
 export default {
@@ -85,19 +85,19 @@ export default {
                 rememberMe: true
             };
             //手机号登录
-            this.$root.$emit('show-loading', true);
+            //this.$root.$emit('show-loading', true);
             this.$root.$emit('start-loading-bar');
             login(data).subscribe(
                 (res) => {
-                    this.$root.$emit('show-loading', false);
+                    //this.$root.$emit('show-loading', false);
                     this.$root.$emit('complete-loading-bar');
 
                     this.userInfo = res;
                     this.RECORD_USERINFO(this.userInfo);
-                    this.$router.push('/dashboard/home');
+                    this.$router.push('/dashboard/bug-list');
                 },
                 (error) => {
-                    this.$root.$emit('show-loading', false);
+                    //this.$root.$emit('show-loading', false);
                     this.$root.$emit('complete-loading-bar');
                     this.$toast({
                         title: 'error',
