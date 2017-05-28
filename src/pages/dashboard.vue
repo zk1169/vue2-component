@@ -16,8 +16,10 @@
                         <span v-if="menuShow" class="menu-text">Dashboard</span>
                     </li>
                     <li class="menu-item">
+                        <router-link to="/dashboard/icbc-ticket">
                         <i class="fa fa-star fa-fw"></i>
                         <span v-if="menuShow" class="menu-text">Fav</span>
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -28,7 +30,7 @@
                     <li class="toolbar-item">
                         <span>Admin</span>
                     </li>
-                    <li class="toolbar-item">
+                    <li class="toolbar-item" @click="logOut">
                         <a>
                             <i class="fa fa-sign-out"></i>
                         </a>
@@ -40,10 +42,20 @@
     </div>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 export default {
     data() {
         return {
             menuShow: false
+        }
+    },
+    methods:{
+        ...mapMutations([
+            'RECORD_USERINFO',
+        ]),
+        logOut(){
+            this.RECORD_USERINFO(null);
+            this.$router.push('/sign/login');
         }
     }
 }
@@ -111,6 +123,7 @@ $tool-bar-height:50px;
             box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
             opacity: 0.9;
             .toolbar-item {
+                cursor:pointer;
                 display: inline-block;
                 a {
                     color: #888;

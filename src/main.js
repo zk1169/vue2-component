@@ -6,7 +6,6 @@ import router from './router/route';
 import store from './store';
 import './directives/loading/loading.directive';
 import './filters/filter';
-
 //全局样式
 import './styles/style.scss';
 
@@ -24,6 +23,8 @@ Vue.config.errorHandler = function(err, vm) {
     // handle error
     console.log(err);
 }
+
+store.commit('AUTO_LOGIN');
 
 /* eslint-disable no-new */
 new Vue({

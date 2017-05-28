@@ -28,7 +28,7 @@
     import ZkList from '../components/list';
     import ZkListHeader from '../components/list-header';
     import ZkListItem from '../components/list-item';
-    
+
     export default {
         data() {
             return {
@@ -36,14 +36,11 @@
                 listData: {
                     headers:[
                         {title:'标题',prop:'title',flex:15},
+                        {title:'创建人',prop:'name',flex:15},
                         {title:'内容',prop:'content',flex:20},
                         {title:'提交时间',prop:'createTime',flex:10}
                     ],
-                    list:[
-                        {id:1,title:'a',content:'aaaaa',createTime:'2017-05-27 09:10:00'},
-                        {id:2,title:'b',content:'bbbbb',createTime:'2017-05-27 09:10:00'},
-                        {id:3,title:'c',content:'ccccc',createTime:'2017-05-27 09:10:00'},
-                    ]
+                    list:[]
                 },
                 listAllChecked: false,
                 searchText: '',
@@ -91,23 +88,21 @@
                 this.directUrl();
             },
             queryInit() {
-                // this.$root.$emit('start-loading-bar');
-                // return getBugList().subscribe(
-                //     (res) => {
-                //         this.listData = {
-                //             list: res.rows
-                //         };
-                //         this.$root.$emit('complete-loading-bar');
-                //     },
-                //     (error) => {
-                //         this.$root.$emit('complete-loading-bar');
-                //         this.$toast({
-                //             title: 'error',
-                //             message: error.message,
-                //             type: 'error'
-                //         });
-                //     }
-                // );
+                this.$root.$emit('start-loading-bar');
+                return getBugList().subscribe(
+                    (res) => {
+                        this.listData.list = res.rows;
+                        this.$root.$emit('complete-loading-bar');
+                    },
+                    (error) => {
+                        this.$root.$emit('complete-loading-bar');
+                        this.$toast({
+                            title: 'error',
+                            message: error.message,
+                            type: 'error'
+                        });
+                    }
+                );
             },
             directUrl() {
                 let url = "/dashboard/bug-list?";

@@ -13,6 +13,7 @@ const Dashboard = resolve => require(['../pages/dashboard'], resolve);
 const Home = resolve => require(['../pages/home'], resolve);
 const Search = resolve => require(['../pages/search'], resolve);
 const BugList = resolve => require(['../pages/bug-list'], resolve);
+const IcbcTicket = resolve => require(['../pages/icbc-ticket'], resolve);
 
 Vue.use(Router);
 
@@ -55,6 +56,11 @@ let router = new Router({
                 {
                     path: 'bug-list',
                     component: BugList,
+                    meta: { requiresAuth: true }
+                },
+                {
+                    path: 'icbc-ticket',
+                    component: IcbcTicket,
                     meta: { requiresAuth: true }
                 }
             ]

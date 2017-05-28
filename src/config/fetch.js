@@ -1,3 +1,5 @@
+import store from '../store';
+
 export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
     type = type.toUpperCase();
     //url = baseUrl + url;
@@ -11,6 +13,13 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
         if (dataStr !== '') {
             dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
             url = url + '?' + dataStr;
+            if(store.getters.accessToken){
+			    url = url + '&accessToken='+store.getters.accessToken;
+		    }
+        }else{
+            if(store.getters.accessToken){
+			    url = url + '?accessToken='+store.getters.accessToken;
+		    }
         }
     }
 
@@ -23,6 +32,10 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
         };
 
         if (data.constructor && data.constructor.name == "FormData") {
+			if(store.getters.accessToken){
+				data.append('accessToken', store.getters.accessToken);
+			}
+			
             if (type == 'POST') {
                 Object.defineProperty(requestConfig, 'body', {
                     value: data
@@ -33,6 +46,9 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             };
+			if(store.getters.accessToken){
+				data.accessToken = store.getters.accessToken
+			}
             if (type == 'POST') {
                 Object.defineProperty(requestConfig, 'body', {
                     value: JSON.stringify(data)
@@ -47,6 +63,7 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
         } catch (error) {
             throw new Error(error);
         }
+        //return responseJson
     } else {
         let requestObj;
         if (window.XMLHttpRequest) {

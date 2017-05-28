@@ -92,7 +92,7 @@ export default {
                     //this.$root.$emit('show-loading', false);
                     this.$root.$emit('complete-loading-bar');
 
-                    this.userInfo = res;
+                    this.userInfo = {name:this.userName,accessToken:res};
                     this.RECORD_USERINFO(this.userInfo);
                     this.$router.push('/dashboard/bug-list');
                 },
