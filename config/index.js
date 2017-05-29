@@ -40,6 +40,7 @@ module.exports = {
             },
             "/api/**": {
                 "target": "http://local.api.com",
+                //"target": "http://api.iyaoheinfo.cn",
                 "secure": false,
                 "changeOrigin": true
             }

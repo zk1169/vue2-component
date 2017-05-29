@@ -31,7 +31,8 @@
                                 {{index+1}}
                             </div>
                             <div class="item-column" v-for="header in headers" :flex="header.flex">
-                                {{item[header.prop]}}
+                                <span v-if="header.prop==='status'">{{item[header.prop]|bugstatus}}</span>
+                                <span v-else>{{item[header.prop]}}</span>
                             </div>
                             <div class="item-column"><router-link :to="'/bug-detail/'+item.id">详情</router-link></div>
                         </div>

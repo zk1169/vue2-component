@@ -38,6 +38,7 @@
                         {title:'标题',prop:'title',flex:15},
                         {title:'创建人',prop:'name',flex:15},
                         {title:'内容',prop:'content',flex:20},
+                        {title:'状态',prop:'status',flex:5},
                         {title:'提交时间',prop:'createTime',flex:10}
                     ],
                     list:[]
