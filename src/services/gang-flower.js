@@ -2,6 +2,7 @@ import fetch from '../config/fetch-rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
+import BugModel from '../models/bug.model';
 
 /**
  * 登录
@@ -14,10 +15,20 @@ let login = (data) => {
     );
 };
 
-let getBugList = (data) => {
-    return fetch('POST', '/api/admin/getBugList', data).map(
+let getBugList = (page) => {
+    let param = {page:page}
+    return fetch('POST', '/api/admin/getBugList', param).map(
         (res) => {
-            return res;
+            let result = {
+                rows:[],
+                totalCount:res.totalCount
+            }
+            if(res && res.rows){
+                res.rows.forEach((item)=>{
+                    result.rows.push(new BugModel(item));
+                });
+            }
+            return result;
         }
     );
 };

@@ -34,16 +34,13 @@
                                 <span v-if="header.prop==='status'">{{item[header.prop]|bugstatus}}</span>
                                 <span v-else>{{item[header.prop]}}</span>
                             </div>
-                            <div class="item-column"><router-link :to="'/bug-detail/'+item.id">详情</router-link></div>
+                            <!--<div class="item-column"><router-link :to="'/bug-detail/'+item.id">详情</router-link></div>-->
+                            <div class="item-column" @click="itemClick(index)"><a class="hand">详情</a></div>
                         </div>
                     </li>
                 </ul>
             </div>
         </slot>
-        <div class="text-right list-page">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400">
-            </el-pagination>
-        </div>
     </div>
 </template>
 
@@ -106,6 +103,9 @@ export default {
         },
         handleCurrentChange() {
 
+        },
+        itemClick(index){
+            this.$emit("item-click",index);
         }
     }
 }

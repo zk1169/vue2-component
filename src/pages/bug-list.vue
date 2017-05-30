@@ -1,19 +1,54 @@
 <template>
     <div class="search-component">
         <!--<div class="search-header" layout="row" layout-align="start center">
-            <div flex="60" class="input-wrap">
-                <el-input placeholder="请输入搜索内容" v-model="searchText" @keyup.enter="queryClick">
-                    <el-button slot="append" icon="search" @click="queryClick"></el-button>
-                </el-input>
-            </div>
-        </div>-->
+                    <div flex="60" class="input-wrap">
+                        <el-input placeholder="请输入搜索内容" v-model="searchText" @keyup.enter="queryClick">
+                            <el-button slot="append" icon="search" @click="queryClick"></el-button>
+                        </el-input>
+                    </div>
+                </div>-->
         <div class="search-body" layout="row">
             <div class="body-right" flex>
                 <div>
-                    <zk-list :headers="listData.headers" :list="listData.list" :hasIndex="1"></zk-list>
+                    <zk-list :headers="listData.headers" :list="listData.list" :hasIndex="1" @item-click="itemClick"></zk-list>
+                    <div class="text-right list-page">
+                        <el-pagination @current-change="pageChange" :current-page="listData.currentPage" layout="total, prev, pager, next" :total="listData.totalCount" :page-size="20">
+                        </el-pagination>
+                    </div>
                 </div>
             </div>
         </div>
+        <el-dialog title="编辑问题" :visible="dialogVisible">
+            <div>
+                <div class="form-item" layout="row">
+                    <label flex="20">标题：</label>
+                    <span>{{selectModel.title}}</span>
+                </div>
+                <div class="form-item" layout="row">
+                    <label flex="20">创建人：</label>
+                    <span>{{selectModel.name}}</span>
+                </div>
+                <div class="form-item" layout="row">
+                    <label flex="20">内容：</label>
+                    <span>{{selectModel.content}}</span>
+                </div>
+                <div class="form-item" layout="row">
+                    <label flex="20">状态：</label>
+                    <zk-select v-model="selectModel.status" :options="statusOptions" placeholder="请选择"></zk-select>
+                </div>
+                <div class="form-item" layout="row">
+                    <label flex="20">提交时间：</label>
+                    <span>{{selectModel.createTime}}</span>
+                </div>
+                <div v-for="item in selectModel.imageList">
+                    <img v-if="item" style="width:100%;" :src="'/api/'+item"></img>
+                </div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">保 存</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -25,74 +60,84 @@
     import {
         getBugList
     } from '../services/gang-flower';
+    import ZkSelect from '../components/select';
     import ZkList from '../components/list';
     import ZkListHeader from '../components/list-header';
     import ZkListItem from '../components/list-item';
-
+    import BugModel from '../models/bug.model';
+    
     export default {
         data() {
             return {
                 loading: true,
                 listData: {
-                    headers:[
-                        {title:'标题',prop:'title',flex:15},
-                        {title:'创建人',prop:'name',flex:15},
-                        {title:'内容',prop:'content',flex:20},
-                        {title:'状态',prop:'status',flex:5},
-                        {title:'提交时间',prop:'createTime',flex:10}
+                    headers: [{
+                            title: '标题',
+                            prop: 'title',
+                            flex: 15
+                        },
+                        {
+                            title: '创建人',
+                            prop: 'name',
+                            flex: 15
+                        },
+                        {
+                            title: '内容',
+                            prop: 'content',
+                            flex: 20
+                        },
+                        {
+                            title: '状态',
+                            prop: 'status',
+                            flex: 5
+                        },
+                        {
+                            title: '提交时间',
+                            prop: 'createTime',
+                            flex: 10
+                        }
                     ],
-                    list:[]
+                    list: [],
+                    totalCount: 0,
+                    currentPage: 1
                 },
                 listAllChecked: false,
                 searchText: '',
-                routeQuery: {
-                    view: 'list'
-                }
+                dialogVisible:false,
+                selectModel:new BugModel(),
+                statusOptions:[
+                    {
+                        value: "1",
+                        label: '待处理'
+                    },
+                    {
+                        value: "2",
+                        label: '正在解决'
+                    },
+                    {
+                        value: "3",
+                        label: '已解决'
+                    }
+                ]
             }
         },
         components: {
             ZkList,
             ZkListHeader,
-            ZkListItem
+            ZkListItem,
+            ZkSelect
         },
         created() {
-            //this.queryClick();
-            if (this.$route.query) {
-                this.routeQueryInit(this.$route.query);
-            }
-        },
-        beforeRouteUpdate(to, from, next) {
-            // 在当前路由改变，但是该组件被复用时调用
-            // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
-            // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
-            // 可以访问组件实例 `this`
-            if (to && to.query) {
-                this.routeQueryInit(to.query);
-            }
+            this.queryInit(1);
         },
         methods: {
-            routeQueryInit(query) {
-                if (query.key) {
-                    this.routeQuery.key = query.key;
-                    this.searchText = query.key;
-                    this.queryInit();
-                } else {
-                    this.routeQuery.key = '';
-                    this.searchText = '';
-                    this.queryInit();
-                }
-    
-            },
-            queryClick() {
-                this.routeQuery.key = this.searchText;
-                //this.directUrl({field:"filters",value:querys.toString()});
-                this.directUrl();
-            },
-            queryInit() {
+            queryInit(page) {
                 this.$root.$emit('start-loading-bar');
-                return getBugList().subscribe(
+                return getBugList(page).subscribe(
                     (res) => {
                         this.listData.list = res.rows;
+                        this.listData.totalCount = res.totalCount;
+                        this.listData.currentPage = Number(page);
                         this.$root.$emit('complete-loading-bar');
                     },
                     (error) => {
@@ -105,19 +150,12 @@
                     }
                 );
             },
-            directUrl() {
-                let url = "/dashboard/bug-list?";
-                if (this.routeQuery) {
-                    if (this.routeQuery.key) {
-                        url += "key=" + this.routeQuery.key + "&";
-                    }
-                    if (url.lastIndexOf("&") == url.length - 1) {
-                        url = url.substr(0, url.length - 1);
-                    }
-                }
-                //this.$router.push({path:'/dashboard/search',query:{key:'bbbbb'}});
-                //this.$route.query.key = "aaaaaaaa";
-                window.location.href = url;
+            pageChange(page) {
+                this.queryInit(page);
+            },
+            itemClick(index){
+                this.selectModel = this.listData.list[index];
+                this.dialogVisible = true;
             }
         },
         computed: {
@@ -147,5 +185,8 @@
         .body-right {
             margin-left: 15px;
         }
+    }
+    .form-item{
+        margin:10px;
     }
 </style>
