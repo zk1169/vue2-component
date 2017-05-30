@@ -15,12 +15,12 @@
                         <i class="fa fa-dashboard fa-fw"></i>
                         <span v-if="menuShow" class="menu-text">Dashboard</span>
                     </li>
-                    <li class="menu-item">
+                    <!--<li class="menu-item">
                         <router-link to="/dashboard/icbc-ticket">
                         <i class="fa fa-star fa-fw"></i>
                         <span v-if="menuShow" class="menu-text">Fav</span>
                         </router-link>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

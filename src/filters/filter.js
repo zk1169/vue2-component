@@ -12,7 +12,7 @@ Vue.filter('highlight', function(value, keyword) {
 
 Vue.filter('bugstatus', function(value) {
     let statusStr = '';
-    switch(value){
+    switch(+value){
         default:
         case 1:
             statusStr = '待处理';

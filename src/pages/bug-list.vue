@@ -40,13 +40,13 @@
                     <label flex="20">提交时间：</label>
                     <span>{{selectModel.createTime}}</span>
                 </div>
-                <div v-for="item in selectModel.imageList">
-                    <img v-if="item" style="width:100%;" :src="'/api/'+item"></img>
+                <div v-for="item in selectModel.imageList" layout="row" layout-wrap>
+                    <img v-if="item" style="width:45%;" :src="'/api/'+item"></img>
                 </div>
             </div>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">保 存</el-button>
+                <el-button type="primary" @click="saveBugClick">保 存</el-button>
             </div>
         </el-dialog>
     </div>
@@ -58,7 +58,7 @@
         mapState
     } from 'vuex';
     import {
-        getBugList
+        getBugList,updateBugStatus
     } from '../services/gang-flower';
     import ZkSelect from '../components/select';
     import ZkList from '../components/list';
@@ -156,6 +156,24 @@
             itemClick(index){
                 this.selectModel = this.listData.list[index];
                 this.dialogVisible = true;
+            },
+            saveBugClick(){
+                this.$root.$emit('start-loading-bar');
+                updateBugStatus(this.selectModel.id,this.selectModel.status).subscribe(
+                    (res) => {
+                        this.$root.$emit('complete-loading-bar');
+                        this.dialogVisible = false;
+                        this.queryInit(this.listData.currentPage);
+                    },
+                    (error) => {
+                        this.$root.$emit('complete-loading-bar');
+                        this.$toast({
+                            title: 'error',
+                            message: error.message,
+                            type: 'error'
+                        });
+                    }
+                );
             }
         },
         computed: {

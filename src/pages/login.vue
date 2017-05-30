@@ -94,7 +94,11 @@ export default {
 
                     this.userInfo = {name:this.userName,accessToken:res};
                     this.RECORD_USERINFO(this.userInfo);
-                    this.$router.push('/dashboard/bug-list');
+                    if(this.userName === 'admin'){
+                        this.$router.push('/dashboard/bug-list');
+                    }else if(this.userName === 'icbc'){
+                        this.$router.push('/dashboard/icbc-ticket');
+                    }
                 },
                 (error) => {
                     //this.$root.$emit('show-loading', false);

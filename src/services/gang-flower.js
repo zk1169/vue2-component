@@ -15,6 +15,15 @@ let login = (data) => {
     );
 };
 
+let updateBugStatus = (id,status) => {
+    let param = {id,status};
+    return fetch('POST', '/api/admin/updateBugStatus', param).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 let getBugList = (page) => {
     let param = {page:page}
     return fetch('POST', '/api/admin/getBugList', param).map(
@@ -35,5 +44,6 @@ let getBugList = (page) => {
 
 export {
     login,
-    getBugList
+    getBugList,
+    updateBugStatus
 };
