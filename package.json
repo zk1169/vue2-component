@@ -22,7 +22,7 @@
         "lodash.clonedeep": "^4.5.0",
         "lodash.replace": "^4.1.4",
         "rxjs": "^5.3.0",
-        "sass-lib": "^1.0.4",
+        "sass-lib": "^1.0.8",
         "vue": "^2.2.2",
         "vue-router": "^2.2.0",
         "vuex": "^2.2.1"
