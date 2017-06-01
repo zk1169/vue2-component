@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <el-dialog title="编辑问题" :visible="dialogVisible">
+        <el-dialog title="编辑问题" :visible="dialogVisible" :show-close="false">
             <div>
                 <div class="form-item" layout="row">
                     <label flex="20">标题：</label>
@@ -40,7 +40,7 @@
                     <label flex="20">提交时间：</label>
                     <span>{{selectModel.createTime}}</span>
                 </div>
-                <div v-for="item in selectModel.imageList" layout="row" layout-wrap>
+                <div v-for="item in selectModel.imageList">
                     <img v-if="item" style="width:45%;" :src="'/api/'+item"></img>
                 </div>
             </div>

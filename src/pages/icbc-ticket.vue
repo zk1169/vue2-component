@@ -1,6 +1,9 @@
 <template>
     <div class="icbc-ticket-component">
         <div>
+            <el-button type="primary" @click="reloadClick">刷 新</el-button>
+        </div>
+        <div>
             <span class="label">
                     券总数：
                 </span>
@@ -61,6 +64,11 @@
                         this.totalCount = res.totalCount;
                         this.todayCount = res.todayCount;
                         this.outCount = res.outCount;
+                        this.$toast({
+                            title: '刷新成功',
+                            //message: '刷新成功',
+                            type: 'info'
+                        });
                     },
                     (error) => {
                         this.$root.$emit('complete-loading-bar');
@@ -71,6 +79,9 @@
                         });
                     }
                 );
+            },
+            reloadClick(){
+                this.getData();
             }
         },
         computed: {
