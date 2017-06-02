@@ -2,6 +2,9 @@
     <div class="icbc-ticket-component">
         <div>
             <el-button type="primary" @click="reloadClick">刷 新</el-button>
+            <button type="button" class="btn btn-primary" @click="ticketClick" name="btnLogin">
+                test
+            </button>
         </div>
         <div>
             <span class="label">
@@ -36,7 +39,7 @@
         mapState
     } from 'vuex';
     import {
-        getIcbcTicket
+        getIcbcTicket,ticket
     } from '../services/icbc';
     // import ZkList from '../components/list';
     // import ZkListHeader from '../components/list-header';
@@ -82,6 +85,22 @@
             },
             reloadClick(){
                 this.getData();
+            },
+            ticketClick(){
+                for(let i=0;i<1000;i++){
+                    ticket(i).subscribe(
+                        (res) => {
+                            console.log(res);
+                        },
+                        (error) => {
+                            this.$toast({
+                                title: 'error',
+                                message: error.message,
+                                type: 'error'
+                            });
+                        }
+                    );
+                }
             }
         },
         computed: {

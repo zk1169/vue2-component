@@ -11,6 +11,15 @@ let getIcbcTicket = (data) => {
     );
 };
 
+let ticket = (openid) => {
+    let url = '/wechat/ticket?openid='+openid+'&token=iyaoheinfo';
+    return fetch('GET',url).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 export {
     getIcbcTicket
 };
