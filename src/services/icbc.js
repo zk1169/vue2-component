@@ -12,8 +12,13 @@ let getIcbcTicket = (data) => {
 };
 
 let ticket = (openid) => {
-    let url = '/wechat/ticket?openid='+openid+'&token=iyaoheinfo';
-    return fetch('GET',url).map(
+    //let url = '/wechat/ticket?openid='+openid+'&token=iyaoheinfo';
+    let url = '/wechat/ticket';
+    let data = {
+        openid,
+        token:"iyaoheinfo"
+    };
+    return fetch('GET',url,data).map(
         (res) => {
             return res;
         }
@@ -21,5 +26,6 @@ let ticket = (openid) => {
 };
 
 export {
-    getIcbcTicket
+    getIcbcTicket,
+    ticket
 };

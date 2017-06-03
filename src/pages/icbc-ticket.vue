@@ -87,8 +87,8 @@
                 this.getData();
             },
             ticketClick(){
-                for(let i=0;i<1000;i++){
-                    ticket(i).subscribe(
+                for(let i=0;i<100;i++){
+                    ticket(i+1).subscribe(
                         (res) => {
                             console.log(res);
                         },
