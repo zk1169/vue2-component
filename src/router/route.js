@@ -11,6 +11,7 @@ const Sign = resolve => require(['../pages/sign'], resolve);
 const Login = resolve => require(['../pages/login'], resolve);
 const Dashboard = resolve => require(['../pages/dashboard'], resolve);
 const Home = resolve => require(['../pages/home'], resolve);
+const Charts = resolve => require(['../pages/charts'], resolve);
 const Search = resolve => require(['../pages/search'], resolve);
 const BugList = resolve => require(['../pages/bug-list'], resolve);
 const IcbcTicket = resolve => require(['../pages/icbc-ticket'], resolve);
@@ -49,6 +50,10 @@ let router = new Router({
                     meta: { requiresAuth: true }
                 },
                 {
+                    path: 'chart',
+                    component: Charts
+                },
+                {
                     path: 'search',
                     component: Search,
                     meta: { requiresAuth: true }
@@ -68,16 +73,6 @@ let router = new Router({
     ]
 });
 
-// //检查路由权限
-// router.beforeEach(({ meta, path }, from, next) => {
-//     //var { auth = true } = meta;
-//     console.log('route change');
-//     if (!store.getters.isLogin && path !== '/sign/login') {
-//         return next({ path: '/sign/login' });
-//     }
-//     next();
-// });
-
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         // this route requires auth, check if logged in
@@ -86,12 +81,12 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/sign/login',
                 query: { redirect: to.fullPath }
-            })
+            });
         } else {
-            next()
+            next();
         }
     } else {
-        next() // 确保一定要调用 next()
+        next(); // 确保一定要调用 next()
     }
 });
 

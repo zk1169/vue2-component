@@ -17,5 +17,8 @@
   "tree": "../tree/index.js",
   "tooltip": "../tooltip/index.js",
   "card": "../card/index.js",
-  "date-picker": "../date-picker/index.js"
+  "date-picker": "../date-picker/index.js",
+  "bar": "../bar/index.js",
+  "line": "../line/index.js",
+  "pie": "../pie/index.js"
 }

@@ -34,7 +34,9 @@
         <zk-radio v-model="radioModel" :options="radioOptions" style="margin-left:50px;"></zk-radio>
         <zk-checkbox-list :options="checkboxOptions" style="margin-left:50px;"></zk-checkbox-list>
     
-        <zk-tree :node="treeModel"></zk-tree>
+        <!--<zk-tree :node="treeModel"></zk-tree>-->
+        <zk-bar></zk-bar>
+        <zk-line></zk-line>
     
         <br>
         <br>
@@ -56,6 +58,9 @@ import ZkButton from '../components/button';
 import ZkImage from '../components/image';
 import ZkSelect from '../components/select';
 import { ZkTree, TreeModel } from '../components/tree';
+
+import ZkBar from '../components/bar';
+import ZkLine from '../components/line';
 
 export default {
     data() {
@@ -110,7 +115,9 @@ export default {
         ZkButton,
         ZkImage,
         ZkSelect,
-        ZkTree
+        ZkTree,
+        ZkBar,
+        ZkLine
     },
     created() {
         console.log('created');
