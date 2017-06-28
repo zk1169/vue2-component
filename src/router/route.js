@@ -15,6 +15,7 @@ const Charts = resolve => require(['../pages/charts'], resolve);
 const Search = resolve => require(['../pages/search'], resolve);
 const BugList = resolve => require(['../pages/bug-list'], resolve);
 const IcbcTicket = resolve => require(['../pages/icbc-ticket'], resolve);
+const LangTrans = resolve => require(['../pages/lang-trans'], resolve);
 
 Vue.use(Router);
 
@@ -67,7 +68,11 @@ let router = new Router({
                     path: 'icbc-ticket',
                     component: IcbcTicket,
                     meta: { requiresAuth: true }
-                }
+                },
+                {
+                    path: 'lang-trans',
+                    component: LangTrans
+                },
             ]
         }
     ]

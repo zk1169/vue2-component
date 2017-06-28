@@ -28,6 +28,7 @@ require('echarts/lib/chart/pie');
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
+require('echarts/lib/component/legend');
 
 //element-ui控件库
 // import Element from 'element-ui';

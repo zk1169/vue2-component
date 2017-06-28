@@ -1,17 +1,9 @@
 <template>
-  <div class="zk-bar" id="zk_bar" style="height:500px;width:500px;">
+  <div class="zk-bar" id="zk_bar" style="height:100%;width:100%;">
   </div>
 </template>
 
 <script>
-  // // 引入 ECharts 主模块
-  // var echarts = require('echarts/lib/echarts');
-  // // 引入柱状图
-  // require('echarts/lib/chart/bar');
-  // // 引入提示框和标题组件
-  // require('echarts/lib/component/tooltip');
-  // require('echarts/lib/component/title');
-  
   export default {
     name: 'zk-bar',
     data() {
@@ -30,6 +22,7 @@
         this.car.name = 'bens';
         this.$emit('onclick',params);
       });
+      //window.onresize = this.myChart.resize;
     },
     watch: {
       options: function() {

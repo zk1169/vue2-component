@@ -20,5 +20,6 @@
   "date-picker": "../date-picker/index.js",
   "bar": "../bar/index.js",
   "line": "../line/index.js",
-  "pie": "../pie/index.js"
+  "pie": "../pie/index.js",
+  "npl-header": "../npl-header/index.js"
 }
