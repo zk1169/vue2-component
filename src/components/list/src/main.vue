@@ -28,7 +28,7 @@
                             </div>
                             <div v-if="hasIndex" class="item-column list-index">
                                 <i class="dot-status"></i>
-                                {{index+1}}
+                                {{((page-1)*10)+(index+1)}}
                             </div>
                             <div class="item-column" v-for="header in headers" :flex="header.flex">
                                 <span v-if="header.prop==='status'">{{item[header.prop]|bugstatus}}</span>
@@ -63,6 +63,10 @@ export default {
         hasIndex: {
             type: [Boolean, String, Number],
             default: false
+        },
+        page:{
+            type:Number,
+            default:1
         }
     },
     data() {

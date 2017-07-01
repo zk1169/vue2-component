@@ -10,9 +10,9 @@
         <div class="search-body" layout="row">
             <div class="body-right" flex>
                 <div>
-                    <zk-list :headers="listData.headers" :list="listData.list" :hasIndex="1" @item-click="itemClick"></zk-list>
+                    <zk-list :headers="listData.headers" :list="listData.list" :page="listData.currentPage"" :hasIndex="1" @item-click="itemClick"></zk-list>
                     <div class="text-right list-page">
-                        <el-pagination @current-change="pageChange" :current-page="listData.currentPage" layout="total, prev, pager, next" :total="listData.totalCount" :page-size="20">
+                        <el-pagination @current-change="pageChange" :current-page="listData.currentPage" layout="total, prev, pager, next" :total="listData.totalCount" :page-size="10">
                         </el-pagination>
                     </div>
                 </div>
