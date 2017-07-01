@@ -7,10 +7,6 @@
 </template>
 
 <script>
-    import { Observable } from 'rxjs/Observable';
-    import 'rxjs/add/observable/of';
-    import 'rxjs/add/operator/delay';
-    
     export default {
         name: 'zk-button',
         props: {
@@ -36,7 +32,6 @@
                         },
                         (error) => {
                             this.loading = false;
-                            //Observable.of(true).delay(1000).subscribe(()=>this.loading = false);
                         }
                     );
                 } else {

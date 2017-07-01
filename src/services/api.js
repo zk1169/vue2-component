@@ -1,7 +1,7 @@
 import fetch from '../config/fetch-rx';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/delay';
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/of';
+// import 'rxjs/add/operator/delay';
 
 import { loginResultData } from './temp-data/login';
 import { moreAnalysisData } from './temp-data/more-analysis';

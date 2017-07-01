@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/timeout';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/from';
+// import 'rxjs/add/operator/timeout';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/observable/throw';
 
 import fetch from './fetch';
 
