@@ -14,6 +14,7 @@ const Home = resolve => require(['../pages/home'], resolve);
 const Charts = resolve => require(['../pages/charts'], resolve);
 const Search = resolve => require(['../pages/search'], resolve);
 const BugList = resolve => require(['../pages/bug-list'], resolve);
+const SteelHotList = resolve => require(['../pages/steel-hot-list'], resolve);
 const IcbcTicket = resolve => require(['../pages/icbc-ticket'], resolve);
 const LangTrans = resolve => require(['../pages/lang-trans'], resolve);
 
@@ -62,6 +63,11 @@ let router = new Router({
                 {
                     path: 'bug-list',
                     component: BugList,
+                    meta: { requiresAuth: true }
+                },
+                {
+                    path: 'hot-list',
+                    component: SteelHotList,
                     meta: { requiresAuth: true }
                 },
                 {

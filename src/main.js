@@ -4,6 +4,9 @@ import Vue from 'vue';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/reduce';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/timeout';
