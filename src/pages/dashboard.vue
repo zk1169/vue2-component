@@ -11,11 +11,13 @@
                     </span>
                 </div>
                 <ul>
-                    <li class="menu-item checked">
-                        <i class="fa fa-dashboard fa-fw"></i>
-                        <span v-if="menuShow" class="menu-text">Dashboard</span>
+                    <li :class="['menu-item',{'checked':$route.path == '/dashboard/bug-list'}]">
+                        <router-link to="/dashboard/bug-list">
+                            <i class="fa fa-dashboard fa-fw"></i>
+                            <span v-if="menuShow" class="menu-text">Dashboard</span>
+                        </router-link>
                     </li>
-                    <li class="menu-item">
+                    <li :class="['menu-item',{'checked':$route.path == '/dashboard/hot-list'}]">
                         <router-link to="/dashboard/hot-list">
                             <i class="fa fa-star fa-fw"></i>
                             <span v-if="menuShow" class="menu-text">Hot List</span>
@@ -100,6 +102,7 @@ $tool-bar-height:50px;
             cursor: pointer;
             width: $left-width-large;
             padding: 8px 15px 8px 20px;
+            a{color:#fff;}
             .menu-text {
                 display: inline-block;
                 margin-left: 10px;
