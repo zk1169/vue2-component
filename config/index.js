@@ -47,6 +47,11 @@ module.exports = {
                 "target": "http://api.iyaoheinfo.cn",
                 "secure": false,
                 "changeOrigin": true
+            },
+            "/npl/**": {
+                "target": "http://192.168.5.207:8080",
+                "secure": false,
+                "changeOrigin": true
             }
         },
         // CSS Sourcemaps off by default because relative paths are "buggy"

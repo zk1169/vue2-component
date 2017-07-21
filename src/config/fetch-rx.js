@@ -9,11 +9,12 @@ import fetch from './fetch';
 
 function extractData(response) {
     if (response) {
-        if (response.code === '000000' || response.code === 200) {
-            return response.data;
-        } else {
-            throw new Error(response.message);
-        }
+        // if (response.code === '000000' || response.code === 200) {
+        //     return response.data;
+        // } else {
+        //     throw new Error(response.message);
+        // }
+        return response;
     } else {
         throw new Error('unknow error');
     }

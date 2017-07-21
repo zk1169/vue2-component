@@ -62,9 +62,18 @@ var ranking = (param) => {
     return Observable.of(rankingData).delay(1000);
 };
 
+let formSubmit = (data) => {
+    return fetch('POST', '/npl/transfer/query', data).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 export {
     login,
     moreAnalysis,
     patentQuery,
-    ranking
+    ranking,
+    formSubmit
 };

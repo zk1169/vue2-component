@@ -17,6 +17,7 @@
     "new": " node ./build/bin/new.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "echarts": "^3.6.1",
     "element-ui": "^1.2.5",
     "font-awesome": "^4.7.0",

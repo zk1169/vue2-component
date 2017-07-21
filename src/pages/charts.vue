@@ -2,15 +2,19 @@
     <div>
         <textarea name="" id="" cols="30" rows="10" :readonly="readonly"></textarea>
         <zk-button type="primary" @click="readonly=!readonly">readonly</zk-button>
+        <zk-button type="primary" @click="formSubmitClick">formSubmit</zk-button>
         <br><br><br><br>
         <div layout="row" layout-wrap>
             <!--<div>{{car.name}}</div>-->
             <zk-button type="primary" @click="resetBarClick">Change data</zk-button>
             <div style="height:80vh;width:80vw">
-                <zk-bar :options="barOptions" @onclick="barClick" :car="car"></zk-bar>
+                <zk-bar :options="barOptions" elId="charts_1" @onclick="barClick" :car="car"></zk-bar>
             </div>
             
         </div>
+        <div style="height:80vh;width:80vw" v-for="item in 10">
+                <zk-bar :options="barOptions" :elId="'charts_'+item+2" @onclick="barClick" :car="car"></zk-bar>
+            </div>
     </div>
 </template>
 
@@ -21,6 +25,7 @@
     import ZkButton from '../components/button';
     
     import ZkNplHeader from '@/components/npl-header';
+    import { formSubmit } from '@/services/api';
     
     class Car {
         constructor() {
@@ -81,7 +86,18 @@
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                            //data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                            data: [
+                                {
+                                    value:'周一',
+                                    textStyle: {
+                                        fontSize: 20,
+                                        color: 'red'
+                                    }
+                                },
+                                '周二', '周三', '周四', '周五', '周六', '周日'
+                            ],
+                            
                         },
                         series: [{
                                 name: '直接访问',
@@ -150,7 +166,7 @@
                         //     }
                         // }
                     };
-                }, 1000);
+                }, 500);
             },
             resetBarClick() {
                 //throw new Error('cloud');
@@ -176,11 +192,20 @@
                     },
                     xAxis: {
                         type: 'value',
-                        boundaryGap: [0, 0.01]
+                        boundaryGap: [0, 0.01],
+                        nameTextStyle: {
+                            fontSize:20,
+                            fontWeight:'bold',
+                            color:'#75bb00'
+                        }
                     },
                     yAxis: {
                         type: 'category',
-                        data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)']
+                        data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)'],
+                        nameTextStyle: {
+                            fontSize:20,
+                            fontWeight:'bold'   
+                        }
                     },
                     series: [{
                             name: '2011年',
@@ -193,6 +218,7 @@
                             data: [19325, 23438, 31000, 121594, 134141, 681807]
                         }
                     ]
+                    
                 };
             },
             barClick(params) {
@@ -201,6 +227,19 @@
             },
             headerClick() {
                 window.open("http://www.baidu.com", "baidu");
+            },
+            formSubmitClick(){
+                let data = new FormData();
+                data.append('q','car');
+                data.append('matchFields',['ALL']);
+                formSubmit(data).subscribe(
+                    (res)=>{
+                        debugger;
+                    },
+                    (error)=>{
+                        debugger;
+                    }
+                );
             }
         },
         computed: {

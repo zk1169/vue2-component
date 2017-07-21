@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 
+import 'babel-polyfill';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
@@ -20,15 +21,16 @@ import './filters/filter';
 import './styles/style.scss';
 
 window.Observable = Observable;
-// 引入 ECharts 主模块
-window.echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/bar');
-require('echarts/lib/chart/line');
-require('echarts/lib/chart/pie');
-// 引入提示框和标题组件
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
+window.echarts = require('echarts');
+// // 引入 ECharts 主模块
+// window.echarts = require('echarts/lib/echarts');
+// require('echarts/lib/chart/bar');
+// require('echarts/lib/chart/line');
+// require('echarts/lib/chart/pie');
+// // 引入提示框和标题组件
+// require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/title');
+// require('echarts/lib/component/legend');
 
 //element-ui控件库
 // import Element from 'element-ui';

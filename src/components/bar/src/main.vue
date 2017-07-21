@@ -1,5 +1,5 @@
 <template>
-  <div class="zk-bar" id="zk_bar" style="height:100%;width:100%;">
+  <div class="zk-bar" :id="elId" style="height:100%;width:100%;">
   </div>
 </template>
 
@@ -13,11 +13,15 @@
     },
     props: {
       options: Object,
-      car:Object
+      car:Object,
+      elId: {
+        type:String,
+        default: new Date().getTime()+''
+      }
     },
     mounted() {
       // 基于准备好的dom，初始化echarts实例
-      this.myChart = echarts.init(document.getElementById('zk_bar'));
+      this.myChart = echarts.init(document.getElementById(this.elId));
       this.myChart.on('click',(params)=>{
         this.car.name = 'bens';
         this.$emit('onclick',params);
