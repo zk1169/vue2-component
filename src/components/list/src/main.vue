@@ -9,7 +9,7 @@
                     <li v-if="hasIndex" class="list-index">
                         #
                     </li>
-                    <li v-for="(header, index) in headers" :flex="header.flex">
+                    <li v-for="(header, index) in headers" :flex="header.flex" v-bind:key="index">
                         <span class="title">
                             {{header.title}}
                         </span>
@@ -21,7 +21,7 @@
             </div>
             <div class="zk-list-body">
                 <ul>
-                    <li v-for="(item, index) in list" class="zk-list-item">
+                    <li v-for="(item, index) in list" class="zk-list-item" v-bind:key="index">
                         <div layout="row">
                             <div v-if="hasCheckbox" class="item-column">
                                 <zk-checkbox v-model="item.checked"></zk-checkbox>
@@ -30,7 +30,7 @@
                                 <i class="dot-status"></i>
                                 {{((page-1)*10)+(index+1)}}
                             </div>
-                            <div class="item-column" v-for="header in headers" :flex="header.flex">
+                            <div class="item-column" v-for="header in headers" :flex="header.flex" v-bind:key="header">
                                 <span v-if="header.prop==='status'">{{item[header.prop]|bugstatus}}</span>
                                 <span v-else>{{item[header.prop]}}</span>
                             </div>

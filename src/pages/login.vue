@@ -157,7 +157,6 @@ export default {
     border-radius: 2px;
     opacity: 0.88;
     transform: translate(-50%, -60%);
-    -webkit-transform: translate(-50%, -60%);
     .login-content {
         background-color: #fff;
         opacity: 0.98;
