@@ -76,11 +76,6 @@ export default {
                     flex: 30
                 },
                 {
-                    title: '状态',
-                    prop: 'status',
-                    flex: 5
-                },
-                {
                     title: '提交时间',
                     prop: 'createTime',
                     flex: 10
@@ -130,7 +125,8 @@ export default {
         pageChange(page) {
             this.queryInit(page);
         },
-        itemClick(index) {
+        itemClick(options) {
+            let index = options.index;
             this.selectModel = this.listData.list[index];
             this.imageFileList = this.selectModel.imageList;
             this.dialogVisible = true;

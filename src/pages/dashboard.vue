@@ -14,13 +14,19 @@
                     <li :class="['menu-item',{'checked':$route.path == '/dashboard/bug-list'}]">
                         <router-link to="/dashboard/bug-list">
                             <i class="fa fa-dashboard fa-fw"></i>
-                            <span v-if="menuShow" class="menu-text">Dashboard</span>
+                            <span v-if="menuShow" class="menu-text">反馈列表</span>
                         </router-link>
                     </li>
                     <li :class="['menu-item',{'checked':$route.path == '/dashboard/hot-list'}]">
                         <router-link to="/dashboard/hot-list">
                             <i class="fa fa-star fa-fw"></i>
-                            <span v-if="menuShow" class="menu-text">Hot List</span>
+                            <span v-if="menuShow" class="menu-text">热门话题</span>
+                        </router-link>
+                    </li>
+                    <li :class="['menu-item',{'checked':$route.path == '/dashboard/blog-list'}]">
+                        <router-link to="/dashboard/blog-list">
+                            <i class="fa fa fa-send-o fa-fw"></i>
+                            <span v-if="menuShow" class="menu-text">微钢消息</span>
                         </router-link>
                     </li>
                     <!--<li class="menu-item">
@@ -56,6 +62,8 @@ export default {
         return {
             menuShow: false
         }
+    },
+    created(){
     },
     methods:{
         ...mapMutations([

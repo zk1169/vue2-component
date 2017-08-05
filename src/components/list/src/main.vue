@@ -31,11 +31,15 @@
                                 {{((page-1)*10)+(index+1)}}
                             </div>
                             <div class="item-column" v-for="header in headers" :flex="header.flex" v-bind:key="header">
-                                <span v-if="header.prop==='status'">{{item[header.prop]|bugstatus}}</span>
-                                <span v-else>{{item[header.prop]}}</span>
+                                <!-- <span v-if="header.prop==='status'">{{item[header.prop]}}</span> -->
+                                <span>{{item[header.prop]}}</span>
                             </div>
                             <!--<div class="item-column"><router-link :to="'/bug-detail/'+item.id">详情</router-link></div>-->
-                            <div class="item-column" @click="itemClick(index)"><a class="hand">详情</a></div>
+                            <div class="item-column" layout="row">
+                                <div v-for="operateItem in operatorList" @click="itemClick(index,operateItem)">
+                                    <a class="hand">{{operateItem.text}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -67,6 +71,13 @@ export default {
         page:{
             type:Number,
             default:1
+        },
+        operatorList:{
+            type:Array,
+            required: false,
+            default:function(){
+                return [{text:'详情',type:'detail'}];
+            }
         }
     },
     data() {
@@ -108,9 +119,19 @@ export default {
         handleCurrentChange() {
 
         },
-        itemClick(index){
-            this.$emit("item-click",index);
+        itemClick(index,item){
+            if(item.length === 1){
+                this.$emit("item-click",index);
+            }else{
+                this.$emit("item-click",{index:index,type:item.type});
+            }
         }
     }
 }
 </script>
+
+<style scoped>
+    .item-column{
+        overflow: hidden;
+    }
+</style>

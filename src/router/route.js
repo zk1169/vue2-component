@@ -17,6 +17,7 @@ const BugList = resolve => require(['../pages/bug-list'], resolve);
 const SteelHotList = resolve => require(['../pages/steel-hot-list'], resolve);
 const IcbcTicket = resolve => require(['../pages/icbc-ticket'], resolve);
 const LangTrans = resolve => require(['../pages/lang-trans'], resolve);
+const BlogList = resolve => require(['../pages/blog-list'], resolve);
 
 Vue.use(Router);
 
@@ -63,6 +64,11 @@ let router = new Router({
                 {
                     path: 'bug-list',
                     component: BugList,
+                    meta: { requiresAuth: true }
+                },
+                {
+                    path: 'blog-list',
+                    component: BlogList,
                     meta: { requiresAuth: true }
                 },
                 {

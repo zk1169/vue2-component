@@ -138,11 +138,38 @@ let uploadImage = (fileData) => {
     );
 };
 
+let getBlogList = (page,keyword) => {
+    let param = { page,keyword };
+    return fetch('POST', '/api/admin/getBlogList', param).map(
+        (res) => {
+            let result = {
+                rows: [],
+                totalCount: res.totalCount
+            }
+            if (res && res.rows) {
+                res.rows.forEach((item) => {
+                    result.rows.push(new BugModel(item));
+                });
+            }
+            return result;
+        }
+    );
+};
+
+let deleteBlog = (id) => {
+    return fetch('POST', '/api/admin/deleteBlog', { id }).map(
+        (res) => {
+            return res;
+        }
+    );
+};
 
 export {
     login,
     getBugList,
     updateBugStatus,
     getHotList,
-    saveHotInfoBatch
+    saveHotInfoBatch,
+    getBlogList,
+    deleteBlog
 };

@@ -1,16 +1,16 @@
 <template>
     <div class="search-component">
-        <!--<div class="search-header" layout="row" layout-align="start center">
-                    <div flex="60" class="input-wrap">
-                        <el-input placeholder="请输入搜索内容" v-model="searchText" @keyup.enter="queryClick">
-                            <el-button slot="append" icon="search" @click="queryClick"></el-button>
-                        </el-input>
-                    </div>
-                </div>-->
+        <div class="search-header" layout="row" layout-align="start center">
+            <div flex="60" class="input-wrap">
+                <el-input placeholder="请输入搜索内容" v-model="searchText" @keyup.enter="queryClick">
+                    <el-button slot="append" icon="search" @click="queryClick"></el-button>
+                </el-input>
+            </div>
+        </div>
         <div class="search-body" layout="row">
             <div class="body-right" flex>
                 <div>
-                    <zk-list :headers="listData.headers" :list="listData.list" :page="listData.currentPage" :hasIndex="1" @item-click="itemClick"></zk-list>
+                    <zk-list :headers="listData.headers" :list="listData.list" :page="listData.currentPage" :hasIndex="1" @item-click="itemClick" :operatorList="[{text:'下架',type:'delete'},{text:'详情',type:'detail'}]"></zk-list>
                     <div class="text-right list-page">
                         <el-pagination @current-change="pageChange" :current-page="listData.currentPage" layout="total, prev, pager, next" :total="listData.totalCount" :page-size="10">
                         </el-pagination>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <el-dialog title="编辑问题" :visible="dialogVisible" :show-close="false">
+        <!-- <el-dialog title="编辑问题" :visible="dialogVisible" :show-close="false">
             <div>
                 <div class="form-item" layout="row">
                     <label flex="20">标题：</label>
@@ -48,7 +48,7 @@
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="saveBugClick">保 存</el-button>
             </div>
-        </el-dialog>
+        </el-dialog> -->
     </div>
 </template>
 
@@ -58,7 +58,7 @@
         mapState
     } from 'vuex';
     import {
-        getBugList,updateBugStatus
+        getBlogList,deleteBlog
     } from '../services/gang-flower';
     import ZkSelect from '../components/select';
     import ZkList from '../components/list';
@@ -88,7 +88,7 @@
                         },
                         {
                             title: '状态',
-                            prop: 'bugStatusText',
+                            prop: 'blogStatusText',
                             flex: 5
                         },
                         {
@@ -105,20 +105,6 @@
                 searchText: '',
                 dialogVisible:false,
                 selectModel:new BugModel(),
-                statusOptions:[
-                    {
-                        value: "1",
-                        label: '待处理'
-                    },
-                    {
-                        value: "2",
-                        label: '正在解决'
-                    },
-                    {
-                        value: "3",
-                        label: '已解决'
-                    }
-                ]
             }
         },
         components: {
@@ -131,9 +117,12 @@
             this.queryInit(1);
         },
         methods: {
+            queryClick(){
+                this.queryInit(1);
+            },
             queryInit(page) {
                 this.$root.$emit('start-loading-bar');
-                return getBugList(page).subscribe(
+                return getBlogList(page,this.searchText).subscribe(
                     (res) => {
                         this.listData.list = res.rows;
                         this.listData.totalCount = res.totalCount;
@@ -154,13 +143,34 @@
                 this.queryInit(page);
             },
             itemClick(options){
+                // this.selectModel = this.listData.list[index];
+                // this.dialogVisible = true;
                 let index = options.index;
-                this.selectModel = this.listData.list[index];
-                this.dialogVisible = true;
+                if(options.type == 'delete'){
+                    this.$root.$emit('start-loading-bar');
+                    deleteBlog(this.listData.list[index].id).subscribe(
+                        (res) => {
+                            this.$root.$emit('complete-loading-bar');
+                            this.dialogVisible = false;
+                            this.queryInit(this.listData.currentPage);
+                        },
+                        (error) => {
+                            this.$root.$emit('complete-loading-bar');
+                            this.$toast({
+                                title: 'error',
+                                message: error.message,
+                                type: 'error'
+                            });
+                        }
+                    );
+                }else if(options.type == 'detail'){
+                    //this.$router.push('/blog-detial/'+this.listData.list[index].id);
+                    window.open('http://m.gangflower.com/blog-detail/'+this.listData.list[index].id);
+                }
             },
             saveBugClick(){
                 this.$root.$emit('start-loading-bar');
-                updateBugStatus(this.selectModel.id,this.selectModel.status).subscribe(
+                updateBugStatus(this.selectModel.id,this.searchText).subscribe(
                     (res) => {
                         this.$root.$emit('complete-loading-bar');
                         this.dialogVisible = false;
