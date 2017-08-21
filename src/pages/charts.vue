@@ -25,7 +25,7 @@
     import ZkButton from '../components/button';
     
     import ZkNplHeader from '@/components/npl-header';
-    import { formSubmit } from '@/services/api';
+    import { formSubmit, nplRes, srpInit } from '@/services/api';
     
     class Car {
         constructor() {
@@ -229,10 +229,10 @@
                 window.open("http://www.baidu.com", "baidu");
             },
             formSubmitClick(){
-                let data = new FormData();
-                data.append('q','car');
-                data.append('matchFields',['ALL']);
-                formSubmit(data).subscribe(
+                // let data = new FormData();
+                // data.append('q','car');
+                // data.append('matchFields',['ALL']);
+                srpInit().subscribe(
                     (res)=>{
                         debugger;
                     },

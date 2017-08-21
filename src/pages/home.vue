@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div>
+            <a href="/dashboard/chart" target="_blank" @click="aClick">aClick</a>
+        </div>
         <div class="text-overflow text-center clearfix">{{message}}</div>
         <div layout="row" layout-wrap style="border:solid 1px red;">
             <div style="height:50px;background-color:#666;" flex="10" flex-md="30" flex-sm="40" flex-xs="50"></div>
@@ -147,6 +150,9 @@ export default {
                         type: 'error'
                     });
                 });
+        },
+        aClick(){
+            console.log('a click');
         }
     },
     computed: {

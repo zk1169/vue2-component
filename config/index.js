@@ -49,7 +49,12 @@ module.exports = {
                 "changeOrigin": true
             },
             "/npl/**": {
-                "target": "http://192.168.5.207:8080",
+                "target": "http://zk-analytics.patsnap.cn",
+                "secure": false,
+                "changeOrigin": true
+            },
+            "/srp/**": {
+                "target": "http://192.168.6.100:8080",
                 "secure": false,
                 "changeOrigin": true
             }

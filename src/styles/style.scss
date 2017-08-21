@@ -9,3 +9,8 @@
  @import './element-ui';
  @import '../../node_modules/sass-lib/dist/sass-lib.css';
  @import './base';
+
+ .patsnap-cloud{
+ 	transform: scale(1.5);
+ 	-ms-transform: scale(1.5);
+ }

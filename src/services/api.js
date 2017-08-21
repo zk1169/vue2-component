@@ -27,6 +27,18 @@ let login = (data) => {
     //     }
     // );
     return Observable.of(loginResultData).delay(1000);
+    // let formData = new FormData();
+    // formData.append('from','analytics');
+    // formData.append('redirect_uri','analytics');
+    // formData.append('client_id','10');
+    // formData.append('from','analytics');
+    // formData.append('from','analytics');
+    // formData.append('from','analytics');
+    // return fetch('POST', 'http://qa-passport.patsnap.com/loginsubmit', data).map(
+    //     (res) => {
+    //         return res;
+    //     }
+    // );
 };
 
 var moreAnalysis = (param) => {
@@ -70,10 +82,40 @@ let formSubmit = (data) => {
     );
 };
 
+let srpInit = (data) => {
+    return fetch('GET', '/srp/init', data).map(
+        (res) => {
+            debugger;
+            return res;
+        }
+    );
+};
+
+var nplRes = (param) => {
+    let data = {
+        url: '/list',
+        body: {
+            fq: '',
+            matchFields: ['ALL'],
+            q: 'car',
+            rows: 20,
+            sort: 'sdesc',
+            start: 0
+        }
+    };
+    return fetch('POST', '/npl/res', data).map(
+        (res) => {
+            return res;
+        }
+    );
+};
+
 export {
     login,
     moreAnalysis,
     patentQuery,
     ranking,
-    formSubmit
+    formSubmit,
+    nplRes,
+    srpInit
 };
