@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/merge';
@@ -14,6 +14,12 @@ import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+
+// import VCharts from 'v-charts';
+// Vue.use(VCharts);
+
+import VeLine from 'v-charts/lib/line';
+Vue.component(VeLine.name, VeLine);
 
 import App from './app';
 import router from './router/route';
